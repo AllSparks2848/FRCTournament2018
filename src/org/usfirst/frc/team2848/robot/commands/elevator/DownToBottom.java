@@ -17,11 +17,16 @@ public class DownToBottom extends Command {
 	}
 
 	protected void execute() {
-		Robot.elevator.elevatorMotor.set(.5);// sends carriage down
+		if (Robot.elevator.elevatorEncoder.get() < 100) {
+			Robot.elevator.elevatorMotor.set(.3);// sends carriage down
+		} else {
+			Robot.elevator.elevatorMotor.set(.5);// sends carriage down
+		}
+
 	}
 
 	protected boolean isFinished() {
-		if(!Robot.elevator.limitSwitchElevatorBottom.get())
+		if (!Robot.elevator.limitSwitchElevatorBottom.get())
 			return true;
 		return false;
 	}

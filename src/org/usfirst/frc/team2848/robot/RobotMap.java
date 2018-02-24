@@ -10,7 +10,9 @@ public class RobotMap {
 
 	// Controllers
 	public static int p_xbox1 = 0;
-	public static int p_buttonBox = 1;
+	public static int p_buttonBox = 3;
+	public static int p_newButtonBoxA = 1;
+	public static int p_newButtonBoxB = 2;
 
 	// DriveTrain Motors
 	public static int p_leftDrive1 = 5;
