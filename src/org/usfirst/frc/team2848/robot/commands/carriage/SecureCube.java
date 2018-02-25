@@ -31,5 +31,6 @@ public class SecureCube extends Command {
 	}
 
 	protected void interrupted() {
+		end();
 	}
 }

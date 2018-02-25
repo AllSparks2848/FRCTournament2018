@@ -5,7 +5,9 @@ import org.usfirst.frc.team2848.robot.commands.auton.LeftAuton1;
 import org.usfirst.frc.team2848.robot.commands.carriage.ClampIntakeClaw;
 import org.usfirst.frc.team2848.robot.commands.carriage.ExtakeFront;
 import org.usfirst.frc.team2848.robot.commands.carriage.ExtakeLeft;
+import org.usfirst.frc.team2848.robot.commands.carriage.ExtakeLeftElevator;
 import org.usfirst.frc.team2848.robot.commands.carriage.ExtakeRight;
+import org.usfirst.frc.team2848.robot.commands.carriage.ExtakeRightElevator;
 import org.usfirst.frc.team2848.robot.commands.carriage.ReleaseIntakeClaw;
 import org.usfirst.frc.team2848.robot.commands.carriage.SecureCube;
 import org.usfirst.frc.team2848.robot.commands.drive.DriveToDistance;
@@ -78,13 +80,13 @@ public class OI {
 	JoystickButton nbba3 = new JoystickButton(newButtonBoxA, 3);
 	JoystickButton nbba4 = new JoystickButton(newButtonBoxA, 4);
 	JoystickButton nbba5 = new JoystickButton(newButtonBoxA, 5);
-	JoystickButton nbba6 = new JoystickButton(newButtonBoxA, 8);
-	JoystickButton nbba7 = new JoystickButton(newButtonBoxA, 9);
-	JoystickButton nbba8 = new JoystickButton(newButtonBoxA, 10);
-	JoystickButton nbba9 = new JoystickButton(newButtonBoxA, 11);
-	JoystickButton nbba10 = new JoystickButton(newButtonBoxA, 12);
-	JoystickButton nbba11 = new JoystickButton(newButtonBoxA, 7);
-	JoystickButton nbba12 = new JoystickButton(newButtonBoxA, 6);
+	JoystickButton nbba6 = new JoystickButton(newButtonBoxA, 12);
+	JoystickButton nbba7 = new JoystickButton(newButtonBoxA, 11);
+	JoystickButton nbba8 = new JoystickButton(newButtonBoxA, 6);
+	JoystickButton nbba9 = new JoystickButton(newButtonBoxA, 7);
+	JoystickButton nbba10 = new JoystickButton(newButtonBoxA, 8);
+	JoystickButton nbba11 = new JoystickButton(newButtonBoxA, 9);
+	JoystickButton nbba12 = new JoystickButton(newButtonBoxA, 10);
 
 	//newButtonBoxB
 	JoystickButton nbbb1 = new JoystickButton(newButtonBoxB, 1);
@@ -108,9 +110,9 @@ public class OI {
 		// back.whenPressed(new AutonSetup());
 		start.whenPressed(new DriveToDistance(-3));
 		lb.whenPressed(new ShiftHigh());
-		b.whileHeld(new ExtakeLeft());
+//		b.whenPressed(new DeployHanger());
 		rb.whenPressed(new ShiftLow());
-		a.whileHeld(new SecureCube());
+//		a.whileHeld(new PullUp());
 		y.whenPressed(new AutonReset());
 		// b.whileHeld(new ArcTurn(4, 2));
 		// a.whenPressed(new FollowPath(xC, yC, direction));
@@ -119,7 +121,7 @@ public class OI {
 		bb11.whenPressed(new GoToHeight(400)); // scale
 		bb12.whenPressed(new DownToBottom());
 		bb13.whenPressed(new GoToHeight(250)); // switch
-		bb14.whileHeld(new PullUp());
+//		bb14.whileHeld(new PullUp());
 		bb15.whileHeld(new DeployHanger());
 		// bb16.whenPressed(new DeployHanger());
 		bb16.whileHeld(new SpitOutFront());// pulse intake
@@ -143,7 +145,7 @@ public class OI {
 		nbba8.whileHeld(new ManualUp()); //manual up
 		nbba9.whileHeld(new ManualDown()); //manual down
 		nbba10.whileHeld(new PullUp()); //pull up
-		nbba11.whenPressed(new DeployHanger()); // deploy hanger
+		nbba11.whileHeld(new DeployHanger()); // deploy hanger
 		//nbba12.whenPressed(new ); // buddy
 
 		//nbbb1.whenPressed(new ); //warn
@@ -156,9 +158,9 @@ public class OI {
 		nbbb8.whenPressed(new ReleaseIntakeClaw());
 		nbbb9.whenPressed(new ClampIntakeClaw());
 		nbbb10.whileHeld(new SecureCube());
-		nbbb11.whileHeld(new ExtakeFront());
-		nbbb12.whileHeld(new ExtakeLeft());
-		nbbb13.whileHeld(new ExtakeRight());
+		nbbb11.whileHeld(new SpitOutFront());
+		nbbb12.whenPressed(new ExtakeLeftElevator());
+		nbbb13.whenPressed(new ExtakeRightElevator());
 		nbbb14.whileHeld(new IntakeCube());
 
 	}
