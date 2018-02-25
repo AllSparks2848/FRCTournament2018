@@ -29,6 +29,9 @@ public class GoToHeight extends Command {
 	}
 
 	protected boolean isFinished() {
+		if(!Robot.elevator.limitSwitchElevatorTop.get()) {
+			end();
+		}
 		return Math.abs(Robot.elevator.elevatorEncoder.get() - target) < 5 ;
 	}
 
