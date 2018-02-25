@@ -125,10 +125,12 @@ public class Robot extends IterativeRobot {
 		// Arcade Drive
 		if (Math.abs(oi.getLeftJoystick()) > .05 || Math.abs(oi.getRightJoystick()) > .05)
 			drivetrain.arcadeDrive(oi.getLeftJoystick(), -oi.getRightJoystick());
-
-		System.out.println("left encoder: " + Robot.drivetrain.leftEncoder.getDistance() + " right encoder: "
-				+ Robot.drivetrain.rightEncoder.getDistance());
-		System.out.println("gyro angle: " + Robot.drivetrain.navX.getAngle());
+//
+//		System.out.println("left encoder: " + Robot.drivetrain.leftEncoder.getDistance() + " right encoder: "
+//				+ Robot.drivetrain.rightEncoder.getDistance());
+//		System.out.println("gyro angle: " + Robot.drivetrain.navX.getAngle());
+		
+		System.out.println(Robot.elevator.elevatorEncoder.get());
 	}
 
 	/**

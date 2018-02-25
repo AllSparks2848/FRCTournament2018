@@ -18,7 +18,7 @@ public class ManualDown extends Command {
 
     protected void execute() {
     	if(Robot.elevator.limitSwitchElevatorBottom.get())
-    	Robot.elevator.elevatorMotor.set(0.25); //makes elevator go down when held
+    	Robot.elevator.elevatorMotor.set(0.6); //makes elevator go down when held
     	else {
     		Robot.elevator.elevatorMotor.set(0);
     	}
