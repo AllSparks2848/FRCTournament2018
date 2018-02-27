@@ -32,9 +32,10 @@ public class VelocityDriveToDistance extends Command {
 
     protected void end() {
     	Robot.drivetrain.drivetrainSetPowerZero();
+    	Robot.drivetrain.arcPIDs.interrupt();
     	try {
 			Robot.drivetrain.arcPIDs.join();
-		} catch (InterruptedException e) {
+		} catch (InterruptedException e) { 
 			e.printStackTrace();
 		}
     }

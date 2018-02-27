@@ -51,10 +51,10 @@ public class Robot extends IterativeRobot {
 		Robot.drivetrain.navX.reset();
 		Robot.drivetrain.leftEncoder.setReverseDirection(true);
 
-		Robot.drivetrain.leftEncoder.setDistancePerPulse(0.00114);
-		Robot.drivetrain.rightEncoder.setDistancePerPulse(-0.00114);
+		Robot.drivetrain.leftEncoder.setDistancePerPulse(-0.00114);
+		Robot.drivetrain.rightEncoder.setDistancePerPulse(0.00114);
 
-		CameraServer.getInstance().startAutomaticCapture();
+//		CameraServer.getInstance().startAutomaticCapture();
 		SmartDashboard.putData("Auto mode", chooser);
 	}
 
@@ -130,7 +130,7 @@ public class Robot extends IterativeRobot {
 //				+ Robot.drivetrain.rightEncoder.getDistance());
 //		System.out.println("gyro angle: " + Robot.drivetrain.navX.getAngle());
 		
-		System.out.println(Robot.elevator.elevatorEncoder.get());
+//		System.out.println(Robot.elevator.elevatorEncoder.get());
 	}
 
 	/**

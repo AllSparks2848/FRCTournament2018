@@ -40,11 +40,11 @@ public class PIDCalculate extends Thread {
 				System.out.println("Mult: "
 						+ (Math.abs(Robot.drivetrain.leftEncoder.getDistance() - this.target)) / (this.target * 0.1));
 
-				if (Math.abs(Robot.drivetrain.leftEncoder.getDistance() - this.target) < this.target * 0.1) {
-					System.out.println("Mult: " + this.multiplier);
-					this.multiplier = (Math
-							.abs(Robot.drivetrain.leftEncoder.getDistance() - (this.target) / this.target * 0.1));
-				}
+//				if (Math.abs(Robot.drivetrain.leftEncoder.getDistance() - this.target) < this.target * 0.1) {
+//					System.out.println("Mult: " + this.multiplier);
+//					this.multiplier = (Math
+//							.abs(Robot.drivetrain.leftEncoder.getDistance() - (this.target) / this.target * 0.1));
+//				}
 
 				if (Math.abs(Robot.drivetrain.leftEncoder.getDistance() - this.target) < 0.5) {
 					int i = 6000;
@@ -56,7 +56,7 @@ public class PIDCalculate extends Thread {
 						}
 
 						if (velocityR > 0) {
-							Robot.drivetrain.right.set(0.1);
+							Robot.drivetrain.right.set(0.1); 
 						} else {
 							Robot.drivetrain.right.set(-0.1);
 						}
@@ -67,6 +67,8 @@ public class PIDCalculate extends Thread {
 				}
 			}
 		} else if (this.type == 1) {
+			Robot.drivetrain.navX.reset();
+	        Robot.drivetrain.navX.zeroYaw();
 			while (!interrupted()) {
 				double leftSpeed = Robot.drivetrain.leftPIDDrive.getOutput(Robot.drivetrain.leftEncoder.getRate(),
 						this.velocityL * multiplier);
@@ -76,14 +78,30 @@ public class PIDCalculate extends Thread {
 				Robot.drivetrain.left.set(leftSpeed);
 				Robot.drivetrain.right.set(-rightSpeed);
 				
-				System.out.println("Yaw: " + Robot.drivetrain.navX.getYaw());
 
-				if (Math.abs(Robot.drivetrain.navX.getYaw() - this.target) < 20) {
+				if (Math.abs(Robot.drivetrain.navX.getYaw() - this.target) < 15) {
+					int i = 60000;
+					while (i > 0) {
+						if (velocityL > 0) {
+							Robot.drivetrain.left.set(0.2);
+						} else {
+							Robot.drivetrain.left.set(-0.2);
+						}
+
+						if (velocityR > 0) {
+							Robot.drivetrain.right.set(0.2); 
+						} else {
+							Robot.drivetrain.right.set(-0.2);
+						}
+						i--;
+					}
 					this.interrupt();
 					return;
 				}
 			}
 		} else if (this.type == 2) {
+			Robot.drivetrain.navX.reset();
+	        Robot.drivetrain.navX.zeroYaw();
 			while (!interrupted()) {
 				double leftSpeed = Robot.drivetrain.leftPIDDrive.getOutput(Robot.drivetrain.leftEncoder.getRate(),
 						-this.velocityL * multiplier);
@@ -93,9 +111,23 @@ public class PIDCalculate extends Thread {
 				Robot.drivetrain.left.set(leftSpeed);
 				Robot.drivetrain.right.set(-rightSpeed);
 				
-				System.out.println("Yaw: " + Robot.drivetrain.navX.getYaw());
 
-				if (Math.abs(Robot.drivetrain.navX.getYaw() - this.target) < 20) {
+				if (Math.abs(Robot.drivetrain.navX.getYaw() - this.target) < 15) {
+					int i = 60000;
+					while (i > 0) {
+						if (velocityL > 0) {
+							Robot.drivetrain.left.set(0.2);
+						} else {
+							Robot.drivetrain.left.set(-0.2);
+						}
+
+						if (velocityR > 0) {
+							Robot.drivetrain.right.set(0.2); 
+						} else {
+							Robot.drivetrain.right.set(-0.2);
+						}
+						i--;
+					}
 					this.interrupt();
 					return;
 				}

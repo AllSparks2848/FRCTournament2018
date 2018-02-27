@@ -10,9 +10,10 @@ import org.usfirst.frc.team2848.robot.commands.carriage.ExtakeRight;
 import org.usfirst.frc.team2848.robot.commands.carriage.ExtakeRightElevator;
 import org.usfirst.frc.team2848.robot.commands.carriage.ReleaseIntakeClaw;
 import org.usfirst.frc.team2848.robot.commands.carriage.SecureCube;
-import org.usfirst.frc.team2848.robot.commands.drive.DriveToDistance;
 import org.usfirst.frc.team2848.robot.commands.drive.ShiftHigh;
 import org.usfirst.frc.team2848.robot.commands.drive.ShiftLow;
+import org.usfirst.frc.team2848.robot.commands.drive.VelocityDriveToDistance;
+import org.usfirst.frc.team2848.robot.commands.drive.VelocityTurnToAngle;
 import org.usfirst.frc.team2848.robot.commands.elevator.DownToBottom;
 import org.usfirst.frc.team2848.robot.commands.elevator.GoToHeight;
 import org.usfirst.frc.team2848.robot.commands.elevator.ManualDown;
@@ -90,7 +91,7 @@ public class OI {
 
 	//newButtonBoxB
 	JoystickButton nbbb1 = new JoystickButton(newButtonBoxB, 1);
-	// JoystickButton nbbb2 = new JoystickButton(newButtonBoxB, 2);
+//	 JoystickButton nbbb2 = new JoystickButton(newButtonBoxB, 2);
 	// JoystickButton nbbb3 = new JoystickButton(newButtonBoxB, 3);
 	JoystickButton nbbb4 = new JoystickButton(newButtonBoxB, 11);
 	JoystickButton nbbb5 = new JoystickButton(newButtonBoxB, 10);
@@ -107,13 +108,14 @@ public class OI {
 	public OI() {
 
 		back.whenPressed(new LeftAuton1());
+//		back.whenPressed(new GyroTurn(-60));
 		// back.whenPressed(new AutonSetup());
-		start.whenPressed(new DriveToDistance(-3));
+		start.whenPressed(new AutonReset());
 		lb.whenPressed(new ShiftHigh());
 //		b.whenPressed(new DeployHanger());
 		rb.whenPressed(new ShiftLow());
 //		a.whileHeld(new PullUp());
-		y.whenPressed(new AutonReset());
+		y.whenPressed(new VelocityDriveToDistance(6, 15));
 		// b.whileHeld(new ArcTurn(4, 2));
 		// a.whenPressed(new FollowPath(xC, yC, direction));
 
@@ -149,7 +151,7 @@ public class OI {
 		//nbba12.whenPressed(new ); // buddy
 
 		//nbbb1.whenPressed(new ); //warn
-		//nbbb2.whenPressed(new ); //not wanted
+//		nbbb2.whenPressed(new AutonReset()); //not wanted
 		//nbbb3.whenPressed(new ); //not wanted
 		nbbb4.whileHeld(new RotateCube()); //rotate
 		nbbb5.whileHeld(new PulseIntake()); //pulse

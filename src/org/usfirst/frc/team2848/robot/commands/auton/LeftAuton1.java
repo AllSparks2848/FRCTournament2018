@@ -5,6 +5,7 @@ import org.usfirst.frc.team2848.robot.commands.carriage.ExtakeLeftAuton;
 import org.usfirst.frc.team2848.robot.commands.carriage.ReleaseIntakeClaw;
 import org.usfirst.frc.team2848.robot.commands.drive.GyroTurn;
 import org.usfirst.frc.team2848.robot.commands.drive.VelocityDriveToDistance;
+import org.usfirst.frc.team2848.robot.commands.drive.VelocityTurnToAngle;
 import org.usfirst.frc.team2848.robot.commands.elevator.DownToBottom;
 import org.usfirst.frc.team2848.robot.commands.elevator.GoToHeight;
 import org.usfirst.frc.team2848.robot.commands.intake.IntakeCube;
@@ -34,8 +35,12 @@ public class LeftAuton1 extends CommandGroup {
 		
 		addSequential(new DownToBottom());
 		addSequential(new VelocityDriveToDistance(-6, -3));
-		addSequential(new GyroTurn(-90));
-		addSequential(new VelocityDriveToDistance(-6, -3));
-		addParallel(new IntakeCube());
+		addSequential(new VelocityTurnToAngle(3, -90, 2));
+//		addSequential(new VelocityDriveToDistance(6, 15));
+		
+//		addSequential(new VelocityTurnToAngle(3, -60, 2));
+//		addSequential(new Wait(.5));
+//		addParallel(new IntakeCube());
+//		addSequential(new VelocityDriveToDistance(3, 1.5));
 	}
 }
