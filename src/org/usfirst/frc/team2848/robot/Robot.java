@@ -1,15 +1,22 @@
 package org.usfirst.frc.team2848.robot;
 
+import org.usfirst.frc.team2848.robot.commands.auton.CenterAutonSelector;
+import org.usfirst.frc.team2848.robot.commands.auton.LeftAutonSelector;
+import org.usfirst.frc.team2848.robot.commands.auton.RightAutonSelector;
+import org.usfirst.frc.team2848.robot.commands.led.BlueAlliance;
+import org.usfirst.frc.team2848.robot.commands.led.RedAlliance;
 import org.usfirst.frc.team2848.robot.subsystems.Carriage;
 import org.usfirst.frc.team2848.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team2848.robot.subsystems.Elevator;
 import org.usfirst.frc.team2848.robot.subsystems.Hanger;
 import org.usfirst.frc.team2848.robot.subsystems.Intake;
+import org.usfirst.frc.team2848.robot.subsystems.LED;
 import org.usfirst.frc.team2848.robot.subsystems.PivotIntake;
 import org.usfirst.frc.team2848.robot.util.PathPlanning;
 
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -30,6 +37,7 @@ public class Robot extends IterativeRobot {
 	public static final Hanger hanger = new Hanger();
 	public static final Carriage carriage = new Carriage();
 	public static final Elevator elevator = new Elevator();
+	public static final LED led = new LED();
 	public static final PivotIntake pivotIntake = new PivotIntake();
 	public static PathPlanning pathplanning = new PathPlanning();
 
@@ -37,7 +45,8 @@ public class Robot extends IterativeRobot {
 	public static OI oi;
 
 	Command autonomousCommand;
-	SendableChooser<Command> chooser = new SendableChooser<>();
+	SendableChooser allianceChooser;
+	SendableChooser autoChooser;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -53,9 +62,20 @@ public class Robot extends IterativeRobot {
 
 		Robot.drivetrain.leftEncoder.setDistancePerPulse(0.00114);
 		Robot.drivetrain.rightEncoder.setDistancePerPulse(-0.00114);
+		
+		allianceChooser = new SendableChooser();
+		
+		allianceChooser.addDefault("Red Alliance", new RedAlliance());
+		allianceChooser.addObject("Blue Alliance", new BlueAlliance());
 
+		autoChooser = new SendableChooser();
+		
+		autoChooser.addDefault("Left", new LeftAutonSelector()); //Picks one of the left options
+		autoChooser.addObject("Center", new CenterAutonSelector()); //Picks one of the center options
+		autoChooser.addObject("Right", new RightAutonSelector()); //Picks one of the right options
+		SmartDashboard.putData("Autonomous Mode Selector", autoChooser);
+		
 		CameraServer.getInstance().startAutomaticCapture();
-		SmartDashboard.putData("Auto mode", chooser);
 	}
 
 	/**
@@ -90,7 +110,9 @@ public class Robot extends IterativeRobot {
 
 	@Override
 	public void autonomousInit() {
-		autonomousCommand = chooser.getSelected();
+		Timer.delay(SmartDashboard.getNumber("Auton Init Delay", 0));
+		
+		autonomousCommand = (Command) autoChooser.getSelected();
 
 		if (autonomousCommand != null)
 			autonomousCommand.start();

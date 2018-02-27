@@ -25,6 +25,7 @@ import org.usfirst.frc.team2848.robot.commands.intake.PivotIn;
 import org.usfirst.frc.team2848.robot.commands.intake.PulseIntake;
 import org.usfirst.frc.team2848.robot.commands.intake.RotateCube;
 import org.usfirst.frc.team2848.robot.commands.intake.SpitOutFront;
+import org.usfirst.frc.team2848.robot.commands.led.HumanSignal;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -116,6 +117,7 @@ public class OI {
 		y.whenPressed(new AutonReset());
 		// b.whileHeld(new ArcTurn(4, 2));
 		// a.whenPressed(new FollowPath(xC, yC, direction));
+		x.toggleWhenPressed(new HumanSignal());
 
 		// teleop button box commands
 		bb11.whenPressed(new GoToHeight(400)); // scale

@@ -69,4 +69,8 @@ public class RobotMap {
 	// carriage motors
 	public static int p_omniPlateMotor = 11;
 	public static int p_intakeClawMotor = 10;
+	
+	//LED
+	public static int p_humanSignalLED = 12;
+	public static int p_allianceLED = 13;
 }
