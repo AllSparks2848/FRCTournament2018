@@ -3,32 +3,37 @@ package org.usfirst.frc.team2848.robot.commands.intake;
 import org.usfirst.frc.team2848.robot.Robot;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
 public class IntakeCubeAuton extends Command {
-	Timer timer = new Timer();
+
 	public IntakeCubeAuton() {
 		requires(Robot.intake);
 		requires(Robot.carriage);
 	}
 
 	protected void initialize() {
-		timer.start();
 	}
 
 	protected void execute() {
 		Robot.carriage.intakeClaw.set(DoubleSolenoid.Value.kReverse);
-		Robot.intake.leftIntake.set(-0.8);
-		Robot.intake.rightIntake.set(0.8);// intakes
-		Robot.carriage.intakeClawMotor.set(-0.8);
+		if (Robot.pdp.getCurrent(3) > 15) {
+			Robot.intake.leftIntake.set(-0.8);
+			Robot.intake.rightIntake.set(0.8);// intakes
+			Robot.carriage.intakeClawMotor.set(-0.8);
+		} else {
+			Robot.intake.leftIntake.set(-0.6);
+			Robot.intake.rightIntake.set(0.6);// intakes
+			Robot.carriage.intakeClawMotor.set(-0.6);
+		}
+
 	}
 
 	protected boolean isFinished() {
-		return timer.get() > 2 ;
+		return Robot.intake.sonar.getValue() < 60;
 	}
 
 	protected void end() {

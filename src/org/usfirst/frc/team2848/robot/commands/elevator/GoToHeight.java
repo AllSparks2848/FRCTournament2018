@@ -32,12 +32,17 @@ public class GoToHeight extends Command {
 //		}
 //		if(t.get()>.2)
 //			Robot.pivotIntake.intakePivot.set(DoubleSolenoid.Value.kForward);
+		if(Robot.elevator.elevatorEncoder.get() > 60){
+			
+		}
+		
+		if(Robot.elevator.elevatorEncoder.get() < 100 )
 		Robot.elevator.goToPosition(target);
 	}
 
 	protected boolean isFinished() {
 		if(!Robot.elevator.limitSwitchElevatorTop.get()) {
-			end();
+			return true;
 		}
 		return Math.abs(Robot.elevator.elevatorEncoder.get() - target) < 5 ;
 	}

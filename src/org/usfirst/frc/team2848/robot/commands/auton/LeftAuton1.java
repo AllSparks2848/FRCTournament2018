@@ -3,12 +3,12 @@ package org.usfirst.frc.team2848.robot.commands.auton;
 import org.usfirst.frc.team2848.robot.commands.carriage.ClampIntakeClaw;
 import org.usfirst.frc.team2848.robot.commands.carriage.ExtakeLeftAuton;
 import org.usfirst.frc.team2848.robot.commands.carriage.ReleaseIntakeClaw;
-import org.usfirst.frc.team2848.robot.commands.drive.GyroTurn;
+import org.usfirst.frc.team2848.robot.commands.drive.ShiftHigh;
 import org.usfirst.frc.team2848.robot.commands.drive.VelocityDriveToDistance;
 import org.usfirst.frc.team2848.robot.commands.drive.VelocityTurnToAngle;
 import org.usfirst.frc.team2848.robot.commands.elevator.DownToBottom;
 import org.usfirst.frc.team2848.robot.commands.elevator.GoToHeight;
-import org.usfirst.frc.team2848.robot.commands.intake.IntakeCube;
+import org.usfirst.frc.team2848.robot.commands.intake.IntakeCubeAuton;
 import org.usfirst.frc.team2848.robot.commands.intake.PivotOut;
 import org.usfirst.frc.team2848.robot.util.Wait;
 
@@ -22,6 +22,7 @@ public class LeftAuton1 extends CommandGroup {
 	Timer timer = new Timer();
 
 	public LeftAuton1() {
+		addSequential(new ShiftHigh());
 		addSequential(new ClampIntakeClaw());
 		addSequential(new VelocityDriveToDistance(-6, -12));
 		addParallel(new PivotOut());
@@ -34,9 +35,11 @@ public class LeftAuton1 extends CommandGroup {
 		addSequential(new ExtakeLeftAuton());
 		
 		addSequential(new DownToBottom());
-		addSequential(new VelocityDriveToDistance(-6, -3));
-		addSequential(new VelocityTurnToAngle(3, -90, 2));
-//		addSequential(new VelocityDriveToDistance(6, 15));
+		addSequential(new VelocityDriveToDistance(-6, -2.75));
+		addParallel(new IntakeCubeAuton());
+		addSequential(new VelocityTurnToAngle(3, -65, 2));
+		addParallel(new IntakeCubeAuton());
+		addSequential(new VelocityDriveToDistance(1.5, 4));
 		
 //		addSequential(new VelocityTurnToAngle(3, -60, 2));
 //		addSequential(new Wait(.5));

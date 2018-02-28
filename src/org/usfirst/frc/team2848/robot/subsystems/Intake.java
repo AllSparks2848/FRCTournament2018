@@ -2,6 +2,7 @@ package org.usfirst.frc.team2848.robot.subsystems;
 
 import org.usfirst.frc.team2848.robot.RobotMap;
 
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -13,6 +14,8 @@ public class Intake extends Subsystem {
 	//Intake motors
 	public Spark leftIntake = new Spark(RobotMap.p_leftIntake);
 	public Spark rightIntake = new Spark(RobotMap.p_rightIntake);
+	
+	public AnalogInput sonar = new AnalogInput(RobotMap.p_sonar);
 
 	public Intake() {
 		super("Intake");

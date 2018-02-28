@@ -10,6 +10,7 @@ import org.usfirst.frc.team2848.robot.util.PathPlanning;
 
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -33,7 +34,7 @@ public class Robot extends IterativeRobot {
 	public static final PivotIntake pivotIntake = new PivotIntake();
 	public static PathPlanning pathplanning = new PathPlanning();
 
-	// public static PowerDistributionPanel pdp = new PowerDistributionPanel();
+	 public static PowerDistributionPanel pdp = new PowerDistributionPanel();
 	public static OI oi;
 
 	Command autonomousCommand;
@@ -49,12 +50,13 @@ public class Robot extends IterativeRobot {
 		Robot.drivetrain.leftEncoder.reset();
 		Robot.drivetrain.rightEncoder.reset();
 		Robot.drivetrain.navX.reset();
+		Robot.drivetrain.navX.zeroYaw();
 		Robot.drivetrain.leftEncoder.setReverseDirection(true);
 
 		Robot.drivetrain.leftEncoder.setDistancePerPulse(-0.00114);
 		Robot.drivetrain.rightEncoder.setDistancePerPulse(0.00114);
 
-//		CameraServer.getInstance().startAutomaticCapture();
+		CameraServer.getInstance().startAutomaticCapture();
 		SmartDashboard.putData("Auto mode", chooser);
 	}
 
@@ -110,9 +112,6 @@ public class Robot extends IterativeRobot {
 			autonomousCommand.cancel();
 
 		Robot.hanger.lockHangerDown();
-
-		drivetrain.navX.zeroYaw();
-		drivetrain.navX.reset();
 	}
 
 	/**
@@ -121,7 +120,10 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-
+		
+//		System.out.println("sonar: " + Robot.intake.sonar.getValue());
+		System.out.println("current: " + Robot.pdp.getCurrent(3));
+		
 		// Arcade Drive
 		if (Math.abs(oi.getLeftJoystick()) > .05 || Math.abs(oi.getRightJoystick()) > .05)
 			drivetrain.arcadeDrive(oi.getLeftJoystick(), -oi.getRightJoystick());
@@ -131,6 +133,8 @@ public class Robot extends IterativeRobot {
 //		System.out.println("gyro angle: " + Robot.drivetrain.navX.getAngle());
 		
 //		System.out.println(Robot.elevator.elevatorEncoder.get());
+		
+		System.out.println("Elev: " + Robot.elevator.elevatorEncoder.get() + " Bottom Lim: " + Robot.elevator.limitSwitchElevatorBottom.get() + " Top Lim: " + Robot.elevator.limitSwitchElevatorTop.get());
 	}
 
 	/**

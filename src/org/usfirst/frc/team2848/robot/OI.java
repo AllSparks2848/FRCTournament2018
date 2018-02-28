@@ -21,6 +21,7 @@ import org.usfirst.frc.team2848.robot.commands.elevator.ManualUp;
 import org.usfirst.frc.team2848.robot.commands.hanger.DeployHanger;
 import org.usfirst.frc.team2848.robot.commands.hanger.PullUp;
 import org.usfirst.frc.team2848.robot.commands.intake.IntakeCube;
+import org.usfirst.frc.team2848.robot.commands.intake.IntakeCubeAuton;
 import org.usfirst.frc.team2848.robot.commands.intake.Pivot;
 import org.usfirst.frc.team2848.robot.commands.intake.PivotIn;
 import org.usfirst.frc.team2848.robot.commands.intake.PulseIntake;
@@ -115,14 +116,14 @@ public class OI {
 //		b.whenPressed(new DeployHanger());
 		rb.whenPressed(new ShiftLow());
 //		a.whileHeld(new PullUp());
-		y.whenPressed(new VelocityDriveToDistance(6, 15));
-		// b.whileHeld(new ArcTurn(4, 2));
+		y.whenPressed(new VelocityDriveToDistance(7, 10));
+		b.whenPressed(new VelocityTurnToAngle(2, 90, 1));
 		// a.whenPressed(new FollowPath(xC, yC, direction));
 		
 		// teleop button box commands
-		bb11.whenPressed(new GoToHeight(400)); // scale
+		bb11.whenPressed(new GoToHeight(100)); // scale
 		bb12.whenPressed(new DownToBottom());
-		bb13.whenPressed(new GoToHeight(250)); // switch
+		bb13.whenPressed(new GoToHeight(50)); // switch
 //		bb14.whileHeld(new PullUp());
 		bb15.whileHeld(new DeployHanger());
 		// bb16.whenPressed(new DeployHanger());
@@ -161,8 +162,8 @@ public class OI {
 		nbbb9.whenPressed(new ClampIntakeClaw());
 		nbbb10.whileHeld(new SecureCube());
 		nbbb11.whileHeld(new SpitOutFront());
-		nbbb12.whenPressed(new ExtakeLeftElevator());
-		nbbb13.whenPressed(new ExtakeRightElevator());
+		nbbb12.whileHeld(new ExtakeLeft());
+		nbbb13.whileHeld(new ExtakeRight());
 		nbbb14.whileHeld(new IntakeCube());
 
 	}
