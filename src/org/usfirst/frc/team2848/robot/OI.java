@@ -116,7 +116,7 @@ public class OI {
 //		b.whenPressed(new DeployHanger());
 		rb.whenPressed(new ShiftLow());
 //		a.whileHeld(new PullUp());
-		y.whenPressed(new VelocityDriveToDistance(7, 10));
+		y.whenPressed(new VelocityDriveToDistance(-6, -12));
 		b.whenPressed(new VelocityTurnToAngle(2, 90, 1));
 		// a.whenPressed(new FollowPath(xC, yC, direction));
 		
@@ -164,7 +164,7 @@ public class OI {
 		nbbb11.whileHeld(new SpitOutFront());
 		nbbb12.whileHeld(new ExtakeLeft());
 		nbbb13.whileHeld(new ExtakeRight());
-		nbbb14.whileHeld(new IntakeCube());
+		nbbb14.whenPressed(new IntakeCubeAuton());
 
 	}
 

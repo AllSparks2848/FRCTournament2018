@@ -32,11 +32,14 @@ public class GoToHeight extends Command {
 //		}
 //		if(t.get()>.2)
 //			Robot.pivotIntake.intakePivot.set(DoubleSolenoid.Value.kForward);
-		if(Robot.elevator.elevatorEncoder.get() > 60){
+//		if(Robot.elevator.elevatorEncoder.get() > 60){
+//			
+//		}
+//		
+//		if(Robot.elevator.elevatorEncoder.get() < 100 ){
+//			
+//		}
 			
-		}
-		
-		if(Robot.elevator.elevatorEncoder.get() < 100 )
 		Robot.elevator.goToPosition(target);
 	}
 
@@ -44,7 +47,7 @@ public class GoToHeight extends Command {
 		if(!Robot.elevator.limitSwitchElevatorTop.get()) {
 			return true;
 		}
-		return Math.abs(Robot.elevator.elevatorEncoder.get() - target) < 5 ;
+		return (Robot.elevator.elevatorEncoder.get() > target + 5) || Math.abs(Robot.elevator.elevatorEncoder.get() - target) < 10 ;
 	}
 
 	protected void end() {

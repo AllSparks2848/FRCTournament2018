@@ -23,23 +23,25 @@ public class LeftAuton1 extends CommandGroup {
 
 	public LeftAuton1() {
 		addSequential(new ShiftHigh());
-		addSequential(new ClampIntakeClaw());
-		addSequential(new VelocityDriveToDistance(-6, -12));
+//		addSequential(new ClampIntakeClaw());
+		addSequential(new VelocityDriveToDistance(-6, -13.5));
 		addParallel(new PivotOut());
 		addParallel(new Wait(.3));
 		addParallel(new DownToBottom());
-		addSequential(new GoToHeight(250));
-		addSequential(new Wait(.5));
-		addSequential(new ReleaseIntakeClaw());
-		addSequential(new Wait(.5));
-		addSequential(new ExtakeLeftAuton());
 		
-		addSequential(new DownToBottom());
-		addSequential(new VelocityDriveToDistance(-6, -2.75));
+//		addSequential(new GoToHeight(250));
+//		addSequential(new Wait(.5));
+//		addSequential(new ReleaseIntakeClaw());
+//		addSequential(new Wait(.5));
+//		addSequential(new ExtakeLeftAuton());
+		
+//		addSequential(new DownToBottom());
+		addSequential(new VelocityDriveToDistance(-6, -4.5)); //was 2.75
+		addSequential(new VelocityTurnToAngle(2.5, 310, 2)); //was 65
 		addParallel(new IntakeCubeAuton());
-		addSequential(new VelocityTurnToAngle(3, -65, 2));
-		addParallel(new IntakeCubeAuton());
-		addSequential(new VelocityDriveToDistance(1.5, 4));
+		addSequential(new VelocityDriveToDistance(3, 2));
+		addSequential(new VelocityDriveToDistance(-2, -2));
+		addSequential(new VelocityTurnToAngle(3, 180, 2));
 		
 //		addSequential(new VelocityTurnToAngle(3, -60, 2));
 //		addSequential(new Wait(.5));

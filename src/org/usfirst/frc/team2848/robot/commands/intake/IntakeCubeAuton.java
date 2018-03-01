@@ -25,9 +25,9 @@ public class IntakeCubeAuton extends Command {
 			Robot.intake.rightIntake.set(0.8);// intakes
 			Robot.carriage.intakeClawMotor.set(-0.8);
 		} else {
-			Robot.intake.leftIntake.set(-0.6);
-			Robot.intake.rightIntake.set(0.6);// intakes
-			Robot.carriage.intakeClawMotor.set(-0.6);
+			Robot.intake.leftIntake.set(-0.5);
+			Robot.intake.rightIntake.set(0.5);// intakes
+			Robot.carriage.intakeClawMotor.set(-0.5);
 		}
 
 	}

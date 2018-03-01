@@ -24,7 +24,7 @@ public class ExtakeLeftAuton extends Command {
 	}
 
 	protected boolean isFinished() {
-		return timer.get() > 1;
+		return timer.get() > .75;
 	}
 
 	protected void end() {

@@ -27,7 +27,7 @@ public class VelocityDriveToDistance extends Command {
     }
 
     protected boolean isFinished() {
-        return Robot.drivetrain.arcPIDs.isInterrupted() || Math.abs(Robot.drivetrain.leftEncoder.getDistance() - this.distance) < 0.5 ;
+        return Robot.drivetrain.arcPIDs.interrupt == 1;
     }
 
     protected void end() {
