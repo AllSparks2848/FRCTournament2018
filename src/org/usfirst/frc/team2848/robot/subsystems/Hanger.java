@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Hanger extends Subsystem {
 	public Solenoid unfoldPneumatic = new Solenoid(RobotMap.p_unfoldPneumatic);
 	public Spark hangerMotor1 = new Spark(RobotMap.p_hangerMotor1);
+	public boolean unlocked = false;
 
 	public Hanger() {
 		super("Hanger");
@@ -22,5 +23,11 @@ public class Hanger extends Subsystem {
 
 	public void lockHangerDown() {
 		unfoldPneumatic.set(false);
+		unlocked = false;
+	}
+	
+	public void releaseHanger() {
+		unfoldPneumatic.set(true);
+		unlocked = true;
 	}
 }

@@ -23,7 +23,7 @@ public class LeftAuton1 extends CommandGroup {
 
 	public LeftAuton1() {
 		addSequential(new ShiftHigh());
-//		addSequential(new ClampIntakeClaw());
+		addSequential(new ClampIntakeClaw());
 		addSequential(new VelocityDriveToDistance(-6, -13.5));
 		addParallel(new PivotOut());
 		addParallel(new Wait(.3));

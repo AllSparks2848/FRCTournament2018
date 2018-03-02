@@ -9,40 +9,36 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class GoToHeight extends Command {
+public class GoToHeightAuton extends Command {
 	double lastTick = 0;
 	double target = 0;
-	Timer t = new Timer();
+//	Timer t = new Timer();
 	
 	
-	public GoToHeight(double x) {// use target height as parameter
+	public GoToHeightAuton(double x) {// use target height as parameter
 		requires(Robot.elevator);
-		requires(Robot.pivotIntake);
 		
 		target = x;
 	}
 
 	protected void initialize() {
 		lastTick = Robot.elevator.elevatorEncoder.get();
-		t.start();
+//		t.start();
 	}
 
 	protected void execute() {
-		if(t.get()>.1){
-			Robot.pivotIntake.intakePivot.set(DoubleSolenoid.Value.kForward);
-		}
-		if(t.get() ==.1 && Robot.elevator.elevatorEncoder.get()<lastTick +5) {
-			end();
-		}
-		if(t.get()>.2)
-			Robot.pivotIntake.intakePivot.set(DoubleSolenoid.Value.kForward);
-		if(Robot.elevator.elevatorEncoder.get() > 60){
-			
-		}
-		
-		if(Robot.elevator.elevatorEncoder.get() < 100 ){
-			
-		}
+//		if(t.get() ==.1 && Robot.elevator.elevatorEncoder.get()<lastTick +5) {
+//			end();
+//		}
+//		if(t.get()>.2)
+//			Robot.pivotIntake.intakePivot.set(DoubleSolenoid.Value.kForward);
+//		if(Robot.elevator.elevatorEncoder.get() > 60){
+//			
+//		}
+//		
+//		if(Robot.elevator.elevatorEncoder.get() < 100 ){
+//			
+//		}
 			
 		Robot.elevator.goToPosition(target);
 	}

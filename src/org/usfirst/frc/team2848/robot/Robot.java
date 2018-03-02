@@ -1,5 +1,8 @@
 package org.usfirst.frc.team2848.robot;
 
+import org.usfirst.frc.team2848.robot.commands.auton.CenterAutonSelector;
+import org.usfirst.frc.team2848.robot.commands.auton.LeftAutonSelector;
+import org.usfirst.frc.team2848.robot.commands.auton.RightAutonSelector;
 import org.usfirst.frc.team2848.robot.subsystems.Carriage;
 import org.usfirst.frc.team2848.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team2848.robot.subsystems.Elevator;
@@ -34,11 +37,11 @@ public class Robot extends IterativeRobot {
 	public static final PivotIntake pivotIntake = new PivotIntake();
 	public static PathPlanning pathplanning = new PathPlanning();
 
-	 public static PowerDistributionPanel pdp = new PowerDistributionPanel();
+	public static PowerDistributionPanel pdp = new PowerDistributionPanel();
 	public static OI oi;
 
 	Command autonomousCommand;
-	SendableChooser<Command> chooser = new SendableChooser<>();
+	SendableChooser autoChooser;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -56,7 +59,13 @@ public class Robot extends IterativeRobot {
 		Robot.drivetrain.rightEncoder.setDistancePerPulse(0.00114);
 
 		CameraServer.getInstance().startAutomaticCapture();
-		SmartDashboard.putData("Auto mode", chooser);
+		
+		autoChooser = new SendableChooser();
+		autoChooser.addDefault("Left", new LeftAutonSelector()); //Picks one of the left options
+		autoChooser.addObject("Center", new CenterAutonSelector()); //Picks one of the center options
+		autoChooser.addObject("Right", new RightAutonSelector()); //Picks one of the right options
+		SmartDashboard.putData("Autonomous Mode Selector", autoChooser);
+		
 	}
 
 	/**
@@ -91,8 +100,6 @@ public class Robot extends IterativeRobot {
 
 	@Override
 	public void autonomousInit() {
-		autonomousCommand = chooser.getSelected();
-
 		if (autonomousCommand != null)
 			autonomousCommand.start();
 	}
@@ -119,26 +126,28 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-		
-//		System.out.println("sonar: " + Robot.intake.sonar.getValue());
-//		System.out.println("current: " + Robot.pdp.getCurrent(3));
-		
+
+		// System.out.println("sonar: " + Robot.intake.sonar.getValue());
+		// System.out.println("current: " + Robot.pdp.getCurrent(3));
+
 		// Arcade Drive
 		if (Math.abs(oi.getLeftJoystick()) > .05 || Math.abs(oi.getRightJoystick()) > .05)
 			drivetrain.arcadeDrive(oi.getLeftJoystick(), -oi.getRightJoystick());
-//
-//		System.out.println("left encoder: " + Robot.drivetrain.leftEncoder.getDistance() + " right encoder: "
-//				+ Robot.drivetrain.rightEncoder.getDistance());
-//		System.out.println("r1: " + Robot.pdp.getCurrent(15));
-//		System.out.println("r2: " + Robot.pdp.getCurrent(14));
-//		System.out.println("r3: " + Robot.pdp.getCurrent(13));
-//		System.out.println("l1: " + Robot.pdp.getCurrent(0));
-//		System.out.println("l2: " + Robot.pdp.getCurrent(1));
-//		System.out.println("l3: " + Robot.pdp.getCurrent(2));
+		//
+		// System.out.println("left encoder: " +
+		// Robot.drivetrain.leftEncoder.getDistance() + " right encoder: "
+		// + Robot.drivetrain.rightEncoder.getDistance());
+		// System.out.println("r1: " + Robot.pdp.getCurrent(15));
+		// System.out.println("r2: " + Robot.pdp.getCurrent(14));
+		// System.out.println("r3: " + Robot.pdp.getCurrent(13));
+		// System.out.println("l1: " + Robot.pdp.getCurrent(0));
+		// System.out.println("l2: " + Robot.pdp.getCurrent(1));
+		// System.out.println("l3: " + Robot.pdp.getCurrent(2));
 		System.out.println("gyro angle: " + Robot.drivetrain.navX.getFusedHeading());
-		
 
-//		System.out.println("Elev: " + Robot.elevator.elevatorEncoder.get() + " Bottom Lim: " + Robot.elevator.limitSwitchElevatorBottom.get() + " Top Lim: " + Robot.elevator.limitSwitchElevatorTop.get());
+		// System.out.println("Elev: " + Robot.elevator.elevatorEncoder.get() +
+		// " Bottom Lim: " + Robot.elevator.limitSwitchElevatorBottom.get() + "
+		// Top Lim: " + Robot.elevator.limitSwitchElevatorTop.get());
 	}
 
 	/**

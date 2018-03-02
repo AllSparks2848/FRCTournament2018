@@ -1,13 +1,11 @@
 package org.usfirst.frc.team2848.robot;
 
 import org.usfirst.frc.team2848.robot.commands.auton.AutonReset;
-import org.usfirst.frc.team2848.robot.commands.auton.LeftAuton1;
+import org.usfirst.frc.team2848.robot.commands.auton.LeftScaleAuton;
 import org.usfirst.frc.team2848.robot.commands.carriage.ClampIntakeClaw;
 import org.usfirst.frc.team2848.robot.commands.carriage.ExtakeFront;
 import org.usfirst.frc.team2848.robot.commands.carriage.ExtakeLeft;
-import org.usfirst.frc.team2848.robot.commands.carriage.ExtakeLeftElevator;
 import org.usfirst.frc.team2848.robot.commands.carriage.ExtakeRight;
-import org.usfirst.frc.team2848.robot.commands.carriage.ExtakeRightElevator;
 import org.usfirst.frc.team2848.robot.commands.carriage.ReleaseIntakeClaw;
 import org.usfirst.frc.team2848.robot.commands.carriage.SecureCube;
 import org.usfirst.frc.team2848.robot.commands.drive.ShiftHigh;
@@ -108,7 +106,7 @@ public class OI {
 
 	public OI() {
 
-		back.whenPressed(new LeftAuton1());
+		back.whenPressed(new LeftScaleAuton());
 //		back.whenPressed(new GyroTurn(-60));
 		// back.whenPressed(new AutonSetup());
 		start.whenPressed(new AutonReset());
@@ -148,7 +146,7 @@ public class OI {
 		nbba8.whileHeld(new ManualUp()); //manual up
 		nbba9.whileHeld(new ManualDown()); //manual down
 		nbba10.whileHeld(new PullUp()); //pull up
-		nbba11.whileHeld(new DeployHanger()); // deploy hanger
+		nbba11.whenPressed(new DeployHanger()); // deploy hanger
 		//nbba12.whenPressed(new ); // buddy
 
 		//nbbb1.whenPressed(new ); //warn

@@ -18,7 +18,7 @@ public class DeployHanger extends Command {
 	}
 
 	protected void execute() {
-		Robot.hanger.unfoldPneumatic.set(true);
+		
 	}
 
 	protected boolean isFinished() {
