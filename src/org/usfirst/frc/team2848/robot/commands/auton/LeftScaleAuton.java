@@ -18,6 +18,9 @@ public class LeftScaleAuton extends CommandGroup {
 		addSequential(new ShiftHigh());
 		addSequential(new ClampIntakeClaw());
 		addSequential(new VelocityDriveToDistance(6, 21));
+		for (int i = 0; i <5000; i++) {
+			System.out.println("ENDING");
+		}
 		addSequential(new GoToHeightAuton(420));
 		addSequential(new VelocityTurnToAngle(2, 10, 1));
 		addSequential(new VelocityDriveToDistance(3, 3));

@@ -3,13 +3,13 @@ package org.usfirst.frc.team2848.robot.commands.drive;
 import org.usfirst.frc.team2848.robot.Robot;
 import org.usfirst.frc.team2848.robot.util.PIDCalculate;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
 public class VelocityDriveToDistance extends Command {
-	
 	double velocity, distance;
 
     public VelocityDriveToDistance(double velocity, double distance) {

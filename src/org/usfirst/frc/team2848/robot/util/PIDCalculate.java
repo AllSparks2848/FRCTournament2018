@@ -2,8 +2,12 @@ package org.usfirst.frc.team2848.robot.util;
 
 import org.usfirst.frc.team2848.robot.Robot;
 
+import edu.wpi.first.wpilibj.Timer;
+
 public class PIDCalculate extends Thread {
 
+	Timer t = new Timer();
+	
 	double velocityL;
 	double velocityR;
 	double multiplier;
@@ -14,7 +18,7 @@ public class PIDCalculate extends Thread {
 	double target;
 	double type;
 	
-	MiniPID multiplierPID = new MiniPID(0.45, 0.0, 0.0);
+	MiniPID multiplierPID = new MiniPID(0.35, 0.0, 0.0);
 
 	public PIDCalculate(double velocityL, double velocityR, double target, double type) {
 		this.velocityL = velocityL;
@@ -45,6 +49,10 @@ public class PIDCalculate extends Thread {
 				
 //				System.out.println("Mult: " + multiplier);
 				
+				if(multiplier != 1) {
+					t.start();
+				}
+				
 				double leftSpeed = Robot.drivetrain.leftPIDDrive.getOutput(Robot.drivetrain.leftEncoder.getRate(),
 						this.velocityL * multiplier);
 				double rightSpeed = Robot.drivetrain.rightPIDDrive.getOutput(Robot.drivetrain.rightEncoder.getRate(),
@@ -53,7 +61,7 @@ public class PIDCalculate extends Thread {
 				Robot.drivetrain.left.set(leftSpeed);
 				Robot.drivetrain.right.set(-rightSpeed);
 				
-				if(multiplier < 0.05){
+				if(multiplier < 0.09 || t.get() > 1.5){
 					this.interrupt = 1;
 					System.out.println("Interrupting");
 					this.interrupt();

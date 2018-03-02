@@ -114,7 +114,7 @@ public class OI {
 //		b.whenPressed(new DeployHanger());
 		rb.whenPressed(new ShiftLow());
 //		a.whileHeld(new PullUp());
-		y.whenPressed(new VelocityDriveToDistance(-6, -12));
+		y.whenPressed(new VelocityDriveToDistance(6, 6));
 		b.whenPressed(new VelocityTurnToAngle(2, 90, 1));
 		// a.whenPressed(new FollowPath(xC, yC, direction));
 		
