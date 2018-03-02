@@ -17,7 +17,7 @@ public class PullUp extends Command {
 	}
 
 	protected void execute() {
-		Robot.hanger.hangerMotor1.set(1);
+		Robot.hanger.hangerMotor1.set(-1);
 
 	}
 

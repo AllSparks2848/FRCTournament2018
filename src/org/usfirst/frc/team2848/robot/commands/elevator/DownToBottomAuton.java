@@ -17,17 +17,17 @@ public class DownToBottomAuton extends Command {
 	}
 
 	protected void initialize() {
-		Robot.pivotIntake.intakePivot.set(DoubleSolenoid.Value.kReverse);
+		Robot.pivotIntake.intakePivot.set(DoubleSolenoid.Value.kForward);
 		t.start();
 	}
 
 	protected void execute() {
-		Robot.pivotIntake.intakePivot.set(DoubleSolenoid.Value.kReverse);
+		Robot.pivotIntake.intakePivot.set(DoubleSolenoid.Value.kForward);
 		if(t.get()>.2) {
 		if (Robot.elevator.elevatorEncoder.get() < 100) {
-			Robot.elevator.elevatorMotor.set(.5);// sends carriage down
+			Robot.elevator.elevatorMotor.set(-.5);// sends carriage down
 		} else {
-			Robot.elevator.elevatorMotor.set(.7);// sends carriage down
+			Robot.elevator.elevatorMotor.set(-.7);// sends carriage down
 		}
 		}
 	}

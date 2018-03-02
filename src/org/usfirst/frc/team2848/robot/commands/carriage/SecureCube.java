@@ -19,7 +19,7 @@ public class SecureCube extends Command {
 
 	protected void execute() {
 		Robot.carriage.intakeClaw.set(DoubleSolenoid.Value.kForward);
-		Robot.carriage.intakeClawMotor.set(-.8);
+		Robot.carriage.intakeClawMotor.set(.8);
 	}
 
 	protected boolean isFinished() {

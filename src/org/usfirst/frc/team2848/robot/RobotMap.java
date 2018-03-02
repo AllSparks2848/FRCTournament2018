@@ -31,7 +31,7 @@ public class RobotMap {
 	public static int p_hangerMotor1 = 4;
 
 	// Elevator motors
-	public static int p_elevatorMotor = 9;
+	public static int p_elevatorMotor = 12;
 
 	// Elevator DigitalInputs
 	public static int p_elevatorLimitBottom = 6;

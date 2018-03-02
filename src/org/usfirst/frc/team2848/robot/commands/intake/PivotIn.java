@@ -15,7 +15,7 @@ public class PivotIn extends Command {
 	}
 
 	protected void initialize() {
-		Robot.pivotIntake.intakePivot.set(DoubleSolenoid.Value.kForward);
+		Robot.pivotIntake.intakePivot.set(DoubleSolenoid.Value.kReverse);
 	}
 
 	protected void execute() {
@@ -26,6 +26,7 @@ public class PivotIn extends Command {
 	}
 
 	protected void end() {
+		Robot.pivotIntake.intakePivot.set(DoubleSolenoid.Value.kReverse);
 	}
 
 	protected void interrupted() {

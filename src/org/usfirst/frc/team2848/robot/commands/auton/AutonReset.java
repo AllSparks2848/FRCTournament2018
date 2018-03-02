@@ -20,7 +20,7 @@ public class AutonReset extends CommandGroup {
 		addSequential(new PivotOut());
 		addSequential(new Wait(1));
 		addSequential(new DownToBottomAuton());
-		addSequential(new GoToHeightAuton(100));
+		addSequential(new GoToHeightAuton(65));
 		addSequential(new Wait(1));
 		addSequential(new PivotIn());
 		addSequential(new ReleaseIntakeClaw());

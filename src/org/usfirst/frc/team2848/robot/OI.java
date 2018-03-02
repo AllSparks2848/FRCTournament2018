@@ -161,7 +161,7 @@ public class OI {
 		nbbb11.whileHeld(new SpitOutFront());
 		nbbb12.whileHeld(new ExtakeLeft());
 		nbbb13.whileHeld(new ExtakeRight());
-//		nbbb14.whenPressed(new IntakeCubeAuton());
+		nbbb14.whileHeld(new IntakeCube()); // ian changed from when pressed autonintake cube becuase no ultrasocin
 
 	}
 

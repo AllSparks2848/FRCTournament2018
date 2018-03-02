@@ -49,7 +49,7 @@ public class Elevator extends Subsystem {
 
 	public void goToPosition(double height) {
 		double pidOutput = elevatorController.getOutput(elevatorEncoder.get(), height);
-		elevatorMotor.set(-pidOutput);
+		elevatorMotor.set(pidOutput);
 		System.out.println("PID Output: " + pidOutput);
 	}
 

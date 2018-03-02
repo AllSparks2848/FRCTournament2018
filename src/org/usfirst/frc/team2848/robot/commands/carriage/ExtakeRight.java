@@ -15,9 +15,9 @@ public class ExtakeRight extends Command {
 	}
 
 	protected void execute() {
-		if(Robot.elevator.elevatorEncoder.get() > Robot.elevator.sideSpitMinPos) {
+//		if(Robot.elevator.elevatorEncoder.get() > Robot.elevator.sideSpitMinPos) {
 			Robot.carriage.omniPlateMotor.set(1);// output cube to robot's right
-		}
+//		}
 	}
 
 	protected boolean isFinished() {

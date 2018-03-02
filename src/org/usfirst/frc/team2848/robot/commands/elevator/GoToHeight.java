@@ -29,13 +29,13 @@ public class GoToHeight extends Command {
 
 	protected void execute() {
 		if(t.get()>.1){
-			Robot.pivotIntake.intakePivot.set(DoubleSolenoid.Value.kForward);
+			Robot.pivotIntake.intakePivot.set(DoubleSolenoid.Value.kReverse);
 		}
 		if(t.get() ==.1 && Robot.elevator.elevatorEncoder.get()<lastTick +5) {
 			end();
 		}
 		if(t.get()>.2)
-			Robot.pivotIntake.intakePivot.set(DoubleSolenoid.Value.kForward);
+			Robot.pivotIntake.intakePivot.set(DoubleSolenoid.Value.kReverse);
 		if(Robot.elevator.elevatorEncoder.get() > 60){
 			
 		}

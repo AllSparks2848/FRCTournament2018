@@ -140,23 +140,12 @@ public class Robot extends IterativeRobot {
 		if (Math.abs(oi.getLeftJoystick()) > .05 || Math.abs(oi.getRightJoystick()) > .05)
 			drivetrain.arcadeDrive(oi.getLeftJoystick(), -oi.getRightJoystick());
 
-//		 System.out.println("left encoder: " +
-//		 Robot.drivetrain.leftEncoder.getDistance() + " right encoder: "
-//		 + Robot.drivetrain.rightEncoder.getDistance());
-//		 System.out.println("r1: " + Robot.pdp.getCurrent(15));
-//		 System.out.println("r2: " + Robot.pdp.getCurrent(14));
-//		 System.out.println("r3: " + Robot.pdp.getCurrent(13));
-//		 System.out.println("l1: " + Robot.pdp.getCurrent(0));
-//		 System.out.println("l2: " + Robot.pdp.getCurrent(1));
-//		 System.out.println("l3: " + Robot.pdp.getCurrent(2));
-//		 System.out.println("gyro angle: " +
-//		 Robot.drivetrain.navX.getFusedHeading());
+		 System.out.println("left encoder: " + Robot.drivetrain.leftEncoder.getDistance() + " right encoder: " + Robot.drivetrain.rightEncoder.getDistance());
+
+		 System.out.println("gyro angle: " + Robot.drivetrain.navX.getFusedHeading());
 //		 System.out.println("sonar: " + Robot.intake.sonar.getValue());
-//		 System.out.println("current: " + Robot.pdp.getCurrent(3));
-//		 System.out.println("Elev: " + Robot.elevator.elevatorEncoder.get() +
-//		 " Bottom Lim: "
-//		 + Robot.elevator.limitSwitchElevatorBottom.get() + "Top Lim: "
-//		 + Robot.elevator.limitSwitchElevatorTop.get());
+		 System.out.println("Elev: " + Robot.elevator.elevatorEncoder.get() + " Bottom Lim: " + Robot.elevator.limitSwitchElevatorBottom.get() + "Top Lim: "
+		 + Robot.elevator.limitSwitchElevatorTop.get());
 	}
 
 	/**

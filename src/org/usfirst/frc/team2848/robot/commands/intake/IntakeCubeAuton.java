@@ -21,12 +21,12 @@
 //	protected void execute() {
 //		Robot.carriage.intakeClaw.set(DoubleSolenoid.Value.kReverse);
 //		if (Robot.pdp.getCurrent(3) > 15) {
-//			Robot.intake.leftIntake.set(-0.8);
-//			Robot.intake.rightIntake.set(0.8);// intakes
+//			Robot.intake.leftIntake.set(0.8);
+//			Robot.intake.rightIntake.set(-0.8);// intakes
 //			Robot.carriage.intakeClawMotor.set(-0.8);
 //		} else {
-//			Robot.intake.leftIntake.set(-0.5);
-//			Robot.intake.rightIntake.set(0.5);// intakes
+//			Robot.intake.leftIntake.set(0.5);
+//			Robot.intake.rightIntake.set(-0.5);// intakes
 //			Robot.carriage.intakeClawMotor.set(-0.5);
 //		}
 //
