@@ -38,6 +38,7 @@ public class Robot extends IterativeRobot {
 	public static PathPlanning pathplanning = new PathPlanning();
 
 //	public static PowerDistributionPanel pdp = new PowerDistributionPanel();
+	
 	public static OI oi;
 
 	Command autonomousCommand;
