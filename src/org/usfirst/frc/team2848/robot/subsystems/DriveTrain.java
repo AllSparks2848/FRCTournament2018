@@ -56,9 +56,9 @@ public class DriveTrain extends PIDSubsystem {
 	// Gyro PIDs
 	public static double gyroKp = 0.6;
 	public static double gyroKi = 0;
-	public static double gyroKd = 0.08;
+	public static double gyroKd = 0.1;
 	
-	private static double kP = 0.1;
+	private static double kP = 0.06;
 	private static double kI = 0.0005;
 	private static double kD = 0.02;
 	

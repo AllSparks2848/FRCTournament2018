@@ -28,7 +28,7 @@ public class LeftAutonSelector extends Command {
 			new LeftScaleAuton();
 			break;
 		case "RRR":
-			new LeftForwardAuton();
+			new ForwardAuton();
 			break;
     	}
     }

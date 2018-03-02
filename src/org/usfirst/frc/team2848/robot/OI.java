@@ -19,7 +19,6 @@ import org.usfirst.frc.team2848.robot.commands.elevator.ManualUp;
 import org.usfirst.frc.team2848.robot.commands.hanger.DeployHanger;
 import org.usfirst.frc.team2848.robot.commands.hanger.PullUp;
 import org.usfirst.frc.team2848.robot.commands.intake.IntakeCube;
-import org.usfirst.frc.team2848.robot.commands.intake.IntakeCubeAuton;
 import org.usfirst.frc.team2848.robot.commands.intake.Pivot;
 import org.usfirst.frc.team2848.robot.commands.intake.PivotIn;
 import org.usfirst.frc.team2848.robot.commands.intake.PulseIntake;
@@ -162,7 +161,7 @@ public class OI {
 		nbbb11.whileHeld(new SpitOutFront());
 		nbbb12.whileHeld(new ExtakeLeft());
 		nbbb13.whileHeld(new ExtakeRight());
-		nbbb14.whenPressed(new IntakeCubeAuton());
+//		nbbb14.whenPressed(new IntakeCubeAuton());
 
 	}
 

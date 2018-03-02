@@ -11,9 +11,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-public class LeftForwardAuton extends CommandGroup {
+public class ForwardAuton extends CommandGroup {
 
-	public LeftForwardAuton() {
+	public ForwardAuton() {
 		addSequential(new ShiftHigh());
 		addSequential(new ClampIntakeClaw());
 		addSequential(new VelocityDriveToDistance(6, 12.5));

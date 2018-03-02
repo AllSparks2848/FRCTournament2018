@@ -21,10 +21,10 @@ public class Elevator extends Subsystem {
 
 	public Encoder elevatorEncoder = new Encoder(RobotMap.p_elevatorEncoderA, RobotMap.p_elevatorEncoderB, true,
 			EncodingType.k4X);// measures carriage height
-
-	double kP = 0.0;
-	double kI = 0.001;
-	double kD = 0.1;
+ 
+	double kP = 0.04;
+	double kI = 0.00;
+	double kD = 0.16;
 
 	public MiniPID elevatorController = new MiniPID(kP, kI, kD);
 	

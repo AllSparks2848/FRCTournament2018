@@ -21,7 +21,7 @@ public class RightAutonSelector extends Command {
     	
     	switch (gameData) {
 		case "LLL":
-//			new RightAutonLLL();
+			new ForwardAuton();
 			break;
 		case "LRL":
 //			new RightAutonLRL();
@@ -30,7 +30,7 @@ public class RightAutonSelector extends Command {
 //			new RightAutonRLR();
 			break;
 		case "RRR":
-//			new RightAutonRRR();
+			
 			break;
     	}
     }

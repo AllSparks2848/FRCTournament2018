@@ -18,16 +18,16 @@ public class CenterAutonSelector extends Command {
     	
     	switch (gameData) {
 		case "LLL":
-			new CenterAutonLeft();
+			new CenterLeftAuton();
 			break;
 		case "LRL":
-			new CenterAutonLeft();
+			new CenterLeftAuton();
 			break;
 		case "RLR":
-			new CenterAutonRight();
+			new CenterRightAuton();
 			break;
 		case "RRR":
-			new CenterAutonRight();
+			new CenterRightAuton();
 			break;
     	}
     }
