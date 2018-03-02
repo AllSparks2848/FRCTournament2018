@@ -1,7 +1,7 @@
 package org.usfirst.frc.team2848.robot;
 
 import org.usfirst.frc.team2848.robot.commands.auton.AutonReset;
-import org.usfirst.frc.team2848.robot.commands.auton.LeftScaleAuton;
+import org.usfirst.frc.team2848.robot.commands.auton.LeftCrossSwitch;
 import org.usfirst.frc.team2848.robot.commands.carriage.ClampIntakeClaw;
 import org.usfirst.frc.team2848.robot.commands.carriage.ExtakeFront;
 import org.usfirst.frc.team2848.robot.commands.carriage.ExtakeLeft;
@@ -106,7 +106,7 @@ public class OI {
 
 	public OI() {
 
-		back.whenPressed(new LeftScaleAuton());
+		back.whenPressed(new LeftCrossSwitch());
 //		back.whenPressed(new GyroTurn(-60));
 		// back.whenPressed(new AutonSetup());
 		start.whenPressed(new AutonReset());

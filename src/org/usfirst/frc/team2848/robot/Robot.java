@@ -75,6 +75,13 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void disabledInit() {
+		Robot.hanger.lockHangerDown();
+		Robot.drivetrain.navX.reset();
+		Robot.drivetrain.leftEncoder.reset();
+		Robot.drivetrain.rightEncoder.reset();
+		Robot.drivetrain.disable();
+		Robot.drivetrain.drivetrainSetPowerZero();
+		
 		if (Robot.drivetrain.arcPIDs != null) {
 			System.out.println("ending thread");
 			Robot.drivetrain.arcPIDs.interrupt();
@@ -84,12 +91,7 @@ public class Robot extends IterativeRobot {
 				e.printStackTrace();
 			}
 		}
-		Robot.hanger.lockHangerDown();
-		Robot.drivetrain.navX.reset();
-		Robot.drivetrain.leftEncoder.reset();
-		Robot.drivetrain.rightEncoder.reset();
-		Robot.drivetrain.disable();
-		Robot.drivetrain.drivetrainSetPowerZero();
+
 		Scheduler.getInstance().removeAll();
 	}
 
@@ -116,6 +118,8 @@ public class Robot extends IterativeRobot {
 	public void teleopInit() {
 		if (autonomousCommand != null)
 			autonomousCommand.cancel();
+		
+		Robot.drivetrain.navX.reset();
 
 		Robot.hanger.lockHangerDown();
 	}
