@@ -1,23 +1,26 @@
 package org.usfirst.frc.team2848.robot.commands.auton;
 
 import org.usfirst.frc.team2848.robot.commands.carriage.ClampIntakeClaw;
-import org.usfirst.frc.team2848.robot.commands.carriage.ExtakeFront;
 import org.usfirst.frc.team2848.robot.commands.drive.ShiftHigh;
 import org.usfirst.frc.team2848.robot.commands.drive.VelocityDriveToDistance;
 import org.usfirst.frc.team2848.robot.commands.drive.VelocityTurnToAngle;
 import org.usfirst.frc.team2848.robot.commands.elevator.GoToHeightAuton;
+import org.usfirst.frc.team2848.robot.commands.intake.SpitOutFront;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
  *
  */
-public class LeftScaleAuton extends CommandGroup {
+public class CenterLeftAutonFast extends CommandGroup {
 
-	public LeftScaleAuton() {
-		addSequential(new ShiftHigh());
-		addSequential(new ClampIntakeClaw());
-		addSequential(new VelocityDriveToDistance(7, 25.5));
-		addSequential(new LeftScaleScoreAndBack());
-	}
+    public CenterLeftAutonFast() {
+    	addSequential(new ShiftHigh());
+		addParallel(new ClampIntakeClaw());
+        addSequential(new VelocityTurnToAngle(2, 329, 2));
+        addSequential(new VelocityDriveToDistance(5, 10));
+        addSequential(new GoToHeightAuton(200));
+        addSequential(new SpitOutFront());
+        
+    }
 }

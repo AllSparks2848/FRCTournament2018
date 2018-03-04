@@ -12,6 +12,7 @@ import org.usfirst.frc.team2848.robot.subsystems.PivotIntake;
 import org.usfirst.frc.team2848.robot.util.PathPlanning;
 
 import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.command.Command;
@@ -37,11 +38,11 @@ public class Robot extends IterativeRobot {
 	public static final PivotIntake pivotIntake = new PivotIntake();
 	public static PathPlanning pathplanning = new PathPlanning();
 
-//	public static PowerDistributionPanel pdp = new PowerDistributionPanel();
-	
+	// public static PowerDistributionPanel pdp = new PowerDistributionPanel();
+
 	public static OI oi;
 
-	Command autonomousCommand;
+	public static Command autonomousCommand;
 	SendableChooser autoChooser;
 
 	/**
@@ -74,7 +75,6 @@ public class Robot extends IterativeRobot {
 																	// right
 																	// options
 		SmartDashboard.putData("Autonomous Mode Selector", autoChooser);
-
 	}
 
 	/**
@@ -109,8 +109,15 @@ public class Robot extends IterativeRobot {
 
 	@Override
 	public void autonomousInit() {
-		if (autonomousCommand != null)
+
+		autonomousCommand = (Command) autoChooser.getSelected();
+
+		if (autonomousCommand != null) {
+			System.out.println("Starting AutonChooser Command");
 			autonomousCommand.start();
+		} else {
+			System.out.println("autonomousCommand == null");
+		}
 	}
 
 	/**
@@ -140,12 +147,14 @@ public class Robot extends IterativeRobot {
 		if (Math.abs(oi.getLeftJoystick()) > .05 || Math.abs(oi.getRightJoystick()) > .05)
 			drivetrain.arcadeDrive(oi.getLeftJoystick(), -oi.getRightJoystick());
 
-		 System.out.println("left encoder: " + Robot.drivetrain.leftEncoder.getDistance() + " right encoder: " + Robot.drivetrain.rightEncoder.getDistance());
+		System.out.println("left encoder: " + Robot.drivetrain.leftEncoder.getDistance() + " right encoder: "
+				+ Robot.drivetrain.rightEncoder.getDistance());
 
-		 System.out.println("gyro angle: " + Robot.drivetrain.navX.getFusedHeading());
-//		 System.out.println("sonar: " + Robot.intake.sonar.getValue());
-		 System.out.println("Elev: " + Robot.elevator.elevatorEncoder.get() + " Bottom Lim: " + Robot.elevator.limitSwitchElevatorBottom.get() + "Top Lim: "
-		 + Robot.elevator.limitSwitchElevatorTop.get());
+		System.out.println("gyro angle: " + Robot.drivetrain.navX.getFusedHeading());
+		// System.out.println("sonar: " + Robot.intake.sonar.getValue());
+		System.out.println("Elev: " + Robot.elevator.elevatorEncoder.get() + " Bottom Lim: "
+				+ Robot.elevator.limitSwitchElevatorBottom.get() + "Top Lim: "
+				+ Robot.elevator.limitSwitchElevatorTop.get());
 	}
 
 	/**
@@ -155,4 +164,11 @@ public class Robot extends IterativeRobot {
 	public void testPeriodic() {
 		LiveWindow.run();
 	}
+
+	// public int getAutoNum() {
+	// int autoNum = 0;
+	// if(autoChooser.addDefault("Left", new LeftAutonSelector())) {}
+	//
+	// return autoNum;
+	// }
 }

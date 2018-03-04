@@ -20,9 +20,9 @@ public class IntakeCube extends Command {
 
 	protected void execute() {
 		Robot.carriage.intakeClaw.set(DoubleSolenoid.Value.kReverse);
-		Robot.intake.leftIntake.set(0.8);
-		Robot.intake.rightIntake.set(-0.8);// intakes
-		Robot.carriage.intakeClawMotor.set(0.8);
+		Robot.intake.leftIntake.set(0.7);
+		Robot.intake.rightIntake.set(-0.7);// intakes
+		Robot.carriage.intakeClawMotor.set(0.7);
 	}
 
 	protected boolean isFinished() {

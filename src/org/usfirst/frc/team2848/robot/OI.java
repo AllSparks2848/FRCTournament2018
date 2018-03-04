@@ -10,8 +10,6 @@ import org.usfirst.frc.team2848.robot.commands.carriage.ReleaseIntakeClaw;
 import org.usfirst.frc.team2848.robot.commands.carriage.SecureCube;
 import org.usfirst.frc.team2848.robot.commands.drive.ShiftHigh;
 import org.usfirst.frc.team2848.robot.commands.drive.ShiftLow;
-import org.usfirst.frc.team2848.robot.commands.drive.VelocityDriveToDistance;
-import org.usfirst.frc.team2848.robot.commands.drive.VelocityTurnToAngle;
 import org.usfirst.frc.team2848.robot.commands.elevator.DownToBottom;
 import org.usfirst.frc.team2848.robot.commands.elevator.GoToHeight;
 import org.usfirst.frc.team2848.robot.commands.elevator.ManualDown;
@@ -105,16 +103,18 @@ public class OI {
 
 	public OI() {
 
-		back.whenPressed(new LeftScaleAuton());
+//		back.whenPressed(new LeftScaleAuton());
 //		back.whenPressed(new GyroTurn(-60));
 		// back.whenPressed(new AutonSetup());
 		start.whenPressed(new AutonReset());
 		lb.whenPressed(new ShiftHigh());
 //		b.whenPressed(new DeployHanger());
 		rb.whenPressed(new ShiftLow());
-//		a.whileHeld(new PullUp());
-		y.whenPressed(new VelocityDriveToDistance(-6, -12));
-		b.whenPressed(new VelocityTurnToAngle(2, 90, 1));
+//		a.whenPressed(new LeftScaleAuton());
+//		a.whenPressed(new CenterLeftAutonFast());
+//		b.whenPressed(new CenterRightAutonFast());
+//		y.whenPressed(new VelocityDriveToDistance(-6, -12));
+//		b.whenPressed(new VelocityTurnToAngle(2, 90, 1));
 		// a.whenPressed(new FollowPath(xC, yC, direction));
 		
 		// teleop button box commands

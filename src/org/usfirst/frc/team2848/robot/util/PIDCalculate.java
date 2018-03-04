@@ -2,12 +2,16 @@ package org.usfirst.frc.team2848.robot.util;
 
 import org.usfirst.frc.team2848.robot.Robot;
 
+import edu.wpi.first.wpilibj.Timer;
+
 public class PIDCalculate extends Thread {
 
 	double velocityL;
 	double velocityR;
 	double multiplier;
 	double offset;
+	
+	Timer t = new Timer();
 	
 	public double interrupt = 0;
 
@@ -33,6 +37,8 @@ public class PIDCalculate extends Thread {
 	}
 
 	public void run() {
+		
+		boolean notBeginning = false;
 
 		Robot.drivetrain.leftEncoder.reset();
 		Robot.drivetrain.rightEncoder.reset();
@@ -58,7 +64,22 @@ public class PIDCalculate extends Thread {
 					System.out.println("Interrupting");
 					this.interrupt();
 					return;
-				}				
+				}
+				
+//				if (multiplier == 1){
+//					notBeginning = true;
+//				}
+//				
+//				if (multiplier != 1 && notBeginning){
+//					t.start();
+//				}
+//				
+//				if (t.get() > 1) {
+//					this.interrupt = 1;
+//					System.out.println("Interrupting");
+//					this.interrupt();
+//					return;
+//				}
 			}
 		} else if (this.type == 1) {
 			

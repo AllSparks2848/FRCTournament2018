@@ -22,7 +22,7 @@ public class CenterRightAuton extends CommandGroup {
         addSequential(new VelocityDriveToDistance(5, 6.5));
         addSequential(new VelocityTurnToAngle(2, 360, 2));
         addSequential(new GoToHeightAuton(200));
-        addSequential(new VelocityDriveToDistance(5, 2.25));
+        addSequential(new VelocityDriveToDistance(5, 2.75));
         addSequential(new SpitOutFront());
     }
 }
