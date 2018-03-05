@@ -18,8 +18,8 @@ public class RotateCube extends Command {
 	}
 
 	protected void execute() {
-		Robot.intake.leftIntake.set(.4);
-		Robot.intake.rightIntake.set(0.4);// intakes
+		Robot.intake.leftIntake.set(.5);
+		Robot.intake.rightIntake.set(0.5);// intakes
 	}
 
 	protected boolean isFinished() {

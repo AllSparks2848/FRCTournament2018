@@ -15,8 +15,8 @@ public class RightScaleSetupAuton extends CommandGroup {
     public RightScaleSetupAuton() {
     	addSequential(new ShiftHigh());
 		addSequential(new ClampIntakeClaw());
-		addSequential(new VelocityDriveToDistance(6, 22));
-		addSequential(new VelocityTurnToAngle(2, 90, 1));
-		addSequential(new VelocityDriveToDistance(4, 12));
+		addSequential(new VelocityDriveToDistance(6, 20));
+//		addSequential(new VelocityTurnToAngle(2, 90, 1));
+//		addSequential(new VelocityDriveToDistance(4, 12));
     }
 }

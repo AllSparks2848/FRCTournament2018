@@ -18,7 +18,7 @@ public class CenterRightAuton extends CommandGroup {
     	addSequential(new ShiftHigh());
 		addSequential(new ClampIntakeClaw());
         addSequential(new VelocityDriveToDistance(5, 3));
-        addSequential(new VelocityTurnToAngle(2, 40, 1));
+        addSequential(new VelocityTurnToAngle(2, 38, 1));
         addSequential(new VelocityDriveToDistance(5, 6.5));
         addSequential(new VelocityTurnToAngle(2, 360, 2));
         addSequential(new GoToHeightAuton(200));

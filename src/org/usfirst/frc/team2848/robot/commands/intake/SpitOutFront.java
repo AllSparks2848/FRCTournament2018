@@ -19,15 +19,19 @@ public class SpitOutFront extends Command {
 	}
 
 	protected void execute() {
-		Robot.carriage.intakeClaw.set(DoubleSolenoid.Value.kForward);
-		Robot.intake.leftIntake.set(-0.8);
-		Robot.intake.rightIntake.set(0.8);// extakes
-		Robot.carriage.intakeClawMotor.set(-1);
+		if(Robot.elevator.elevatorEncoder.get() > 50) {
+			Robot.carriage.intakeClaw.set(DoubleSolenoid.Value.kForward);
+			Robot.carriage.intakeClawMotor.set(-1);
+		} else {
+			Robot.carriage.intakeClaw.set(DoubleSolenoid.Value.kForward);
+			Robot.intake.leftIntake.set(-0.8);
+			Robot.intake.rightIntake.set(0.8);// extakes
+			Robot.carriage.intakeClawMotor.set(-1);
+		}
+		
 	}
 
 	protected boolean isFinished() {
-		
-		
 		return false;
 	}
 

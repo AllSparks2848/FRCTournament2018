@@ -1,7 +1,6 @@
 package org.usfirst.frc.team2848.robot;
 
 import org.usfirst.frc.team2848.robot.commands.auton.AutonReset;
-import org.usfirst.frc.team2848.robot.commands.auton.LeftScaleAuton;
 import org.usfirst.frc.team2848.robot.commands.carriage.ClampIntakeClaw;
 import org.usfirst.frc.team2848.robot.commands.carriage.ExtakeFront;
 import org.usfirst.frc.team2848.robot.commands.carriage.ExtakeLeft;
@@ -12,6 +11,7 @@ import org.usfirst.frc.team2848.robot.commands.drive.ShiftHigh;
 import org.usfirst.frc.team2848.robot.commands.drive.ShiftLow;
 import org.usfirst.frc.team2848.robot.commands.elevator.DownToBottom;
 import org.usfirst.frc.team2848.robot.commands.elevator.GoToHeight;
+import org.usfirst.frc.team2848.robot.commands.elevator.GoToHeightPortal;
 import org.usfirst.frc.team2848.robot.commands.elevator.ManualDown;
 import org.usfirst.frc.team2848.robot.commands.elevator.ManualUp;
 import org.usfirst.frc.team2848.robot.commands.hanger.DeployHanger;
@@ -110,7 +110,9 @@ public class OI {
 		lb.whenPressed(new ShiftHigh());
 //		b.whenPressed(new DeployHanger());
 		rb.whenPressed(new ShiftLow());
+//		a.whenPressed(new ExtakeFrontAuton());
 //		a.whenPressed(new LeftScaleAuton());
+//		b.whenPressed(new RightScaleSetupAuton());
 //		a.whenPressed(new CenterLeftAutonFast());
 //		b.whenPressed(new CenterRightAutonFast());
 //		y.whenPressed(new VelocityDriveToDistance(-6, -12));
@@ -141,7 +143,7 @@ public class OI {
 		nbba4.whenPressed(new GoToHeight(200)); // switch low
 		nbba5.whenPressed(new DownToBottom()); //down and zero
 		//nbba6.whileHeld(new ); //not wanted yet
-		//nbba7.whileHeld(new ); //not wanted yet
+		nbba7.whenPressed(new GoToHeightPortal(93)); //portal (20.5in)
 		nbba8.whileHeld(new ManualUp()); //manual up
 		nbba9.whileHeld(new ManualDown()); //manual down
 		nbba10.whileHeld(new PullUp()); //pull up

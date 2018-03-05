@@ -34,12 +34,12 @@ public class LeftAutonSelector extends Command {
 
 		switch (gameData) {
 		case "LLL":
-			runningAuton = new LeftSwitchAuton();
-			System.out.println("RUNNING LEFT SWITCH AUTON");
+			runningAuton = new LeftScaleAuton();
+			System.out.println("RUNNING LEFT SCALE AUTON");
 			break;
 		case "LRL":
 			runningAuton = new LeftSwitchAuton();
-			System.out.println("RUNNING LEFT SWITCH AUTON");
+			System.out.println("RUNNING LEFT SWITCH AUTON AUTON");
 			break;
 		case "RLR":
 			runningAuton = new LeftScaleAuton();
