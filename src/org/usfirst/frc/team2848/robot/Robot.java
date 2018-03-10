@@ -9,12 +9,11 @@ import org.usfirst.frc.team2848.robot.subsystems.Elevator;
 import org.usfirst.frc.team2848.robot.subsystems.Hanger;
 import org.usfirst.frc.team2848.robot.subsystems.Intake;
 import org.usfirst.frc.team2848.robot.subsystems.PivotIntake;
+//import org.usfirst.frc.team2848.robot.util.ControlLooper;
 import org.usfirst.frc.team2848.robot.util.PathPlanning;
 
 import edu.wpi.first.wpilibj.CameraServer;
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -37,6 +36,8 @@ public class Robot extends IterativeRobot {
 	public static final Elevator elevator = new Elevator();
 	public static final PivotIntake pivotIntake = new PivotIntake();
 	public static PathPlanning pathplanning = new PathPlanning();
+	
+//	public ControlLooper TestLoop;
 
 	// public static PowerDistributionPanel pdp = new PowerDistributionPanel();
 
@@ -100,6 +101,10 @@ public class Robot extends IterativeRobot {
 		Robot.drivetrain.disable();
 		Robot.drivetrain.drivetrainSetPowerZero();
 		Scheduler.getInstance().removeAll();
+		
+//		if(TestLoop != null){
+//			TestLoop.stop();
+//		}
 	}
 
 	@Override
@@ -134,6 +139,9 @@ public class Robot extends IterativeRobot {
 			autonomousCommand.cancel();
 
 		Robot.hanger.lockHangerDown();
+		
+//		TestLoop = new ControlLooper(1);
+//		TestLoop.start();
 	}
 
 	/**
@@ -147,17 +155,16 @@ public class Robot extends IterativeRobot {
 		if (Math.abs(oi.getLeftJoystick()) > .05 || Math.abs(oi.getRightJoystick()) > .05)
 			drivetrain.arcadeDrive(oi.getLeftJoystick(), -oi.getRightJoystick());
 
-		System.out.println("left encoder: " + Robot.drivetrain.leftEncoder.getDistance() + " right encoder: "
-				+ Robot.drivetrain.rightEncoder.getDistance());
-
-		System.out.println("gyro angle: " + Robot.drivetrain.navX.getFusedHeading());
+//		System.out.println("left encoder: " + Robot.drivetrain.leftEncoder.getDistance() + " right encoder: "
+//				+ Robot.drivetrain.rightEncoder.getDistance());
+//		System.out.println("gyro angle: " + Robot.drivetrain.navX.getFusedHeading());
 		// System.out.println("sonar: " + Robot.intake.sonar.getValue());
-		System.out.println("Elev: " + Robot.elevator.elevatorEncoder.get() + " Bottom Lim: "
-				+ Robot.elevator.limitSwitchElevatorBottom.get() + "Top Lim: "
-				+ Robot.elevator.limitSwitchElevatorTop.get());
+//		System.out.println("Elev: " + Robot.elevator.elevatorEncoder.get() + " Bottom Lim: "
+//				+ Robot.elevator.limitSwitchElevatorBottom.get() + "Top Lim: "
+//				+ Robot.elevator.limitSwitchElevatorTop.get());
 	}
 
-	/**
+	/** 
 	 * This function is called periodically during test mode
 	 */
 	@Override

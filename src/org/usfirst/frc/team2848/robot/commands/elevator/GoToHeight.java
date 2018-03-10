@@ -28,21 +28,21 @@ public class GoToHeight extends Command {
 	}
 
 	protected void execute() {
-		if(t.get()>.1){
-			Robot.pivotIntake.intakePivot.set(DoubleSolenoid.Value.kReverse);
-		}
-		if(t.get() ==.1 && Robot.elevator.elevatorEncoder.get()<lastTick +5) {
-			end();
-		}
-		if(t.get()>.2)
-			Robot.pivotIntake.intakePivot.set(DoubleSolenoid.Value.kReverse);
-		if(Robot.elevator.elevatorEncoder.get() > 60){
-			
-		}
-		
-		if(Robot.elevator.elevatorEncoder.get() < 100 ){
-			
-		}
+//		if(t.get()>.1){
+//			Robot.pivotIntake.intakePivot.set(DoubleSolenoid.Value.kReverse);
+//		}
+//		if(t.get() ==.1 && Robot.elevator.elevatorEncoder.get()<lastTick +5) {
+//			end();
+//		}
+//		if(t.get()>.2)
+//			Robot.pivotIntake.intakePivot.set(DoubleSolenoid.Value.kReverse);
+//		if(Robot.elevator.elevatorEncoder.get() > 60){
+//			
+//		}
+//		
+//		if(Robot.elevator.elevatorEncoder.get() < 100 ){
+//			
+//		}
 			
 		Robot.elevator.goToPosition(target);
 	}
@@ -55,6 +55,7 @@ public class GoToHeight extends Command {
 	}
 
 	protected void end() {
+		System.out.println("Ending PID Control");
 		Robot.elevator.elevatorMotor.set(0);
 	}
 
