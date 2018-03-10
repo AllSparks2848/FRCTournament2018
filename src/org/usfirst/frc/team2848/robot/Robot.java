@@ -55,7 +55,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void robotInit() {
 		oi = new OI();
-		Robot.drivetrain.leftEncoder.reset();
+		Robot.drivetrain.leftEncoder.reset();	
 		Robot.drivetrain.rightEncoder.reset();
 		Robot.drivetrain.navX.reset();
 		Robot.drivetrain.leftEncoder.setReverseDirection(true);
