@@ -8,13 +8,14 @@ import org.usfirst.frc.team2848.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team2848.robot.subsystems.Elevator;
 import org.usfirst.frc.team2848.robot.subsystems.Hanger;
 import org.usfirst.frc.team2848.robot.subsystems.Intake;
+import org.usfirst.frc.team2848.robot.subsystems.JeVois;
 import org.usfirst.frc.team2848.robot.subsystems.PivotIntake;
 import org.usfirst.frc.team2848.robot.util.PathPlanning;
 
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.CameraServer;
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.PowerDistributionPanel;
+import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -37,7 +38,8 @@ public class Robot extends IterativeRobot {
 	public static final Elevator elevator = new Elevator();
 	public static final PivotIntake pivotIntake = new PivotIntake();
 	public static PathPlanning pathplanning = new PathPlanning();
-
+	public static final JeVois jevois = new JeVois();
+	
 	// public static PowerDistributionPanel pdp = new PowerDistributionPanel();
 
 	public static OI oi;
@@ -59,27 +61,19 @@ public class Robot extends IterativeRobot {
 
 		Robot.drivetrain.leftEncoder.setDistancePerPulse(-0.00114);
 		Robot.drivetrain.rightEncoder.setDistancePerPulse(0.00114);
-
+		
 		CameraServer.getInstance().startAutomaticCapture();
 
 		autoChooser = new SendableChooser();
-		autoChooser.addDefault("Left", new LeftAutonSelector()); // Picks one of
-																	// the left
-																	// options
-		autoChooser.addObject("Center", new CenterAutonSelector()); // Picks one
-																	// of the
-																	// center
-																	// options
-		autoChooser.addObject("Right", new RightAutonSelector()); // Picks one
-																	// of the
-																	// right
-																	// options
+		autoChooser.addDefault("Left", new LeftAutonSelector()); // Picks one of the left options
+		autoChooser.addObject("Center", new CenterAutonSelector()); // Picks one of the centeroptions
+		autoChooser.addObject("Right", new RightAutonSelector()); // Picks one of the right options
 		SmartDashboard.putData("Autonomous Mode Selector", autoChooser);
 	}
 
 	/**
 	 * This function is called once each time the robot enters Disabled mode.
-	 * You can use it to reset any subsystem information you want to clear when
+	 * You c  an use it to reset any subsystem information you want to clear when
 	 * the robot is disabled.
 	 */
 	@Override
@@ -142,7 +136,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-
+    	
 		// Arcade Drive
 		if (Math.abs(oi.getLeftJoystick()) > .05 || Math.abs(oi.getRightJoystick()) > .05)
 			drivetrain.arcadeDrive(oi.getLeftJoystick(), -oi.getRightJoystick());
