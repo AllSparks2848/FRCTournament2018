@@ -22,7 +22,7 @@ public class LeftScaleCubeAuton extends CommandGroup {
     	addSequential(new ShiftHigh());
 		addSequential(new ClampIntakeClaw());
 //		addSequential(new VelocityDriveToDistance(-6, -12.5));
-		addSequential(new VelocityDriveToDistance(-6, -26.25)); //shop scale is 8 inches back (25.5)
+		addSequential(new VelocityDriveToDistance(-7.5, -26.25)); //shop scale is 8 inches back (25.5)
 		addSequential(new PulseIntakeClawGoToHeightAuton(420));
     	addSequential(new Wait(.2));
     	addSequential(new ExtakeLeftAuton());

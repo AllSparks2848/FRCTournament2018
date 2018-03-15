@@ -3,9 +3,12 @@ package org.usfirst.frc.team2848.robot.commands.carriage;
 import org.usfirst.frc.team2848.robot.Robot;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class ExtakeLeft extends Command {
+
+	Timer t = new Timer();
 
 	public ExtakeLeft() {
 		requires(Robot.carriage);
@@ -13,13 +16,18 @@ public class ExtakeLeft extends Command {
 	}
 
 	protected void initialize() {
-		Robot.carriage.intakeClaw.set(DoubleSolenoid.Value.kReverse);
+		t.start();
 	}
 
 	protected void execute() {
-//		if(Robot.elevator.elevatorEncoder.get() > Robot.elevator.sideSpitMinPos) {
-			Robot.carriage.omniPlateMotor.set(-1);// output cube to robot's left
-//		}
+
+		Robot.carriage.omniPlateMotor.set(-1);// output cube to robot's left
+		while(t.get() < 0.15) {
+			
+		}
+			
+		Robot.carriage.intakeClaw.set(DoubleSolenoid.Value.kReverse);
+
 	}
 
 	protected boolean isFinished() {

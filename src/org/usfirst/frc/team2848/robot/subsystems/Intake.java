@@ -26,14 +26,14 @@ public class Intake extends Subsystem {
 	
 	//Take the cube in
 	public void intake() {
-		leftIntake.set(0.8);
-		rightIntake.set(-0.8);
+		leftIntake.set(1.0);
+		rightIntake.set(-1.0);
 	}
 	
 	//Spit the cube out
 	public void extake() {
-		leftIntake.set(-0.8);
-		rightIntake.set(0.8);
+		leftIntake.set(-1.0);
+		rightIntake.set(1.0);
 	}
 	
 	//Set all motors to 0

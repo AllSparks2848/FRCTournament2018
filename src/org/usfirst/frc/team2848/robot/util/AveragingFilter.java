@@ -11,6 +11,12 @@ public class AveragingFilter {
 		buffer = new double[this.size];
 	}
 	
+	public void initialize(double value) {
+		for(int i = 0; i < size; i++) {
+			buffer[i] = value;
+		}
+	}
+	
 	public double addValueGetAverage(double newValue) {
 		buffer[this.size - 1] = newValue;
 		double bufferSum = newValue;

@@ -14,10 +14,16 @@ public class ExtakeLeftAuton extends Command {
 
 	protected void initialize() {
 		timer.start();
-		Robot.carriage.intakeClaw.set(DoubleSolenoid.Value.kReverse);
 	}
 
 	protected void execute() { 
+		Robot.carriage.omniPlateMotor.set(-1);// output cube to robot's left
+		while(timer.get() < 0.1) {
+			
+		}
+		
+		Robot.carriage.intakeClaw.set(DoubleSolenoid.Value.kReverse);
+		
 		if(Robot.elevator.elevatorEncoder.get() > Robot.elevator.sideSpitMinPos) {
 			Robot.carriage.omniPlateMotor.set(-1);// output cube to robot's left
 		}
