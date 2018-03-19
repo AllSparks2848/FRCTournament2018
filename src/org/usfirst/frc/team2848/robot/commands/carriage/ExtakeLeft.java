@@ -12,7 +12,6 @@ public class ExtakeLeft extends Command {
 
 	public ExtakeLeft() {
 		requires(Robot.carriage);
-		requires(Robot.elevator);
 	}
 
 	protected void initialize() {
@@ -20,18 +19,16 @@ public class ExtakeLeft extends Command {
 	}
 
 	protected void execute() {
-
-		Robot.carriage.omniPlateMotor.set(-1);// output cube to robot's left
-		while(t.get() < 0.15) {
-			
-		}
-			
 		Robot.carriage.intakeClaw.set(DoubleSolenoid.Value.kReverse);
-
+		if(t.get() < 0.3) {
+			
+		} else {
+			Robot.carriage.omniPlateMotor.set(-1.0);// output cube to robot's left
+		}
 	}
 
 	protected boolean isFinished() {
-		return false;
+		return t.get() > 1.5;
 	}
 
 	protected void end() {

@@ -27,7 +27,7 @@ public class VelocityTurnToAngle extends Command {
     }
 
     protected void execute() {
-    	System.out.println("gyro angle: " + Robot.drivetrain.navX.getFusedHeading());
+    	
     }
 
     protected boolean isFinished() {

@@ -18,7 +18,7 @@ public class ExtakeLeftAuton extends Command {
 
 	protected void execute() { 
 		Robot.carriage.omniPlateMotor.set(-1);// output cube to robot's left
-		while(timer.get() < 0.1) {
+		while(timer.get() < 0.5) {
 			
 		}
 		
@@ -30,7 +30,7 @@ public class ExtakeLeftAuton extends Command {
 	}
 
 	protected boolean isFinished() {
-		return timer.get() > .75;
+		return timer.get() > 1.5;
 	}
 
 	protected void end() {

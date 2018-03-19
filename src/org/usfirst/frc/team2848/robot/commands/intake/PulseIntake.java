@@ -27,11 +27,9 @@ public class PulseIntake extends Command {
 		if (((int) (milis / pulse)) % 2 == 0) {
 			Robot.intake.rightIntake.set(0.0);
 			Robot.intake.leftIntake.set(0.8);
-			System.out.println("Left Intake Running");
 		} else {
 			Robot.intake.leftIntake.set(0.0);
 			Robot.intake.rightIntake.set(-0.8);
-			System.out.println("Right Intake Running");
 		}
 	}
 

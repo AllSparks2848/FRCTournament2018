@@ -1,10 +1,10 @@
 package org.usfirst.frc.team2848.robot.commands.carriage;
 
 import org.usfirst.frc.team2848.robot.Robot;
-
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
+
 public class ExtakeRight extends Command {
 	
 	Timer t = new Timer();
@@ -22,12 +22,12 @@ public class ExtakeRight extends Command {
 		if(t.get() < 0.3) {
 			
 		} else {
-			Robot.carriage.omniPlateMotor.set(1);
+			Robot.carriage.omniPlateMotor.set(1.0);
 		}
 	}
 
 	protected boolean isFinished() {
-		return false;
+		return t.get() > 1.5;
 	}
 
 	protected void end() {

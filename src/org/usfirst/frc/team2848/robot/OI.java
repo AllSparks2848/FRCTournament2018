@@ -1,14 +1,14 @@
 package org.usfirst.frc.team2848.robot;
 
 import org.usfirst.frc.team2848.robot.commands.auton.AutonReset;
-import org.usfirst.frc.team2848.robot.commands.auton.ForwardAndCross;
+import org.usfirst.frc.team2848.robot.commands.auton.LeftScaleCubeAuton;
 import org.usfirst.frc.team2848.robot.commands.carriage.ClampIntakeClaw;
 import org.usfirst.frc.team2848.robot.commands.carriage.ExtakeFront;
 import org.usfirst.frc.team2848.robot.commands.carriage.ExtakeLeft;
 import org.usfirst.frc.team2848.robot.commands.carriage.ExtakeRight;
 import org.usfirst.frc.team2848.robot.commands.carriage.ReleaseIntakeClaw;
 import org.usfirst.frc.team2848.robot.commands.carriage.SecureCube;
-import org.usfirst.frc.team2848.robot.commands.drive.Odometer;
+import org.usfirst.frc.team2848.robot.commands.drive.DriveToPoint;
 import org.usfirst.frc.team2848.robot.commands.drive.ShiftHigh;
 import org.usfirst.frc.team2848.robot.commands.drive.ShiftLow;
 import org.usfirst.frc.team2848.robot.commands.drive.VelocityDriveToDistance;
@@ -21,6 +21,7 @@ import org.usfirst.frc.team2848.robot.commands.elevator.ManualUp;
 import org.usfirst.frc.team2848.robot.commands.hanger.DeployHanger;
 import org.usfirst.frc.team2848.robot.commands.hanger.PullUp;
 import org.usfirst.frc.team2848.robot.commands.intake.IntakeCube;
+import org.usfirst.frc.team2848.robot.commands.intake.IntakeWithStop;
 import org.usfirst.frc.team2848.robot.commands.intake.Pivot;
 import org.usfirst.frc.team2848.robot.commands.intake.PivotIn;
 import org.usfirst.frc.team2848.robot.commands.intake.PulseIntake;
@@ -92,7 +93,7 @@ public class OI {
 	// newButtonBoxB
 	JoystickButton nbbb1 = new JoystickButton(newButtonBoxB, 1);
 	// JoystickButton nbbb2 = new JoystickButton(newButtonBoxB, 2);
-	// JoystickButton nbbb3 = new JoystickButton(newButtonBoxB, 3);
+	JoystickButton nbbb3 = new JoystickButton(newButtonBoxB, 3);
 	JoystickButton nbbb4 = new JoystickButton(newButtonBoxB, 11);
 	JoystickButton nbbb5 = new JoystickButton(newButtonBoxB, 10);
 	JoystickButton nbbb6 = new JoystickButton(newButtonBoxB, 9);
@@ -107,10 +108,10 @@ public class OI {
 
 	public OI() {
 
-		// back.whenPressed(new LeftScaleAuton());
+		 back.whenPressed(new LeftScaleCubeAuton());
 		// back.whenPressed(new GyroTurn(-60));
 		// back.whenPressed(new AutonSetup());
-		back.whenPressed(new ForwardAndCross());
+		// back.whenPressed(new ForwardAndCross());
 		start.whenPressed(new AutonReset());
 		lb.whenPressed(new ShiftHigh());
 		// b.whenPressed(new DeployHanger());
@@ -120,9 +121,10 @@ public class OI {
 		// b.whenPressed(new RightScaleSetupAuton());
 		// a.whenPressed(new CenterLeftAutonFast());
 		// b.whenPressed(new CenterRightAutonFast());
-		 y.whenPressed(new VelocityDriveToDistance(-6, -15));
-		 b.whenPressed(new VelocityTurnToAngle(4, 90, 1));
-		 a.whenPressed(new Odometer());
+		x.whenPressed(new IntakeWithStop());
+		y.whileHeld(new IntakeWithStop());
+		b.whenPressed(new VelocityTurnToAngle(4, 339, 1));
+		 a.whenPressed(new DriveToPoint(0, -25));
 
 		// teleop button box commands
 		bb11.whenPressed(new GoToHeight(100)); // scale
@@ -156,9 +158,9 @@ public class OI {
 
 		// nbbb1.whenPressed(new ); //warn
 		// nbbb2.whenPressed(new AutonReset()); //not wanted
-		// nbbb3.whenPressed(new ); //not wanted
+		nbbb3.whenPressed(new IntakeWithStop()); // not wanted
 		nbbb4.whileHeld(new RotateCube()); // rotate
-		nbbb5.whileHeld(new PulseIntake()); // pulse
+		nbbb5.whileHeld(new IntakeWithStop()); // SwitchSpitIntake
 		nbbb6.whenPressed(new Pivot()); // Pivot
 		nbbb7.whenPressed(new PivotIn()); // PivotIn
 		nbbb8.whenPressed(new ReleaseIntakeClaw());

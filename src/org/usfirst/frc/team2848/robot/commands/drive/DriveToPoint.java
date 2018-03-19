@@ -9,15 +9,19 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class Odometer extends Command {
+public class DriveToPoint extends Command {
+	
+	double x, y;
 
-    public Odometer() {
+    public DriveToPoint(double X, double Y) {
+    	this.x = X;
+    	this.y = Y;
     }
 
     protected void initialize() {
     	Robot.drivetrain.arcPIDs = new PIDCalculate(-4, -4, 0, 2);
     	Robot.drivetrain.arcPIDs.setPriority(10);
-    	Robot.drivetrain.arcPIDs.setTargetXandY(-4, -4);
+    	Robot.drivetrain.arcPIDs.setTargetXandY(0, -9);
         Robot.drivetrain.arcPIDs.start();
     } 
 

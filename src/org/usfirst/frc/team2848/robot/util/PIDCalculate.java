@@ -12,7 +12,7 @@ public class PIDCalculate extends Thread {
 	
 	double velocityL;
 	double velocityR;
-	double multiplier, turnOffset;
+	double multiplier;
 	double offset;
 	
 	double basePower = 0.161;
@@ -29,12 +29,18 @@ public class PIDCalculate extends Thread {
 	double rampdown = 0.3;
 	
 	double lastYaw = 0;
-	double lastLeftSpeed = 0;
-	double lastRightSpeed = 0;
+	double lastLeftPos = 0;
+	double lastRightPos = 0;
 	
-	double leftSpeed, rightSpeed, yaw;
+	double deltaX, deltaY;
+	
+	double leftPos, rightPos, yaw;
 	double leftDistance, rightDistance;
 	double hypotenuseDistance;
+	
+	double targetAngle;
+	
+	double leftSpeed, rightSpeed;
 	
 	double change_x, change_y;
 	double current_x, current_y;
@@ -67,10 +73,14 @@ public class PIDCalculate extends Thread {
 		this.target_y = y;
 	}
 	
-	//Use a trapezoidal integration technique to integrate the position of the robot using the distance from each encoder.
-	private void trapIntegratePosition() {
-		leftSpeed = Robot.drivetrain.leftEncoder.getRate();
-		rightSpeed = Robot.drivetrain.rightEncoder.getRate();
+	//integrate the position of the robot using the distance from each encoder.
+	public void integratePosition() {
+		leftPos = Robot.drivetrain.leftEncoder.getDistance();
+		rightPos = Robot.drivetrain.rightEncoder.getDistance();
+		
+		leftSpeed = ((leftPos - lastLeftPos) / period) * 1000000000;
+		rightSpeed = ((rightPos - lastRightPos) / period) * 1000000000;
+		
 		yaw = Robot.drivetrain.navX.getYaw();
 		
 		yaw = 90 - yaw;
@@ -78,8 +88,8 @@ public class PIDCalculate extends Thread {
 			yaw += 360;
 		}		
 		
-		leftDistance = 0.5 * (period / 1000000000) * (leftSpeed + lastLeftSpeed);
-		rightDistance = 0.5 * (period / 1000000000) * (rightSpeed + lastRightSpeed);
+		leftDistance =  (leftPos - lastLeftPos);
+		rightDistance = (rightPos - lastRightPos);
 		
 		hypotenuseDistance = (leftDistance + rightDistance) / 2;
 		
@@ -87,10 +97,6 @@ public class PIDCalculate extends Thread {
 		
 		change_x = ((Math.cos((lastYaw * Math.PI)/180) * hypotenuseDistance) + (Math.cos((yaw * Math.PI)/180) * hypotenuseDistance)) / 2;
 		change_y = ((Math.sin((lastYaw * Math.PI)/180) * hypotenuseDistance) + (Math.sin((yaw * Math.PI)/180) * hypotenuseDistance)) / 2;
-		
-		headingAngle = Math.atan((change_x) / (change_y));
-		
-//		System.out.println("ChangeY: " + change_y);
 		
 		current_x += change_x;
 		current_y += change_y;
@@ -112,22 +118,53 @@ public class PIDCalculate extends Thread {
 		}
 		
 		if(change_x < 0) {
-			headingAngle = Math.atan(change_y/change_x)*Math.PI*180 + 180;
+			headingAngle = (Math.atan(change_y/change_x)/Math.PI*180) + 180;
 		} else if(change_y > 0) {
-			headingAngle = Math.atan(change_y/change_x)*Math.PI*180;
+			headingAngle = Math.atan(change_y/change_x)/Math.PI*180;
 		} else {
-			headingAngle = Math.atan(change_y/change_x)*Math.PI*180 + 360;
+			headingAngle = (Math.atan(change_y/change_x)/Math.PI*180) + 360;
 		}
 		
-//		System.out.println("Curr X: " + current_x + " Curr Y: " + current_y);
+//		System.out.println("LeftSpeed: " + this.leftSpeed + " RightSpeed: " + this.rightSpeed);
+
+//		System.out.println("ChX: " + this.change_x + " ChY: " + this.change_y + " Heading: " + this.headingAngle);
 		
 		lastYaw = yaw;
-		lastLeftSpeed = leftSpeed;
-		lastRightSpeed = rightSpeed;
+		lastLeftPos = leftPos;
+		lastRightPos = rightPos;
+		
+		this.deltaX = this.target_x - this.current_x;
+		this.deltaY = this.target_y - this.current_y;
+		
+		if(this.deltaY == 0) {
+			if(this.deltaX > 0) {
+				this.targetAngle = 0;
+			} else {
+				this.targetAngle = 180;
+			}
+		} else if(this.deltaX == 0) {
+			if(this.deltaY > 0) {			
+				this.targetAngle = 90;
+			} else {
+				this.targetAngle = 270;
+			}
+		}
+		
+		if(this.deltaX < 0) {
+			this.targetAngle = (Math.atan(this.deltaY/this.deltaX)/Math.PI*180) + 180;
+		} else if(this.deltaY > 0) {
+			this.targetAngle = (Math.atan(this.deltaY/this.deltaX)/Math.PI*180);
+		} else {
+			this.targetAngle = (Math.atan(this.deltaY/this.deltaX)/Math.PI*180) + 360;
+		}
+		
+		
+//		System.out.println("Diff: " + getDifferenceInAngleDegrees(this.headingAngle, this.targetAngle));
+		
 	}
 	
     private double getDifferenceInAngleDegrees(double from, double to) {
-        return boundAngleNeg180to180Degrees(to - from);
+        return boundAngleNeg180to180Degrees(from - to);
     }
     
     private double boundAngleNeg180to180Degrees(double angle) {
@@ -153,22 +190,22 @@ public class PIDCalculate extends Thread {
 			
 			while (!interrupted()) {
 				synchronized (taskRunningLock_) {
+					integratePosition();
 					timestamp_ = System.nanoTime();
 					multiplier = multiplierPID.getOutput(Math.abs(Robot.drivetrain.leftEncoder.getDistance()), Math.abs(this.target));
 					
-//					list.add(Robot.drivetrain.leftEncoder.getRate()/Robot.drivetrain.rightEncoder.getRate());
-					
-					double leftSpeed = Robot.drivetrain.leftPIDDrive.getOutput(Robot.drivetrain.leftEncoder.getRate(),
+					double leftPower = Robot.drivetrain.leftPIDDrive.getOutput(this.leftSpeed,
 							this.velocityL * multiplier);
-					double rightSpeed = Robot.drivetrain.rightPIDDrive.getOutput(Robot.drivetrain.rightEncoder.getRate(),
+					double rightPower = Robot.drivetrain.rightPIDDrive.getOutput(this.rightSpeed,
 							this.velocityR * multiplier);
 					
-//					System.out.println("Lef: " + Robot.drivetrain.leftEncoder.getRate() + " Rig: " + Robot.drivetrain.rightEncoder.getRate());
-
-					Robot.drivetrain.left.set((leftSpeed + basePower));
-					Robot.drivetrain.right.set(-(rightSpeed + basePower));
+//					System.out.println("leftSpeed: " + this.leftSpeed + " rightSpeed: " + this.rightSpeed);
+					
+					Robot.drivetrain.left.set((leftPower));
+					Robot.drivetrain.right.set(-(rightPower));
 					
 					if(multiplier < 0.05){
+						System.out.println("CurrentX: " + this.current_x + " CurrentY: " + this.current_y);
 						this.interrupt = 1;
 						System.out.println("Interrupting");
 						this.interrupt();
@@ -180,9 +217,9 @@ public class PIDCalculate extends Thread {
 			}
 		} else if (this.type == 1) {
 			multiplierPID.setOutputLimits(-1.0, 1.0);
-			multiplierPID.setP(0.015);
+			multiplierPID.setP(0.1);
 			multiplierPID.setI(0.0);
-			multiplierPID.setD(0.1);
+			multiplierPID.setD(0.01);
 			
 			
 			AveragingFilter errors = new AveragingFilter(20);
@@ -190,18 +227,20 @@ public class PIDCalculate extends Thread {
 			
 			while (!interrupted()) {
 				synchronized (taskRunningLock_) {
+					integratePosition();
+					
 					timestamp_ = System.nanoTime();
 					multiplier = multiplierPID.getOutput(getDifferenceInAngleDegrees(this.target, Robot.drivetrain.navX.getYaw()), 0);
 					
-					double leftSpeed = Robot.drivetrain.leftPIDDrive.getOutput(Robot.drivetrain.leftEncoder.getRate(),
+					double leftPower = Robot.drivetrain.leftPIDDrive.getOutput(this.leftSpeed,
 							this.velocityL * multiplier);
-					double rightSpeed = Robot.drivetrain.rightPIDDrive.getOutput(Robot.drivetrain.rightEncoder.getRate(),
+					double rightPower = Robot.drivetrain.rightPIDDrive.getOutput(this.rightSpeed,
 							-this.velocityR * multiplier);
 
-					Robot.drivetrain.left.set(leftSpeed);
-					Robot.drivetrain.right.set(-rightSpeed);
+					Robot.drivetrain.left.set(leftPower);
+					Robot.drivetrain.right.set(-rightPower);
 					
-					if(Math.abs(errors.addValueGetAverage(multiplier)) < 0.00005){
+					if(Math.abs(errors.addValueGetAverage(multiplier)) < 0.000005){
 						this.interrupt = 1;
 						System.out.println("Interrupting");
 						this.interrupt();
@@ -214,59 +253,94 @@ public class PIDCalculate extends Thread {
 			}
 		} else if (this.type == 2) {
 			multiplierPID.setOutputLimits(-1.0, 1.0);
-			multiplierPID.setP(0.1);
+			multiplierPID.setP(0.4);
 			multiplierPID.setI(0.0);
-			multiplierPID.setD(0.0);
-			MiniPID turnOffsetPID = new MiniPID(0.05,0,0);
+			multiplierPID.setD(0.5);
+			
+			double turnOffset = 0;
+			double leftPower, rightPower;
+			
+			MiniPID turnOffsetPID = new MiniPID(0.05,0,0.01);
 			turnOffsetPID.setOutputLimits(-5, 5);
+			
+			timestamp_ = System.nanoTime();
+			
+			while(System.nanoTime() < timestamp_ + period){}
 			
 			while (!interrupted()) {
 				synchronized (taskRunningLock_) {
 					timestamp_ = System.nanoTime();
-
-					double deltaX, deltaY, targetAngle;
 					
-					deltaX = this.target_x - this.current_x;
-					deltaY = this.target_y - this.current_y;
-					
-					if(deltaY == 0) {
-						if(deltaX > 0) {
-							targetAngle = 0;
+					integratePosition();
+					/*
+					if(Math.abs(Math.pow(Math.pow(this.deltaX, 2) + Math.pow(this.deltaY, 2), 0.5)) < 1.0) {
+						
+						multiplier = multiplierPID.getOutput(Math.abs(Robot.drivetrain.leftEncoder.getDistance()), Math.abs(this.target));
+						
+						if(velocityL > 0) {
+							leftPower = (velocityL * multiplier)*0.063 + basePower;
 						} else {
-							targetAngle = 180;
+							leftPower = (velocityL * multiplier)*0.063 - basePower;
 						}
-					} else if(deltaX == 0) {
-						if(deltaY > 0) {			
-							targetAngle = 90;
+						
+						if(velocityR > 0) {
+							rightPower = (velocityR * multiplier)*0.063 + basePower;
 						} else {
-							targetAngle = 270;
+							rightPower = (velocityR * multiplier)*0.063 - basePower;
 						}
-					}
-					
-					if(deltaX < 0) {
-						targetAngle = Math.atan(deltaY/deltaX)*Math.PI*180 + 180;
-					} else if(deltaY > 0) {
-						targetAngle = Math.atan(deltaY/deltaX)*Math.PI*180;
+						
+						if(multiplier < 0.05){
+							System.out.println("CurrentX: " + this.current_x + " CurrentY: " + this.current_y);
+							this.interrupt = 1;
+							System.out.println("Interrupting");
+							this.interrupt();
+							return;
+						}
+						
+					} else*/ if(Double.isNaN(getDifferenceInAngleDegrees(this.targetAngle, this.headingAngle))) {
+						
+						leftPower = Robot.drivetrain.leftPIDDrive.getOutput(this.leftSpeed,
+								this.velocityL) + (velocityL * 0.063);
+						rightPower = Robot.drivetrain.rightPIDDrive.getOutput(this.rightSpeed,
+								this.velocityR) + (velocityR * 0.063);
+//						
+//						leftPower = (velocityL) * 0.063;
+//						rightPower = (velocityR) * 0.063;
+						
+						if(velocityL > 0) {
+							leftPower += basePower;
+							rightPower += basePower;
+						} else {
+							leftPower -= basePower;
+							rightPower -= basePower;
+						}
+						
 					} else {
-						targetAngle = Math.atan(deltaY/deltaX)*Math.PI*180 + 360;
+						turnOffset = turnOffsetPID.getOutput(getDifferenceInAngleDegrees(this.targetAngle, this.headingAngle), 0);
+						
+						System.out.println("Target: " + this.targetAngle + " Heading: " + this.headingAngle + " TO: " + turnOffset);
+						
+						leftPower = (Robot.drivetrain.leftPIDDrive.getOutput(this.leftSpeed,
+								this.velocityL + turnOffset)) + (velocityL * 0.063);
+						rightPower = (Robot.drivetrain.rightPIDDrive.getOutput(this.rightSpeed,
+								this.velocityR - turnOffset)) + (velocityR * 0.063);
+						
+//						leftPower = (velocityL + turnOffset) * 0.063;
+//						rightPower = (velocityR + turnOffset) * 0.063;
+						
+						if(velocityL > 0) {
+							leftPower += basePower;
+							rightPower += basePower;
+						} else {
+							leftPower -= basePower;
+							rightPower -= basePower;
+						}
+						
 					}
 					
-					System.out.println("CurrentHeading: " + getDifferenceInAngleDegrees(this.headingAngle, this.headingAngle));
-					
-					double leftSpeed = Robot.drivetrain.leftPIDDrive.getOutput(Robot.drivetrain.leftEncoder.getRate(),
-							(this.velocityL + turnOffset));
-					double rightSpeed = Robot.drivetrain.rightPIDDrive.getOutput(Robot.drivetrain.rightEncoder.getRate(),
-							(this.velocityR - turnOffset));
-
-					Robot.drivetrain.left.set((leftSpeed + basePower));
-					Robot.drivetrain.right.set(-(rightSpeed + basePower));
-					
-//					if(multiplier < 0.05){
-//						this.interrupt = 1;
-//						System.out.println("Interrupting");
-//						this.interrupt();
-//						return;
-//					}
+					Robot.drivetrain.left.set(leftPower);
+					Robot.drivetrain.right.set(-rightPower);
+				
 				}				
 				while(System.nanoTime() < timestamp_ + period){}
 				

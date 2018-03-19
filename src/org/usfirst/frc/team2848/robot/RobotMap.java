@@ -70,6 +70,9 @@ public class RobotMap {
 	public static int p_omniPlateMotor = 11;
 	public static int p_intakeClawMotor = 10;
 	
+	// intake beambreak
+	public static int p_breakBeam = 9;
+	
 //	analog input
 	public static int p_sonar = 3;
 }

@@ -9,6 +9,7 @@ import org.usfirst.frc.team2848.robot.subsystems.Elevator;
 import org.usfirst.frc.team2848.robot.subsystems.Hanger;
 import org.usfirst.frc.team2848.robot.subsystems.Intake;
 import org.usfirst.frc.team2848.robot.subsystems.PivotIntake;
+import org.usfirst.frc.team2848.robot.util.PIDCalculate;
 //import org.usfirst.frc.team2848.robot.util.ControlLooper;
 import org.usfirst.frc.team2848.robot.util.PathPlanning;
 
@@ -140,8 +141,9 @@ public class Robot extends IterativeRobot {
 
 		Robot.hanger.lockHangerDown();
 		
-//		TestLoop = new ControlLooper(1);
-//		TestLoop.start();
+//		Robot.drivetrain.arcPIDs = new PIDCalculate(0, 0, 0, 0);
+//		Robot.drivetrain.arcPIDs.setTargetXandY(-4, -4);
+		
 	}
 
 	/**
@@ -154,6 +156,10 @@ public class Robot extends IterativeRobot {
 		// Arcade Drive
 		if (Math.abs(oi.getLeftJoystick()) > .05 || Math.abs(oi.getRightJoystick()) > .05)
 			drivetrain.arcadeDrive(oi.getLeftJoystick(), -oi.getRightJoystick());
+		
+//		Robot.drivetrain.arcPIDs.integratePosition();
+		
+//		System.out.println("Beambreak: " + intake.haveCube.get());
 
 //		System.out.println("left encoder: " + Robot.drivetrain.leftEncoder.getDistance() + " right encoder: "
 //				+ Robot.drivetrain.rightEncoder.getDistance());
