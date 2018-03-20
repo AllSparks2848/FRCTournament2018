@@ -18,14 +18,15 @@ public class ForwardAndCross extends CommandGroup {
     public ForwardAndCross() {
     	addSequential(new ShiftHigh());
 		addSequential(new ClampIntakeClaw());
-		addSequential(new VelocityDriveToDistance(-6.5, -19));
+//		addSequential(new VelocityDriveToDistance(-6.5, -19));
+		addSequential(new VelocityDriveToDistance(-6.5, -15.75));
 		addSequential(new VelocityTurnToAngle(4, 270, 1));
 		addSequential(new VelocityDriveToDistance(6, 15.75));
-		addSequential(new VelocityTurnToAngle(3, 180, 1));
-		addSequential(new VelocityDriveToDistance(4, 2));
-		addSequential(new GoToHeight(420));
-		addSequential(new ExtakeFrontAuton());
-		addSequential(new DownToBottom());
+//		addSequential(new VelocityTurnToAngle(3, 180, 1));
+//		addSequential(new VelocityDriveToDistance(4, 2));
+//		addSequential(new GoToHeight(420));
+//		addSequential(new ExtakeFrontAuton());
+//		addSequential(new DownToBottom());
 		
 		
 		//scale score

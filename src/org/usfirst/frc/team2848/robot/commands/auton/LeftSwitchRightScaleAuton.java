@@ -36,7 +36,7 @@ public class LeftSwitchRightScaleAuton extends CommandGroup {
     	
     	addSequential(new VelocityDriveToDistance(6, 15.5));
 		addSequential(new VelocityTurnToAngle(4, 180, 1));
-		addSequential(new VelocityDriveToDistance(5, 2));
+		addSequential(new VelocityDriveToDistance(5, 1.5));
 		addParallel(new IntakeCubeAuton(.2));
 		addSequential(new GoToHeight(420));
 		addSequential(new Wait(.4));

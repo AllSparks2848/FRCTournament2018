@@ -183,10 +183,11 @@ public class PIDCalculate extends Thread {
 		Robot.drivetrain.rightEncoder.reset();
 
 		if (this.type == 0) {
+			multiplierPID.reset();
 			multiplierPID.setOutputLimits(-1.0, 1.0);
-			multiplierPID.setP(0.4);
+			multiplierPID.setP(0.4); //.4
 			multiplierPID.setI(0.0);
-			multiplierPID.setD(0.5);
+			multiplierPID.setD(0.01); //.5
 			
 			while (!interrupted()) {
 				synchronized (taskRunningLock_) {
@@ -230,6 +231,7 @@ public class PIDCalculate extends Thread {
 				
 			}
 		} else if (this.type == 1) {
+			multiplierPID.reset();
 			multiplierPID.setOutputLimits(-1.0, 1.0);
 			multiplierPID.setP(0.0325);
 			multiplierPID.setI(0.0);
@@ -266,6 +268,7 @@ public class PIDCalculate extends Thread {
 				
 			}
 		} else if (this.type == 2) {
+			multiplierPID.reset();
 			multiplierPID.setOutputLimits(-1.0, 1.0);
 			multiplierPID.setP(0.4);
 			multiplierPID.setI(0.0);

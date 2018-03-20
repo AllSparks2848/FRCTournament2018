@@ -1,7 +1,7 @@
 package org.usfirst.frc.team2848.robot.commands.auton;
 
 import org.usfirst.frc.team2848.robot.commands.carriage.ClampIntakeClaw;
-import org.usfirst.frc.team2848.robot.commands.carriage.ExtakeLeft;
+import org.usfirst.frc.team2848.robot.commands.carriage.ExtakeFrontAuton;
 import org.usfirst.frc.team2848.robot.commands.drive.ShiftHigh;
 import org.usfirst.frc.team2848.robot.commands.drive.VelocityDriveToDistance;
 import org.usfirst.frc.team2848.robot.commands.drive.VelocityTurnToAngle;
@@ -17,22 +17,27 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-public class LeftScaleSwitchAuton extends CommandGroup {
+public class RightScaleRightSwitchAuton extends CommandGroup {
 
-    public LeftScaleSwitchAuton() {
+    public RightScaleRightSwitchAuton() {
     	addSequential(new ShiftHigh());
 		addSequential(new ClampIntakeClaw());
-		addSequential(new VelocityDriveToDistance(-6.75, -26.25));
+		addSequential(new VelocityDriveToDistance(-6.5, -19));
+		addSequential(new VelocityTurnToAngle(4, 270, 1));
+		addSequential(new VelocityDriveToDistance(6, 15.75));
+		addSequential(new VelocityTurnToAngle(3, 180, 1));
+		addSequential(new VelocityDriveToDistance(4, 2));
 		addSequential(new GoToHeight(420));
-    	addSequential(new Wait(.2));
-    	addSequential(new ExtakeLeft());
-    	addSequential(new DownToBottom());
-		addSequential(new VelocityTurnToAngle(4, 345, 1));
+		addSequential(new ExtakeFrontAuton());
+		addSequential(new DownToBottom());
+		addSequential(new VelocityDriveToDistance(-4, 2));
+		addSequential(new VelocityTurnToAngle(4, 5, 1));
 		addParallel(new IntakeWithStop());
-		addSequential(new VelocityDriveToDistance(6.5, 9.25));
+		addSequential(new VelocityDriveToDistance(4, 2.1));
+		
 		addSequential(new GoToHeight(250));
 		addSequential(new ClosePivot());
-		addSequential(new VelocityDriveToDistance(4, 1.25));
+		addSequential(new VelocityDriveToDistance(4, 1));
 		addSequential(new Wait(.2));
 		addSequential(new SpitOutFront());
     }

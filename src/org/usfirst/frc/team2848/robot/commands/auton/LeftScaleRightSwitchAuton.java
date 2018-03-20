@@ -17,23 +17,29 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-public class LeftScaleSwitchAuton extends CommandGroup {
+public class LeftScaleRightSwitchAuton extends CommandGroup {
 
-    public LeftScaleSwitchAuton() {
-    	addSequential(new ShiftHigh());
+	public LeftScaleRightSwitchAuton() {
+		addSequential(new ShiftHigh());
 		addSequential(new ClampIntakeClaw());
 		addSequential(new VelocityDriveToDistance(-6.75, -26.25));
 		addSequential(new GoToHeight(420));
-    	addSequential(new Wait(.2));
-    	addSequential(new ExtakeLeft());
-    	addSequential(new DownToBottom());
-		addSequential(new VelocityTurnToAngle(4, 345, 1));
+		addSequential(new Wait(.2));
+		addSequential(new ExtakeLeft());
+		addSequential(new DownToBottom());
+		addSequential(new VelocityDriveToDistance(6.75, 9.5));
+		addSequential(new VelocityTurnToAngle(4, 280, 1));
+		addSequential(new VelocityDriveToDistance(6, 16));
+		addSequential(new VelocityTurnToAngle(4, 350, 1));
+		
 		addParallel(new IntakeWithStop());
-		addSequential(new VelocityDriveToDistance(6.5, 9.25));
+		addSequential(new VelocityDriveToDistance(4, 2.1));
+		
+		
 		addSequential(new GoToHeight(250));
 		addSequential(new ClosePivot());
-		addSequential(new VelocityDriveToDistance(4, 1.25));
+		addSequential(new VelocityDriveToDistance(4, 1.5));
 		addSequential(new Wait(.2));
 		addSequential(new SpitOutFront());
-    }
+	}
 }
