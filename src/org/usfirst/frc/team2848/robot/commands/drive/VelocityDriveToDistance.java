@@ -21,6 +21,8 @@ public class VelocityDriveToDistance extends Command {
     	Robot.drivetrain.arcPIDs = new PIDCalculate(velocity, velocity, distance, 0);
     	Robot.drivetrain.arcPIDs.setPriority(10);
         Robot.drivetrain.arcPIDs.start();
+        
+//        System.out.println("StartingVelocity");
     } 
 
     protected void execute() {

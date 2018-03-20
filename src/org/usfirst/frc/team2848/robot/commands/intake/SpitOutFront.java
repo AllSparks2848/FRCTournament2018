@@ -3,19 +3,21 @@ package org.usfirst.frc.team2848.robot.commands.intake;
 import org.usfirst.frc.team2848.robot.Robot;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
 public class SpitOutFront extends Command {
-
+	Timer timer = new Timer();
 	public SpitOutFront() {
 		requires(Robot.intake);
 		requires(Robot.carriage);
 	}
 
 	protected void initialize() {
+		timer.start();
 	}
 
 	protected void execute() {
@@ -32,7 +34,7 @@ public class SpitOutFront extends Command {
 	}
 
 	protected boolean isFinished() {
-		return false;
+		return timer.get() > 2;
 	}
 
 	protected void end() {

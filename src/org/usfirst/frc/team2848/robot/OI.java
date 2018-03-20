@@ -24,7 +24,6 @@ import org.usfirst.frc.team2848.robot.commands.intake.IntakeCube;
 import org.usfirst.frc.team2848.robot.commands.intake.IntakeWithStop;
 import org.usfirst.frc.team2848.robot.commands.intake.Pivot;
 import org.usfirst.frc.team2848.robot.commands.intake.PivotIn;
-import org.usfirst.frc.team2848.robot.commands.intake.PulseIntake;
 import org.usfirst.frc.team2848.robot.commands.intake.RotateCube;
 import org.usfirst.frc.team2848.robot.commands.intake.SpitOutFront;
 
@@ -37,10 +36,6 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-
-	public double[] xC = { 0, 0, -10, -10 };
-	public double[] yC = { 0, 3, 4, 18 };
-	public double[] direction = { -1, -1, 1, 1 };
 
 	// Controllers and button boxes
 	Joystick xbox1 = new Joystick(RobotMap.p_xbox1);
@@ -109,6 +104,9 @@ public class OI {
 	public OI() {
 
 		 back.whenPressed(new LeftScaleCubeAuton());
+//		 back.whenPressed(new LeftScaleSwitchAuton());
+//		 back.whenPressed(new ForwardAndCross());
+//		back.whenPressed(new LeftSwitchRightScaleAuton());
 		// back.whenPressed(new GyroTurn(-60));
 		// back.whenPressed(new AutonSetup());
 		// back.whenPressed(new ForwardAndCross());
@@ -121,10 +119,10 @@ public class OI {
 		// b.whenPressed(new RightScaleSetupAuton());
 		// a.whenPressed(new CenterLeftAutonFast());
 		// b.whenPressed(new CenterRightAutonFast());
-		x.whenPressed(new IntakeWithStop());
+		x.whenPressed(new VelocityDriveToDistance(-6, 9));
 		y.whileHeld(new IntakeWithStop());
-		b.whenPressed(new VelocityTurnToAngle(4, 339, 1));
-		 a.whenPressed(new DriveToPoint(0, -25));
+		b.whenPressed(new VelocityTurnToAngle(4, 0, 1));
+		 a.whenPressed(new DriveToPoint(0, 6));
 
 		// teleop button box commands
 		bb11.whenPressed(new GoToHeight(100)); // scale

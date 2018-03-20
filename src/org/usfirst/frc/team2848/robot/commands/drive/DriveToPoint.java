@@ -19,9 +19,9 @@ public class DriveToPoint extends Command {
     }
 
     protected void initialize() {
-    	Robot.drivetrain.arcPIDs = new PIDCalculate(-4, -4, 0, 2);
+    	Robot.drivetrain.arcPIDs = new PIDCalculate(4, 4, 0, 2);
     	Robot.drivetrain.arcPIDs.setPriority(10);
-    	Robot.drivetrain.arcPIDs.setTargetXandY(0, -9);
+    	Robot.drivetrain.arcPIDs.setTargetXandY(0, 9);
         Robot.drivetrain.arcPIDs.start();
     } 
 

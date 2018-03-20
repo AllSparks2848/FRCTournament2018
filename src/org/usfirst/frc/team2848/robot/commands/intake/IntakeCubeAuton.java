@@ -11,10 +11,11 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class IntakeCubeAuton extends Command {
 	Timer timer = new Timer();
-	
-	public IntakeCubeAuton() {
+	double time;
+	public IntakeCubeAuton(double time) {
 		requires(Robot.intake);
 		requires(Robot.carriage);
+		this.time = time;
 	}
 
 	protected void initialize() {
@@ -30,7 +31,7 @@ public class IntakeCubeAuton extends Command {
 
 	protected boolean isFinished() {
 //		return Robot.intake.sonar.getValue() < 60;
-		return timer.get() > 3;
+		return timer.get() > time;
 	}
 
 	protected void end() {

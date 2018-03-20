@@ -115,7 +115,9 @@ public class Robot extends IterativeRobot {
 
 	@Override
 	public void autonomousInit() {
-
+		
+		Robot.drivetrain.navX.zeroYaw();
+		
 		autonomousCommand = (Command) autoChooser.getSelected();
 
 		if (autonomousCommand != null) {
@@ -136,6 +138,8 @@ public class Robot extends IterativeRobot {
 
 	@Override
 	public void teleopInit() {
+		Robot.drivetrain.navX.zeroYaw();
+		
 		if (autonomousCommand != null)
 			autonomousCommand.cancel();
 

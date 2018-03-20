@@ -39,14 +39,21 @@ public class GoToHeightAuton extends Command {
 //		if(Robot.elevator.elevatorEncoder.get() < 100 ){
 //			
 //		}
-			
-		Robot.elevator.goToPosition(target);
+		if(!Robot.elevator.limitSwitchElevatorTop.get()) {
+			if(target < Robot.elevator.elevatorEncoder.get()) {
+				Robot.elevator.goToPosition(target);
+			}
+			else {
+				Robot.elevator.elevatorMotor.set(0);
+			}
+		}
+		else {
+			Robot.elevator.goToPosition(target);
+		}
+		
 	}
 
 	protected boolean isFinished() {
-		if(!Robot.elevator.limitSwitchElevatorTop.get()) {
-			return true;
-		}
 		return (Robot.elevator.elevatorEncoder.get() > target + 5) || Math.abs(Robot.elevator.elevatorEncoder.get() - target) < 10 ;
 	}
 

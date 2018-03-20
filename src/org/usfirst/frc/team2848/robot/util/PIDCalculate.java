@@ -194,15 +194,25 @@ public class PIDCalculate extends Thread {
 					timestamp_ = System.nanoTime();
 					multiplier = multiplierPID.getOutput(Math.abs(Robot.drivetrain.leftEncoder.getDistance()), Math.abs(this.target));
 					
-					double leftPower = Robot.drivetrain.leftPIDDrive.getOutput(this.leftSpeed,
-							this.velocityL * multiplier);
-					double rightPower = Robot.drivetrain.rightPIDDrive.getOutput(this.rightSpeed,
-							this.velocityR * multiplier);
+					double leftPower, rightPower;
 					
-//					System.out.println("leftSpeed: " + this.leftSpeed + " rightSpeed: " + this.rightSpeed);
+//					System.out.println("If this isn't printing I'm screwed");
 					
-					Robot.drivetrain.left.set((leftPower));
-					Robot.drivetrain.right.set(-(rightPower));
+					leftPower = (Robot.drivetrain.leftPIDDrive.getOutput(Robot.drivetrain.leftEncoder.getRate(),
+							this.velocityL * multiplier));
+					rightPower = (Robot.drivetrain.rightPIDDrive.getOutput(Robot.drivetrain.rightEncoder.getRate(),
+							this.velocityR * multiplier));
+					
+//					leftPower = (velocityL) * 0.063;
+//					rightPower = (velocityR) * 0.063;
+					
+//					if(velocityL > 0) {
+//						leftPower += basePower;
+//						rightPower += basePower;
+//					} else {
+//						leftPower -= basePower;
+//						rightPower -= basePower;
+//					}
 					
 					if(multiplier < 0.05){
 						System.out.println("CurrentX: " + this.current_x + " CurrentY: " + this.current_y);
@@ -211,18 +221,22 @@ public class PIDCalculate extends Thread {
 						this.interrupt();
 						return;
 					}
+					
+					Robot.drivetrain.left.set(leftPower*0.8);
+					Robot.drivetrain.right.set(-rightPower);
+					
 				}				
 				while(System.nanoTime() < timestamp_ + period){}
 				
 			}
 		} else if (this.type == 1) {
 			multiplierPID.setOutputLimits(-1.0, 1.0);
-			multiplierPID.setP(0.1);
+			multiplierPID.setP(0.0325);
 			multiplierPID.setI(0.0);
-			multiplierPID.setD(0.01);
+			multiplierPID.setD(0.005);
 			
 			
-			AveragingFilter errors = new AveragingFilter(20);
+			AveragingFilter errors = new AveragingFilter(100);
 			errors.initialize(10);
 			
 			while (!interrupted()) {
@@ -230,7 +244,7 @@ public class PIDCalculate extends Thread {
 					integratePosition();
 					
 					timestamp_ = System.nanoTime();
-					multiplier = multiplierPID.getOutput(getDifferenceInAngleDegrees(this.target, Robot.drivetrain.navX.getYaw()), 0);
+					multiplier = multiplierPID.getOutput(getDifferenceInAngleDegrees(Robot.drivetrain.navX.getYaw(), this.target), 0);
 					
 					double leftPower = Robot.drivetrain.leftPIDDrive.getOutput(this.leftSpeed,
 							this.velocityL * multiplier);
@@ -240,7 +254,7 @@ public class PIDCalculate extends Thread {
 					Robot.drivetrain.left.set(leftPower);
 					Robot.drivetrain.right.set(-rightPower);
 					
-					if(Math.abs(errors.addValueGetAverage(multiplier)) < 0.000005){
+					if(errors.addValueGetAverage(Math.abs(getDifferenceInAngleDegrees(Robot.drivetrain.navX.getYaw(), this.target))) < 1){
 						this.interrupt = 1;
 						System.out.println("Interrupting");
 						this.interrupt();
@@ -260,8 +274,8 @@ public class PIDCalculate extends Thread {
 			double turnOffset = 0;
 			double leftPower, rightPower;
 			
-			MiniPID turnOffsetPID = new MiniPID(0.05,0,0.01);
-			turnOffsetPID.setOutputLimits(-5, 5);
+			MiniPID turnOffsetPID = new MiniPID(0.01,0,0.0);
+			turnOffsetPID.setOutputLimits(-3, 3);
 			
 			timestamp_ = System.nanoTime();
 			
@@ -300,9 +314,9 @@ public class PIDCalculate extends Thread {
 					} else*/ if(Double.isNaN(getDifferenceInAngleDegrees(this.targetAngle, this.headingAngle))) {
 						
 						leftPower = Robot.drivetrain.leftPIDDrive.getOutput(this.leftSpeed,
-								this.velocityL) + (velocityL * 0.063);
+								this.velocityL);
 						rightPower = Robot.drivetrain.rightPIDDrive.getOutput(this.rightSpeed,
-								this.velocityR) + (velocityR * 0.063);
+								this.velocityR);
 //						
 //						leftPower = (velocityL) * 0.063;
 //						rightPower = (velocityR) * 0.063;
@@ -321,9 +335,9 @@ public class PIDCalculate extends Thread {
 						System.out.println("Target: " + this.targetAngle + " Heading: " + this.headingAngle + " TO: " + turnOffset);
 						
 						leftPower = (Robot.drivetrain.leftPIDDrive.getOutput(this.leftSpeed,
-								this.velocityL + turnOffset)) + (velocityL * 0.063);
+								this.velocityL/* + turnOffset*/));
 						rightPower = (Robot.drivetrain.rightPIDDrive.getOutput(this.rightSpeed,
-								this.velocityR - turnOffset)) + (velocityR * 0.063);
+								this.velocityR/* - turnOffset*/));
 						
 //						leftPower = (velocityL + turnOffset) * 0.063;
 //						rightPower = (velocityR + turnOffset) * 0.063;
