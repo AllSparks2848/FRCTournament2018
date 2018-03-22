@@ -2,6 +2,7 @@ package org.usfirst.frc.team2848.robot;
 
 import org.usfirst.frc.team2848.robot.commands.auton.AutonReset;
 import org.usfirst.frc.team2848.robot.commands.auton.LeftScaleRightSwitchAuton;
+import org.usfirst.frc.team2848.robot.commands.auton.VelocityDriveToDistanceAndIntake;
 import org.usfirst.frc.team2848.robot.commands.carriage.ClampIntakeClaw;
 import org.usfirst.frc.team2848.robot.commands.carriage.ExtakeFront;
 import org.usfirst.frc.team2848.robot.commands.carriage.ExtakeLeft;
@@ -11,7 +12,6 @@ import org.usfirst.frc.team2848.robot.commands.carriage.SecureCube;
 import org.usfirst.frc.team2848.robot.commands.drive.DriveToPoint;
 import org.usfirst.frc.team2848.robot.commands.drive.ShiftHigh;
 import org.usfirst.frc.team2848.robot.commands.drive.ShiftLow;
-import org.usfirst.frc.team2848.robot.commands.drive.VelocityDriveToDistance;
 import org.usfirst.frc.team2848.robot.commands.drive.VelocityTurnToAngle;
 import org.usfirst.frc.team2848.robot.commands.elevator.DownToBottom;
 import org.usfirst.frc.team2848.robot.commands.elevator.GoToHeight;
@@ -121,10 +121,10 @@ public class OI {
 		// b.whenPressed(new RightScaleSetupAuton());
 		// a.whenPressed(new CenterLeftAutonFast());
 		// b.whenPressed(new CenterRightAutonFast());
-		x.whenPressed(new VelocityDriveToDistance(6.5, 12));
-		y.whileHeld(new IntakeWithStop());
+		x.whenPressed(new VelocityDriveToDistanceAndIntake());
+		y.whenPressed(new VelocityTurnToAngle(4, 270, 1));
 		b.whenPressed(new VelocityTurnToAngle(4, 0, 1));
-		 a.whenPressed(new DriveToPoint(0, 6));
+		 a.whenPressed(new VelocityTurnToAngle(4, 90, 1));
 
 		// teleop button box commands
 		bb11.whenPressed(new GoToHeight(100)); // scale

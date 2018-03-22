@@ -231,23 +231,25 @@ public class PIDCalculate extends Thread {
 				
 			}
 		} else if (this.type == 1) {
+			Robot.drivetrain.leftPIDDrive.reset();
+			Robot.drivetrain.rightPIDDrive.reset();
 			multiplierPID.reset();
 			multiplierPID.setOutputLimits(-1.0, 1.0);
-			multiplierPID.setP(0.0325);
+			multiplierPID.setP(0.1);
 			multiplierPID.setI(0.0);
-			multiplierPID.setD(0.005);
+			multiplierPID.setD(0.075);
 			
 			
-			AveragingFilter errors = new AveragingFilter(100);
+			AveragingFilter errors = new AveragingFilter(50);
 			errors.initialize(10);
-			
+
 			while (!interrupted()) {
 				synchronized (taskRunningLock_) {
 					integratePosition();
 					
 					timestamp_ = System.nanoTime();
 					multiplier = multiplierPID.getOutput(getDifferenceInAngleDegrees(Robot.drivetrain.navX.getYaw(), this.target), 0);
-					
+
 					double leftPower = Robot.drivetrain.leftPIDDrive.getOutput(this.leftSpeed,
 							this.velocityL * multiplier);
 					double rightPower = Robot.drivetrain.rightPIDDrive.getOutput(this.rightSpeed,
@@ -256,12 +258,13 @@ public class PIDCalculate extends Thread {
 					Robot.drivetrain.left.set(leftPower);
 					Robot.drivetrain.right.set(-rightPower);
 					
-					if(errors.addValueGetAverage(Math.abs(getDifferenceInAngleDegrees(Robot.drivetrain.navX.getYaw(), this.target))) < 1){
+					if(Math.abs(errors.addValueGetAverage(multiplier)) < 0.0001){
 						this.interrupt = 1;
-						System.out.println("Interrupting");
+						System.out.println("Interrupting, mult");
 						this.interrupt();
 						return;
 					}
+
 					
 				}				
 				while(System.nanoTime() < timestamp_ + period){}

@@ -45,6 +45,9 @@ public class GoToHeight extends Command {
 //		}
 			
 		Robot.elevator.goToPosition(target);
+		if(target > 50 && target < 300) {
+			Robot.pivotIntake.intakePivot.set(DoubleSolenoid.Value.kReverse);
+		}
 	}
 
 	protected boolean isFinished() {
