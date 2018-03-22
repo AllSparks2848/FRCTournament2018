@@ -183,6 +183,9 @@ public class PIDCalculate extends Thread {
 		Robot.drivetrain.rightEncoder.reset();
 
 		if (this.type == 0) {
+			double lastLeftOutput = 0;
+			double lastRightOutput = 0;
+			
 			multiplierPID.reset();
 			multiplierPID.setOutputLimits(-1.0, 1.0);
 			multiplierPID.setP(0.4); //.4
@@ -197,23 +200,10 @@ public class PIDCalculate extends Thread {
 					
 					double leftPower, rightPower;
 					
-//					System.out.println("If this isn't printing I'm screwed");
-					
 					leftPower = (Robot.drivetrain.leftPIDDrive.getOutput(Robot.drivetrain.leftEncoder.getRate(),
 							this.velocityL * multiplier));
 					rightPower = (Robot.drivetrain.rightPIDDrive.getOutput(Robot.drivetrain.rightEncoder.getRate(),
 							this.velocityR * multiplier));
-					
-//					leftPower = (velocityL) * 0.063;
-//					rightPower = (velocityR) * 0.063;
-					
-//					if(velocityL > 0) {
-//						leftPower += basePower;
-//						rightPower += basePower;
-//					} else {
-//						leftPower -= basePower;
-//						rightPower -= basePower;
-//					}
 					
 					if(multiplier < 0.05){
 						System.out.println("CurrentX: " + this.current_x + " CurrentY: " + this.current_y);
@@ -223,16 +213,14 @@ public class PIDCalculate extends Thread {
 						return;
 					}
 					
-					Robot.drivetrain.left.set(leftPower*0.8);
-					Robot.drivetrain.right.set(-rightPower);
+					Robot.drivetrain.left.set(lastLeftOutput + leftPower);
+					Robot.drivetrain.right.set(-(lastRightOutput + rightPower));
 					
 				}				
 				while(System.nanoTime() < timestamp_ + period){}
 				
 			}
 		} else if (this.type == 1) {
-			Robot.drivetrain.leftPIDDrive.reset();
-			Robot.drivetrain.rightPIDDrive.reset();
 			multiplierPID.reset();
 			multiplierPID.setOutputLimits(-1.0, 1.0);
 			multiplierPID.setP(0.1);
@@ -254,10 +242,10 @@ public class PIDCalculate extends Thread {
 					double rightPower = Robot.drivetrain.rightPIDDrive.getOutput(this.rightSpeed,
 							-this.velocityR * multiplier);
 
-					Robot.drivetrain.left.set(leftPower);
-					Robot.drivetrain.right.set(-rightPower);
+					Robot.drivetrain.left.set(multiplier);
+					Robot.drivetrain.right.set(multiplier);
 					
-					if(Math.abs(errors.addValueGetAverage(multiplier)) < 0.0001){
+					if(Math.abs(errors.addValueGetAverage(multiplier)) < 0.0001 && timer.get() > 0.1){
 						this.interrupt = 1;
 						System.out.println("Interrupting, mult");
 						this.interrupt();
