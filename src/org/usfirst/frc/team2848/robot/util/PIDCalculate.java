@@ -239,7 +239,6 @@ public class PIDCalculate extends Thread {
 			multiplierPID.setI(0.0);
 			multiplierPID.setD(0.075);
 			
-			
 			AveragingFilter errors = new AveragingFilter(50);
 			errors.initialize(10);
 
