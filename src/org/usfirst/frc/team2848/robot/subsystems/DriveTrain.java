@@ -63,8 +63,8 @@ public class DriveTrain extends PIDSubsystem {
 //	private static double kD = 0.02;
 	
 	private static double kP = 0.05;
-	private static double kI = 0.0;
-	private static double kD = 0.0;
+	private static double kI = 0.002;
+	private static double kD = 0.01;
 	
 	public PIDCalculate arcPIDs;
 	

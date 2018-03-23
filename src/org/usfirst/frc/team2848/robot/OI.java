@@ -1,17 +1,18 @@
 package org.usfirst.frc.team2848.robot;
 
 import org.usfirst.frc.team2848.robot.commands.auton.AutonReset;
+import org.usfirst.frc.team2848.robot.commands.auton.CenterLeftAutonFast;
+import org.usfirst.frc.team2848.robot.commands.auton.CenterRightAutonFast;
 import org.usfirst.frc.team2848.robot.commands.auton.LeftScaleRightSwitchAuton;
-import org.usfirst.frc.team2848.robot.commands.auton.VelocityDriveToDistanceAndIntake;
 import org.usfirst.frc.team2848.robot.commands.carriage.ClampIntakeClaw;
 import org.usfirst.frc.team2848.robot.commands.carriage.ExtakeFront;
 import org.usfirst.frc.team2848.robot.commands.carriage.ExtakeLeft;
 import org.usfirst.frc.team2848.robot.commands.carriage.ExtakeRight;
 import org.usfirst.frc.team2848.robot.commands.carriage.ReleaseIntakeClaw;
 import org.usfirst.frc.team2848.robot.commands.carriage.SecureCube;
-import org.usfirst.frc.team2848.robot.commands.drive.DriveToPoint;
 import org.usfirst.frc.team2848.robot.commands.drive.ShiftHigh;
 import org.usfirst.frc.team2848.robot.commands.drive.ShiftLow;
+import org.usfirst.frc.team2848.robot.commands.drive.VelocityDriveToDistance;
 import org.usfirst.frc.team2848.robot.commands.drive.VelocityTurnToAngle;
 import org.usfirst.frc.team2848.robot.commands.elevator.DownToBottom;
 import org.usfirst.frc.team2848.robot.commands.elevator.GoToHeight;
@@ -121,10 +122,12 @@ public class OI {
 		// b.whenPressed(new RightScaleSetupAuton());
 		// a.whenPressed(new CenterLeftAutonFast());
 		// b.whenPressed(new CenterRightAutonFast());
-		x.whenPressed(new VelocityDriveToDistanceAndIntake());
-		y.whenPressed(new VelocityTurnToAngle(4, 270, 1));
+//		x.whenPressed(new VelocityTurnToAngle(4, 23, 1));
+		x.whenPressed(new CenterLeftAutonFast());
+		y.whenPressed(new CenterRightAutonFast());
+//		y.whenPressed(new VelocityTurnToAngle(4, 329, 1));
 		b.whenPressed(new VelocityTurnToAngle(4, 0, 1));
-		 a.whenPressed(new VelocityTurnToAngle(4, 90, 1));
+		a.whenPressed(new VelocityDriveToDistance(-7, 22));
 
 		// teleop button box commands
 		bb11.whenPressed(new GoToHeight(100)); // scale

@@ -59,8 +59,8 @@ public class Robot extends IterativeRobot {
 		Robot.drivetrain.navX.reset();
 		Robot.drivetrain.leftEncoder.setReverseDirection(true);
 
-		Robot.drivetrain.leftEncoder.setDistancePerPulse(-0.00114);
-		Robot.drivetrain.rightEncoder.setDistancePerPulse(0.00114);
+		Robot.drivetrain.leftEncoder.setDistancePerPulse(-0.00116);
+		Robot.drivetrain.rightEncoder.setDistancePerPulse(0.00115);
 
 		CameraServer.getInstance().startAutomaticCapture();
 
@@ -85,8 +85,9 @@ public class Robot extends IterativeRobot {
 	 * the robot is disabled.
 	 */
 	@Override
-	public void disabledInit() {
+	public void disabledInit() {		
 		if (Robot.drivetrain.arcPIDs != null) {
+			System.out.println("LeftSpeed: " + Robot.drivetrain.arcPIDs.leftSpeed + " RightSpeed: " + Robot.drivetrain.arcPIDs.rightSpeed);
 			System.out.println("ending thread");
 			Robot.drivetrain.arcPIDs.interrupt();
 			try {
@@ -165,8 +166,8 @@ public class Robot extends IterativeRobot {
 		
 //		System.out.println("Beambreak: " + intake.haveCube.get());
 
-//		System.out.println("left encoder: " + Robot.drivetrain.leftEncoder.getDistance() + " right encoder: "
-//				+ Robot.drivetrain.rightEncoder.getDistance());
+//		System.out.println("left encoder: " + Robot.drivetrain.leftEncoder.get() + " right encoder: "
+//				+ Robot.drivetrain.rightEncoder.get());
 //		System.out.println("gyro angle: " + Robot.drivetrain.navX.getFusedHeading());
 		// System.out.println("sonar: " + Robot.intake.sonar.getValue());
 //		System.out.println("Elev: " + Robot.elevator.elevatorEncoder.get() + " Bottom Lim: "

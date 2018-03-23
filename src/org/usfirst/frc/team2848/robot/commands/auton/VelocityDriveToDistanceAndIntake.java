@@ -11,8 +11,8 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class VelocityDriveToDistanceAndIntake extends CommandGroup {
 
     public VelocityDriveToDistanceAndIntake() {
-    	addSequential(new IntakeCubeAuton(3));
-        addParallel(new VelocityDriveToDistance(4, 4));
+    	addParallel(new IntakeCubeAuton(10));
+        addSequential(new VelocityDriveToDistance(4, 6));
         
     }
 }
