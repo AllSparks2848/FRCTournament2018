@@ -232,7 +232,7 @@ public class PIDCalculate extends Thread {
 		} else if (this.type == 1) {
 			multiplierPID.reset();
 			multiplierPID.setOutputLimits(-1.0, 1.0);
-			multiplierPID.setP(0.04);
+			multiplierPID.setP(0.02);
 			multiplierPID.setI(0.0);
 			multiplierPID.setD(0.0);
 
@@ -244,8 +244,7 @@ public class PIDCalculate extends Thread {
 					integratePosition();
 
 					timestamp_ = System.nanoTime();
-					multiplier = multiplierPID
-							.getOutput(getDifferenceInAngleDegrees(Robot.drivetrain.navX.getYaw(), this.target), 0);
+					multiplier = multiplierPID.getOutput(getDifferenceInAngleDegrees(Robot.drivetrain.navX.getYaw(), this.target), 0);
 
 					// double leftPower =
 					// Robot.drivetrain.leftPIDDrive.getOutput(this.leftSpeed,
@@ -257,7 +256,7 @@ public class PIDCalculate extends Thread {
 					Robot.drivetrain.left.set(multiplier);
 					Robot.drivetrain.right.set(multiplier);
 
-					if (Math.abs(getDifferenceInAngleDegrees(Robot.drivetrain.navX.getYaw(), this.target)) < 5) {
+					if (errors.addValueGetAverage(Math.abs(getDifferenceInAngleDegrees(Robot.drivetrain.navX.getYaw(), this.target))) < 0.05) {
 						this.interrupt = 1;
 						System.out.println("Interrupting, mult");
 						this.interrupt();
