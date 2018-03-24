@@ -45,10 +45,12 @@ public class CenterAutonSelector extends Command {
 			break;
 		case "RLR":
 			runningAuton = new CenterRightAutonFast();
+//			runningAuton = new CenterRightTwoCubeAuton();
 			System.out.println("RUNNING CENTER RIGHT AUTON");
 			break;
 		case "RRR":
 			runningAuton = new CenterRightAutonFast();
+//			runningAuton = new CenterRightTwoCubeAuton();
 			System.out.println("RUNNING CENTER RIGHT AUTON");
 			break;
 		default:

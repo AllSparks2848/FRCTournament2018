@@ -211,7 +211,7 @@ public class PIDCalculate extends Thread {
 					
 //					double powerDiff = Robot.drivetrain.leftPIDDrive.getOutput(Robot.drivetrain.leftEncoder.getRate() - Robot.drivetrain.rightEncoder.getRate(), 0);
 
-					 if(multiplier < 0.005){
+					 if(multiplier < 0.05){
 						 System.out.println("CurrentX: " + this.current_x + " CurrentY: " + this.current_y);
 						 this.interrupt = 1;
 						 System.out.println("Interrupting");
@@ -232,7 +232,7 @@ public class PIDCalculate extends Thread {
 		} else if (this.type == 1) {
 			multiplierPID.reset();
 			multiplierPID.setOutputLimits(-1.0, 1.0);
-			multiplierPID.setP(0.02);
+			multiplierPID.setP(0.08);
 			multiplierPID.setI(0.0);
 			multiplierPID.setD(0.0);
 
@@ -256,7 +256,7 @@ public class PIDCalculate extends Thread {
 					Robot.drivetrain.left.set(multiplier);
 					Robot.drivetrain.right.set(multiplier);
 
-					if (errors.addValueGetAverage(Math.abs(getDifferenceInAngleDegrees(Robot.drivetrain.navX.getYaw(), this.target))) < 0.05) {
+					if (errors.addValueGetAverage(Math.abs(getDifferenceInAngleDegrees(Robot.drivetrain.navX.getYaw(), this.target))) < 2) {
 						this.interrupt = 1;
 						System.out.println("Interrupting, mult");
 						this.interrupt();

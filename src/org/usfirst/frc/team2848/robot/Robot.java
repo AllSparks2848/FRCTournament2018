@@ -3,13 +3,13 @@ package org.usfirst.frc.team2848.robot;
 import org.usfirst.frc.team2848.robot.commands.auton.CenterAutonSelector;
 import org.usfirst.frc.team2848.robot.commands.auton.LeftAutonSelector;
 import org.usfirst.frc.team2848.robot.commands.auton.RightAutonSelector;
+import org.usfirst.frc.team2848.robot.commands.auton.StraightAutonSelector;
 import org.usfirst.frc.team2848.robot.subsystems.Carriage;
 import org.usfirst.frc.team2848.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team2848.robot.subsystems.Elevator;
 import org.usfirst.frc.team2848.robot.subsystems.Hanger;
 import org.usfirst.frc.team2848.robot.subsystems.Intake;
 import org.usfirst.frc.team2848.robot.subsystems.PivotIntake;
-import org.usfirst.frc.team2848.robot.util.PIDCalculate;
 //import org.usfirst.frc.team2848.robot.util.ControlLooper;
 import org.usfirst.frc.team2848.robot.util.PathPlanning;
 
@@ -76,6 +76,7 @@ public class Robot extends IterativeRobot {
 																	// of the
 																	// right
 																	// options
+		autoChooser.addObject("Straight", new StraightAutonSelector());
 		SmartDashboard.putData("Autonomous Mode Selector", autoChooser);
 	}
 

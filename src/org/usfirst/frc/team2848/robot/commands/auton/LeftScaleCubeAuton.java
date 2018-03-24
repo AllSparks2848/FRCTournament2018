@@ -30,7 +30,7 @@ public class LeftScaleCubeAuton extends CommandGroup {
 		addSequential(new DownToBottom());
 		addSequential(new VelocityTurnToAngle(4, 345, 1));
 		addParallel(new IntakeCubeAuton(4.5));
-		addSequential(new VelocityDriveToDistance(6.5, 9.25));
+		addSequential(new VelocityDriveToDistance(4, 9.25));
 		addSequential(new VelocityDriveToDistance(-6.5, 9));
 		addSequential(new VelocityTurnToAngle(4, 0, 1));
 		addSequential(new VelocityDriveToDistance(-6, .75));

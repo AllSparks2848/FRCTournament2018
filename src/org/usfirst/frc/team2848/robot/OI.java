@@ -2,7 +2,7 @@ package org.usfirst.frc.team2848.robot;
 
 import org.usfirst.frc.team2848.robot.commands.auton.AutonReset;
 import org.usfirst.frc.team2848.robot.commands.auton.CenterLeftAutonFast;
-import org.usfirst.frc.team2848.robot.commands.auton.CenterRightAutonFast;
+import org.usfirst.frc.team2848.robot.commands.auton.CenterRightTwoCubeAuton;
 import org.usfirst.frc.team2848.robot.commands.auton.LeftScaleRightSwitchAuton;
 import org.usfirst.frc.team2848.robot.commands.carriage.ClampIntakeClaw;
 import org.usfirst.frc.team2848.robot.commands.carriage.ExtakeFront;
@@ -122,10 +122,11 @@ public class OI {
 		// b.whenPressed(new RightScaleSetupAuton());
 		// a.whenPressed(new CenterLeftAutonFast());
 		// b.whenPressed(new CenterRightAutonFast());
-//		x.whenPressed(new VelocityTurnToAngle(4, 23, 1));
+//		x.whenPressed(new VelocityTurnToAngle(4, 315, 1));
 		x.whenPressed(new CenterLeftAutonFast());
-		y.whenPressed(new CenterRightAutonFast());
-//		y.whenPressed(new VelocityTurnToAngle(4, 329, 1));
+//		y.whenPressed(new CenterRightAutonFast());
+		y.whenPressed(new CenterRightTwoCubeAuton());
+//		y.whenPressed(new VelocityTurnToAngle(4, 45, 1));
 		b.whenPressed(new VelocityTurnToAngle(4, 0, 1));
 		a.whenPressed(new VelocityDriveToDistance(-7, 22));
 

@@ -16,6 +16,6 @@ public class ForwardAuton extends CommandGroup {
 	public ForwardAuton() {
 		addSequential(new ShiftHigh());
 		addSequential(new ClampIntakeClaw());
-		addSequential(new VelocityDriveToDistance(7, 20));
+		addSequential(new VelocityDriveToDistance(-7, 15));
 	}
 }
