@@ -30,7 +30,6 @@ public class SpitOutFront extends Command {
 			Robot.intake.rightIntake.set(0.8);// extakes
 //			Robot.carriage.intakeClawMotor.set(-1);
 //		}
-		
 	}
 
 	protected boolean isFinished() {
