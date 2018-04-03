@@ -1,8 +1,6 @@
 package org.usfirst.frc.team2848.robot;
 
 import org.usfirst.frc.team2848.robot.commands.auton.AutonReset;
-import org.usfirst.frc.team2848.robot.commands.auton.CenterLeftAutonFast;
-import org.usfirst.frc.team2848.robot.commands.auton.CenterRightTwoCubeAuton;
 import org.usfirst.frc.team2848.robot.commands.auton.LeftScaleRightSwitchAuton;
 import org.usfirst.frc.team2848.robot.commands.carriage.ClampIntakeClaw;
 import org.usfirst.frc.team2848.robot.commands.carriage.ExtakeFront;
@@ -13,7 +11,6 @@ import org.usfirst.frc.team2848.robot.commands.carriage.SecureCube;
 import org.usfirst.frc.team2848.robot.commands.drive.ShiftHigh;
 import org.usfirst.frc.team2848.robot.commands.drive.ShiftLow;
 import org.usfirst.frc.team2848.robot.commands.drive.VelocityDriveToDistance;
-import org.usfirst.frc.team2848.robot.commands.drive.VelocityTurnToAngle;
 import org.usfirst.frc.team2848.robot.commands.elevator.DownToBottom;
 import org.usfirst.frc.team2848.robot.commands.elevator.GoToHeight;
 import org.usfirst.frc.team2848.robot.commands.elevator.GoToHeightPortal;
@@ -123,12 +120,17 @@ public class OI {
 		// a.whenPressed(new CenterLeftAutonFast());
 		// b.whenPressed(new CenterRightAutonFast());
 //		x.whenPressed(new VelocityTurnToAngle(4, 315, 1));
-		x.whenPressed(new CenterLeftAutonFast());
+//		x.whenPressed(new CenterLeftAutonFast());
 //		y.whenPressed(new CenterRightAutonFast());
-		y.whenPressed(new CenterRightTwoCubeAuton());
+//		y.whenPressed(new CenterRightTwoCubeAuton());
 //		y.whenPressed(new VelocityTurnToAngle(4, 45, 1));
-		b.whenPressed(new VelocityTurnToAngle(4, 0, 1));
-		a.whenPressed(new VelocityDriveToDistance(-7, 22));
+//		b.whenPressed(new VelocityTurnToAngle(4, 20, 1));
+		a.whenPressed(new VelocityDriveToDistance(3, 3));
+		b.whenPressed(new VelocityDriveToDistance(-3, 3));
+		x.whileHeld(new ExtakeFront());
+		y.whenPressed(new GoToHeight(250));
+		back.whileHeld(new IntakeCube());
+//		a.whenPressed(new NewLeftSideScale());
 
 		// teleop button box commands
 		bb11.whenPressed(new GoToHeight(100)); // scale
@@ -147,7 +149,7 @@ public class OI {
 		bb17.whileHeld(new Pivot());
 
 		// teleop new Button Boc
-		nbba1.whenPressed(new GoToHeight(420)); // scale high
+		nbba1.whenPressed(new GoToHeight(450)); // scale high
 		nbba2.whenPressed(new GoToHeight(400)); // scale low
 		nbba3.whenPressed(new GoToHeight(250)); // switch high
 		nbba4.whenPressed(new GoToHeight(200)); // switch low

@@ -1,55 +1,71 @@
 package org.usfirst.frc.team2848.robot.commands.auton;
 
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
 public class RightAutonSelector extends Command {
-
+	Command runningAuton;
 	String gameData;
-	
-    public RightAutonSelector() {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
-    }
+	Timer t = new Timer();
 
-    // Called just before this Command runs the first time
-    protected void initialize() {
-    	gameData = DriverStation.getInstance().getGameSpecificMessage();
-    	
-    	switch (gameData) {
+	public RightAutonSelector() {
+
+	}
+
+	// Called just before this Command runs the first time
+	protected void initialize() {
+		t.start();
+		while (DriverStation.getInstance().getGameSpecificMessage().length() < 2) {
+			System.out.println("Waiting...");
+			if (t.get() > 1.5) {
+				break;
+			}
+		}
+
+		gameData = DriverStation.getInstance().getGameSpecificMessage();
+
+		System.out.println("Game Data: " + gameData);
+
+		switch (gameData) {
 		case "LLL":
-			new ForwardAuton();
+			runningAuton = new ForwardAuton();
 			break;
 		case "LRL":
-//			new RightAutonLRL();
+			runningAuton = new RightScaleAuton();
 			break;
 		case "RLR":
-//			new RightAutonRLR();
+			runningAuton = new ForwardAuton();
 			break;
 		case "RRR":
-			
+			runningAuton = new RightScaleAuton();
 			break;
-    	}
-    }
+		default:
+			runningAuton = new ForwardAuton();
+			System.out.println("RUNNING DEFAULT FORWARD AUTON");
+			break;
+		}
+		runningAuton.start();
+	}
 
-    // Called repeatedly when this Command is scheduled to run
-    protected void execute() {
-    }
+	// Called repeatedly when this Command is scheduled to run
+	protected void execute() {
+	}
 
-    // Make this return true when this Command no longer needs to run execute()
-    protected boolean isFinished() {
-        return true;
-    }
+	// Make this return true when this Command no longer needs to run execute()
+	protected boolean isFinished() {
+		return true;
+	}
 
-    // Called once after isFinished returns true
-    protected void end() {
-    }
+	// Called once after isFinished returns true
+	protected void end() {
+	}
 
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
-    protected void interrupted() {
-    }
+	// Called when another command which requires one or more of the same
+	// subsystems is scheduled to run
+	protected void interrupted() {
+	}
 }

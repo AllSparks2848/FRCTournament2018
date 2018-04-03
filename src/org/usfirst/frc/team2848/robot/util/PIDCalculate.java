@@ -119,6 +119,8 @@ public class PIDCalculate extends Thread {
 			} else {
 				headingAngle = 270;
 			}
+			
+			
 		}
 
 		if (change_x < 0) {
@@ -200,15 +202,17 @@ public class PIDCalculate extends Thread {
 			
 			double powerDiff = 0;
 			
+			double leftPower, rightPower;
+			
 			multiplierPID.reset();
 			multiplierPID.setOutputLimits(-1.0, 1.0);
-//			multiplierPID.setP(0.7); // .4
-//			multiplierPID.setI(0.0);
-//			multiplierPID.setD(0.7); // .5
-			
-			multiplierPID.setP(0.1); // .4
+			multiplierPID.setP(0.7); // .4
 			multiplierPID.setI(0.0);
-			multiplierPID.setD(0.0); // .5
+			multiplierPID.setD(0.05); // .5
+			
+//			multiplierPID.setP(0.1); // .4
+//			multiplierPID.setI(0.0);
+//			multiplierPID.setD(0.0); // .5
 			
 			AveragingFilter errors = new AveragingFilter(50);
 			errors.initialize(10);
@@ -219,7 +223,7 @@ public class PIDCalculate extends Thread {
 					timestamp_ = System.nanoTime();
 					
 					//Old auton... meh
-					/*
+					
 					multiplier = multiplierPID.getOutput(Math.abs(Robot.drivetrain.leftEncoder.getDistance()),
 							Math.abs(this.target));
 
@@ -230,7 +234,7 @@ public class PIDCalculate extends Thread {
 					
 //					double powerDiff = Robot.drivetrain.leftPIDDrive.getOutput(Robot.drivetrain.leftEncoder.getRate() - Robot.drivetrain.rightEncoder.getRate(), 0);
 
-					 if(multiplier < 0.005){
+					 if(multiplier < 0.1){
 						 System.out.println("CurrentX: " + this.current_x + " CurrentY: " + this.current_y);
 						 this.interrupt = 1;
 						 System.out.println("Interrupting");
@@ -245,24 +249,24 @@ public class PIDCalculate extends Thread {
 					Robot.drivetrain.left.set(leftPower);
 					Robot.drivetrain.right.set(-(rightPower));
 					
-					*/
+					
+					
 					
 					//New speed difference method
-					multiplier = multiplierPID.getOutput(this.target - Robot.drivetrain.leftEncoder.getDistance(), 0);
-
-					powerDiff = diffPID.getOutput(this.leftSpeed - this.rightSpeed, 0);
-					//powerDiff = Robot.drivetrain.leftPIDDrive.getOutput(Robot.drivetrain.leftEncoder.getRate() - Robot.drivetrain.rightEncoder.getRate(), 0);
-
-					 if(errors.addValueGetAverage(Math.abs(Robot.drivetrain.leftEncoder.getDistance() - this.target)) < 0.05){
-						 System.out.println("CurrentX: " + this.current_x + " CurrentY: " + this.current_y);
-						 this.interrupt = 1;
-						 System.out.println("Interrupting");
-						 this.interrupt();
-						 return;
-					 }
-
-					Robot.drivetrain.left.set((constantPower - powerDiff) * multiplier);
-					Robot.drivetrain.right.set(-(constantPower + powerDiff) * multiplier);
+//					multiplier = multiplierPID.getOutput(this.target - Robot.drivetrain.leftEncoder.getDistance(), 0);
+//
+//					powerDiff = Robot.drivetrain.leftPIDDrive.getOutput(Robot.drivetrain.leftEncoder.getRate() - Robot.drivetrain.rightEncoder.getRate(), 0);
+//
+//					 if(errors.addValueGetAverage(Math.abs(Robot.drivetrain.leftEncoder.getDistance() - this.target)) < 0.05){
+//						 System.out.println("CurrentX: " + this.current_x + " CurrentY: " + this.current_y);
+//						 this.interrupt = 1;
+//						 System.out.println("Interrupting");
+//						 this.interrupt();
+//						 return;
+//					 }
+//
+//					Robot.drivetrain.left.set((constantPower - powerDiff) * multiplier);
+//					Robot.drivetrain.right.set(-(constantPower + powerDiff) * multiplier);
 
 				}
 				while (System.nanoTime() < timestamp_ + period) {
@@ -272,12 +276,16 @@ public class PIDCalculate extends Thread {
 		} else if (this.type == 1) {
 			multiplierPID.reset();
 			multiplierPID.setOutputLimits(-1.0, 1.0);
-			multiplierPID.setP(0.02);
+			multiplierPID.setP(0.07);
 			multiplierPID.setI(0.0);
 			multiplierPID.setD(0.0);
 
-			AveragingFilter errors = new AveragingFilter(50);
+			AveragingFilter errors = new AveragingFilter(1000);
 			errors.initialize(10);
+			
+			t.start();
+			
+			double timerTarget = 0.5;
 
 			while (!interrupted()) {
 				synchronized (taskRunningLock_) {
@@ -295,12 +303,19 @@ public class PIDCalculate extends Thread {
 
 					Robot.drivetrain.left.set(multiplier);
 					Robot.drivetrain.right.set(multiplier);
-
-					if (errors.addValueGetAverage(Math.abs(getDifferenceInAngleDegrees(Robot.drivetrain.navX.getYaw(), this.target))) < 0.05) {
-						this.interrupt = 1;
-						System.out.println("Interrupting, mult");
-						this.interrupt();
-						return;
+					
+					if (t.get() > timerTarget){
+						System.out.println("CurrentAvg: " + errors.addValueGetAverage(Math.abs(getDifferenceInAngleDegrees(Robot.drivetrain.navX.getYaw(), this.target))));
+						timerTarget += 0.5;
+					} else {
+						double currentPos = errors.addValueGetAverage(Math.abs(getDifferenceInAngleDegrees(Robot.drivetrain.navX.getYaw(), this.target)));
+						if (currentPos < 2 || t.get() > 5){
+							this.interrupt = 1;
+							System.out.println("Interrupting, mult");
+							System.out.println("TerminatingAvg: " + errors.addValueGetAverage(Math.abs(getDifferenceInAngleDegrees(Robot.drivetrain.navX.getYaw(), this.target))));
+							this.interrupt();
+							return;
+						}
 					}
 
 				}

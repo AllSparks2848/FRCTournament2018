@@ -167,9 +167,9 @@ public class Robot extends IterativeRobot {
 		
 //		System.out.println("Beambreak: " + intake.haveCube.get());
 
-//		System.out.println("left encoder: " + Robot.drivetrain.leftEncoder.get() + " right encoder: "
-//				+ Robot.drivetrain.rightEncoder.get());
-//		System.out.println("gyro angle: " + Robot.drivetrain.navX.getFusedHeading());
+		System.out.println("left encoder: " + Robot.drivetrain.leftEncoder.get() + " right encoder: "
+				+ Robot.drivetrain.rightEncoder.get());
+		System.out.println("gyro angle: " + Robot.drivetrain.navX.getYaw());
 		// System.out.println("sonar: " + Robot.intake.sonar.getValue());
 //		System.out.println("Elev: " + Robot.elevator.elevatorEncoder.get() + " Bottom Lim: "
 //				+ Robot.elevator.limitSwitchElevatorBottom.get() + "Top Lim: "

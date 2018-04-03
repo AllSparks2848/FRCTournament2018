@@ -22,13 +22,16 @@ public class NewLeftSideScale extends CommandGroup {
     public NewLeftSideScale() {
     	addSequential(new ShiftHigh());
 		addSequential(new ClampIntakeClaw());
-		addSequential(new VelocityDriveToDistance(6, 23));
-		addParallel(new GoToHeight(420));
-		addSequential(new VelocityTurnToAngle(4, 20, 1));
+		addSequential(new VelocityDriveToDistance(6, 28)); //23
+		addSequential(new VelocityTurnToAngle(4, 90, 1));
+//		addSequential(new VelocityDriveToDistance(6, 2));
+		addSequential(new GoToHeight(420));
+		addSequential(new VelocityDriveToDistance(3, 2));
 		addSequential(new Wait(0.2));
 		addSequential(new SpitOutFront());
+		addSequential(new VelocityDriveToDistance(-3, 2));
 		addSequential(new DownToBottom());
 		addSequential(new VelocityTurnToAngle(4, 0, 1));
-		addSequential(new VelocityDriveToDistance(-6.5, 9));
+//		addSequential(new VelocityDriveToDistance(6.5, 9));
     }
 }
