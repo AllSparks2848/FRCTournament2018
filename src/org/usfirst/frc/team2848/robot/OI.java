@@ -12,6 +12,7 @@ import org.usfirst.frc.team2848.robot.commands.carriage.SecureCube;
 import org.usfirst.frc.team2848.robot.commands.drive.ShiftHigh;
 import org.usfirst.frc.team2848.robot.commands.drive.ShiftLow;
 import org.usfirst.frc.team2848.robot.commands.drive.VelocityDriveToDistance;
+import org.usfirst.frc.team2848.robot.commands.drive.VelocityTurnToAngle;
 import org.usfirst.frc.team2848.robot.commands.elevator.DownToBottom;
 import org.usfirst.frc.team2848.robot.commands.elevator.GoToHeight;
 import org.usfirst.frc.team2848.robot.commands.elevator.GoToHeightPortal;
@@ -125,7 +126,7 @@ public class OI {
 //		y.whenPressed(new CenterRightAutonFast());
 //		y.whenPressed(new CenterRightTwoCubeAuton());
 		y.whenPressed(new VelocityDriveToDistance(10, 9));
-//		b.whenPressed(new VelocityTurnToAngle(4, 20, 1));
+		b.whenPressed(new VelocityTurnToAngle(4, 20, 1));
 //		a.whenPressed(new GoToHeight(800));
 //		b.whenPressed(new GoToHeight(1400));
 //		x.whileHeld(new GoToHeight(2000));

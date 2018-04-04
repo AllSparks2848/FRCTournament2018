@@ -19,14 +19,16 @@ public class CenterRightThreeCubeAuton extends CommandGroup {
 
     public CenterRightThreeCubeAuton() {
     	addSequential(new CenterRightAutonFast());
-    	addSequential(new VelocityDriveToDistance(-10, 4));
-    	addSequential(new VelocityTurnToAngle(4, 325, 1));
-    	addSequential(new DownToBottom());
-    	addParallel(new IntakeCubeAuton(2.5));
-    	addSequential(new VelocityDriveToDistance(8,3.5));
-    	addSequential(new VelocityDriveToDistance(-8,3.5));
+    	addParallel(new DownToBottom());
+    	addSequential(new VelocityDriveToDistance(-20, 4));
+    	addSequential(new VelocityTurnToAngle(4, 317.5, 1));
     	
-    	addParallel(new GoToHeight(1200));
+    	addParallel(new IntakeCubeAuton(2.5));
+    	addSequential(new VelocityDriveToDistance(10,3.5));
+    	addParallel(new WaitThenElevator());
+    	addSequential(new VelocityDriveToDistance(-10,3.5));
+    	
+    	
     	
     	addSequential(new VelocityTurnToAngle(4, 4, 1));
     	addParallel(new PivotIn());
