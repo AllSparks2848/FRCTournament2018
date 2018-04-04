@@ -1,6 +1,7 @@
 package org.usfirst.frc.team2848.robot;
 
 import org.usfirst.frc.team2848.robot.commands.auton.AutonReset;
+import org.usfirst.frc.team2848.robot.commands.auton.CenterRightThreeCubeAuton;
 import org.usfirst.frc.team2848.robot.commands.auton.LeftScaleRightSwitchAuton;
 import org.usfirst.frc.team2848.robot.commands.carriage.ClampIntakeClaw;
 import org.usfirst.frc.team2848.robot.commands.carriage.ExtakeFront;
@@ -123,12 +124,13 @@ public class OI {
 //		x.whenPressed(new CenterLeftAutonFast());
 //		y.whenPressed(new CenterRightAutonFast());
 //		y.whenPressed(new CenterRightTwoCubeAuton());
-//		y.whenPressed(new VelocityTurnToAngle(4, 45, 1));
+		y.whenPressed(new VelocityDriveToDistance(10, 9));
 //		b.whenPressed(new VelocityTurnToAngle(4, 20, 1));
-		a.whenPressed(new VelocityDriveToDistance(3, 3));
-		b.whenPressed(new VelocityDriveToDistance(-3, 3));
-		x.whileHeld(new ExtakeFront());
-		y.whenPressed(new GoToHeight(250));
+//		a.whenPressed(new GoToHeight(800));
+//		b.whenPressed(new GoToHeight(1400));
+//		x.whileHeld(new GoToHeight(2000));
+//		y.whenPressed(new GoToHeight(2500));
+		a.whenPressed(new CenterRightThreeCubeAuton());
 		back.whileHeld(new IntakeCube());
 //		a.whenPressed(new NewLeftSideScale());
 
@@ -149,10 +151,10 @@ public class OI {
 		bb17.whileHeld(new Pivot());
 
 		// teleop new Button Boc
-		nbba1.whenPressed(new GoToHeight(450)); // scale high
-		nbba2.whenPressed(new GoToHeight(400)); // scale low
-		nbba3.whenPressed(new GoToHeight(250)); // switch high
-		nbba4.whenPressed(new GoToHeight(200)); // switch low
+		nbba1.whenPressed(new GoToHeight(2900)); // scale high 450
+		nbba2.whenPressed(new GoToHeight(2000)); // scale low 400
+		nbba3.whenPressed(new GoToHeight(1400)); // switch high 250
+		nbba4.whenPressed(new GoToHeight(800)); // switch low 150
 		nbba5.whenPressed(new DownToBottom()); // down and zero
 		// nbba6.whileHeld(new ); //not wanted yet
 		nbba7.whenPressed(new GoToHeightPortal(93)); // portal (20.5in)

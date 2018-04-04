@@ -21,7 +21,7 @@ public class RightScaleAuton extends CommandGroup {
 		addSequential(new ClampIntakeClaw());
 		addSequential(new VelocityDriveToDistance(-6.75, 27));
 		addSequential(new VelocityTurnToAngle(4, 90, 1));
-		addSequential(new GoToHeight(450));
+		addSequential(new GoToHeight(2600));
 		addSequential(new VelocityDriveToDistance(2.5, 2));
     	addSequential(new Wait(.2));
     	addSequential(new ExtakeFrontAuton());

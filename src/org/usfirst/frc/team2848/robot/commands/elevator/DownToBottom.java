@@ -23,13 +23,13 @@ public class DownToBottom extends Command {
 
 	protected void execute() {
 		Robot.pivotIntake.intakePivot.set(DoubleSolenoid.Value.kForward);
-		if(t.get()>.2) {
-		if (Robot.elevator.elevatorEncoder.get() < 100) {
+	
+		if (Robot.elevator.elevatorEncoder.get() < 800) {
 			Robot.elevator.elevatorMotor.set(-.3);// sends carriage down
 		} else {
 			Robot.elevator.elevatorMotor.set(-.7);// sends carriage down
 		}
-		}
+		
 	}
 
 	protected boolean isFinished() {

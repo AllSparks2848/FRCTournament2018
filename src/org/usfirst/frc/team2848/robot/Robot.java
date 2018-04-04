@@ -10,6 +10,7 @@ import org.usfirst.frc.team2848.robot.subsystems.Elevator;
 import org.usfirst.frc.team2848.robot.subsystems.Hanger;
 import org.usfirst.frc.team2848.robot.subsystems.Intake;
 import org.usfirst.frc.team2848.robot.subsystems.PivotIntake;
+import org.usfirst.frc.team2848.robot.util.PIDCalculate;
 //import org.usfirst.frc.team2848.robot.util.ControlLooper;
 import org.usfirst.frc.team2848.robot.util.PathPlanning;
 
@@ -59,8 +60,8 @@ public class Robot extends IterativeRobot {
 		Robot.drivetrain.navX.reset();
 		Robot.drivetrain.leftEncoder.setReverseDirection(true);
 
-		Robot.drivetrain.leftEncoder.setDistancePerPulse(-0.00116);
-		Robot.drivetrain.rightEncoder.setDistancePerPulse(0.00115);
+		Robot.drivetrain.leftEncoder.setDistancePerPulse(-0.0012); //0.00116
+		Robot.drivetrain.rightEncoder.setDistancePerPulse(0.001125); //.00115
 
 		CameraServer.getInstance().startAutomaticCapture();
 
@@ -164,13 +165,14 @@ public class Robot extends IterativeRobot {
 			drivetrain.arcadeDrive(oi.getLeftJoystick(), -oi.getRightJoystick());
 		
 //		Robot.drivetrain.arcPIDs.integratePosition();
+//		System.out.println("lefty: " + Robot.drivetrain.arcPIDs.leftSpeed + " righty: " + Robot.drivetrain.arcPIDs.rightSpeed);
 		
 //		System.out.println("Beambreak: " + intake.haveCube.get());
 
 		System.out.println("left encoder: " + Robot.drivetrain.leftEncoder.get() + " right encoder: "
 				+ Robot.drivetrain.rightEncoder.get());
-		System.out.println("gyro angle: " + Robot.drivetrain.navX.getYaw());
-		// System.out.println("sonar: " + Robot.intake.sonar.getValue());
+//		System.out.println("gyro angle: " + Robot.drivetrain.navX.getYaw());
+//		// System.out.println("sonar: " + Robot.intake.sonar.getValue());
 //		System.out.println("Elev: " + Robot.elevator.elevatorEncoder.get() + " Bottom Lim: "
 //				+ Robot.elevator.limitSwitchElevatorBottom.get() + "Top Lim: "
 //				+ Robot.elevator.limitSwitchElevatorTop.get());

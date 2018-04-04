@@ -22,9 +22,9 @@ public class Elevator extends Subsystem {
 	public Encoder elevatorEncoder = new Encoder(RobotMap.p_elevatorEncoderA, RobotMap.p_elevatorEncoderB, true,
 			EncodingType.k4X);// measures carriage height
  
-	double kP = 0.04;
+	double kP = 0.005; //.04
 	double kI = 0.00;
-	double kD = 0.16;
+	double kD = 0.;  //.16
 
 	public MiniPID elevatorController = new MiniPID(kP, kI, kD);
 	
@@ -33,7 +33,7 @@ public class Elevator extends Subsystem {
 	public double sideSpitMinPos = 100;
 
 	public Elevator() {
-		elevatorController.setOutputLimits(-.4, 1);
+		elevatorController.setOutputLimits(-.2, 1); //was -.4
 		elevatorEncoder.reset(); 
 		elevatorEncoder.setReverseDirection(false);
 		// pid.set
