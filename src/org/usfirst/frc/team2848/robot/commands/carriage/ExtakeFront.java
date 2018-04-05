@@ -21,6 +21,7 @@ public class ExtakeFront extends Command {
 	protected void execute() {
 		Robot.carriage.intakeClaw.set(DoubleSolenoid.Value.kForward);
 		Robot.carriage.intakeClawMotor.set(0.8);// outputs cube to robot's front
+		Robot.carriage.omniPlateMotor.set(1.0);
 	}
 
 	protected boolean isFinished() {
@@ -29,6 +30,7 @@ public class ExtakeFront extends Command {
 
 	protected void end() {
 		Robot.carriage.intakeClawMotor.set(0.0);
+		Robot.carriage.omniPlateMotor.set(0);
 	}
 
 	protected void interrupted() {

@@ -22,7 +22,8 @@ public class IntakeCube extends Command {
 		Robot.carriage.intakeClaw.set(DoubleSolenoid.Value.kReverse);
 		Robot.intake.leftIntake.set(0.7);
 		Robot.intake.rightIntake.set(-0.7);// intakes
-		Robot.carriage.intakeClawMotor.set(0.7);
+		Robot.carriage.intakeClawMotor.set(-0.7);
+		Robot.carriage.omniPlateMotor.set(1.0);// output cube to robot's left
 	}
 
 	protected boolean isFinished() {
@@ -31,6 +32,7 @@ public class IntakeCube extends Command {
 
 	protected void end() {
 		Robot.carriage.intakeClawMotor.set(0);
+		Robot.carriage.omniPlateMotor.set(0);// output cube to robot's left
 		Robot.intake.leftIntake.set(0.0);
 		Robot.intake.rightIntake.set(0.0);// stops motors
 		Robot.carriage.intakeClaw.set(DoubleSolenoid.Value.kForward);
