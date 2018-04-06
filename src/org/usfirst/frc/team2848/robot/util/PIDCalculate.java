@@ -213,7 +213,7 @@ public class PIDCalculate extends Thread {
 //			multiplierPID.setI(0.0);
 //			multiplierPID.setD(0.05); // .5
 			
-			multiplierPID.setP(0.4); // .4
+			multiplierPID.setP(0.25); // .4
 			multiplierPID.setI(0.0);
 			multiplierPID.setD(0.0); // .5
 			
@@ -266,7 +266,7 @@ public class PIDCalculate extends Thread {
 					if(t.get() > timerTarget){
 						displacement = Math.abs(Robot.drivetrain.leftEncoder.getDistance() - this.target);
 						
-						if(Math.abs(displacement - previousDisplacement) < 0.005) {
+						if(Math.abs(displacement - previousDisplacement) < 0.05) {
 							 System.out.println("displacement: " + Math.abs(displacement - previousDisplacement));
 							 this.interrupt = 1;
 							 System.out.println("Interrupting");
@@ -292,7 +292,7 @@ public class PIDCalculate extends Thread {
 		} else if (this.type == 1) {
 			multiplierPID.reset();
 			multiplierPID.setOutputLimits(-1.0, 1.0);
-			multiplierPID.setP(0.07);
+			multiplierPID.setP(0.03);
 			multiplierPID.setI(0.0);
 			multiplierPID.setD(0.0);
 
@@ -302,7 +302,7 @@ public class PIDCalculate extends Thread {
 			t.reset();
 			t.start();
 			
-			double timerTarget = 0.1;
+			double timerTarget = 0.05; //.1
 
 			while (!interrupted()) {
 				synchronized (taskRunningLock_) {
@@ -326,7 +326,7 @@ public class PIDCalculate extends Thread {
 					if(t.get() > timerTarget){
 						displacement = getDifferenceInAngleDegrees(Robot.drivetrain.navX.getYaw(), this.target);
 						
-						if(Math.abs(displacement - previousDisplacement) < 0.5) {
+						if(Math.abs(displacement - previousDisplacement) < 1) {
 							 System.out.println("displacement: " + Math.abs(displacement - previousDisplacement));
 							 this.interrupt = 1;
 							 System.out.println("Interrupting");
@@ -336,7 +336,7 @@ public class PIDCalculate extends Thread {
 						
 						previousDisplacement = displacement;
 						
-						timerTarget += 0.1;
+						timerTarget += 0.05; //.1
 					}
 					
 				}

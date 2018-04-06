@@ -1,22 +1,13 @@
-package org.usfirst.frc.team2848.robot.commands.auton;
-
-import org.usfirst.frc.team2848.robot.commands.carriage.ExtakeFrontAuton;
-import org.usfirst.frc.team2848.robot.commands.elevator.GoToHeight;
-import org.usfirst.frc.team2848.robot.commands.intake.PivotIn;
-import org.usfirst.frc.team2848.robot.util.Wait;
+package org.usfirst.frc.team2848.robot.commands.drive;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
  *
  */
-public class WaitThenElevator extends CommandGroup {
+public class TurnSpit extends CommandGroup {
 
-    public WaitThenElevator(double seconds) {
-    	addSequential(new Wait(seconds));
-    	addSequential(new GoToHeight(1000));
-    	addSequential(new PivotIn());
-    	addSequential(new ExtakeFrontAuton());
+    public TurnSpit() {
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());

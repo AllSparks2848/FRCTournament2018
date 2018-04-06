@@ -1,7 +1,8 @@
 package org.usfirst.frc.team2848.robot;
 
 import org.usfirst.frc.team2848.robot.commands.auton.AutonReset;
-import org.usfirst.frc.team2848.robot.commands.auton.CenterRightThreeCubeAuton;
+import org.usfirst.frc.team2848.robot.commands.auton.CenterLeftThreeCubeAutonULTRAFAST;
+import org.usfirst.frc.team2848.robot.commands.auton.LeftScaleAuton1;
 import org.usfirst.frc.team2848.robot.commands.auton.LeftScaleRightSwitchAuton;
 import org.usfirst.frc.team2848.robot.commands.carriage.ClampIntakeClaw;
 import org.usfirst.frc.team2848.robot.commands.carriage.ExtakeFront;
@@ -126,12 +127,13 @@ public class OI {
 //		y.whenPressed(new CenterRightAutonFast());
 //		y.whenPressed(new CenterRightTwoCubeAuton());
 		y.whenPressed(new VelocityDriveToDistance(10, 9));
-		b.whenPressed(new VelocityTurnToAngle(4, 20, 1));
+		b.whenPressed(new CenterLeftThreeCubeAutonULTRAFAST());
+		x.whenPressed(new VelocityTurnToAngle(8, 330, 1));
 //		a.whenPressed(new GoToHeight(800));
 //		b.whenPressed(new GoToHeight(1400));
 //		x.whileHeld(new GoToHeight(2000));
 //		y.whenPressed(new GoToHeight(2500));
-		a.whenPressed(new CenterRightThreeCubeAuton());
+		a.whenPressed(new LeftScaleAuton1());
 		back.whileHeld(new IntakeCube());
 //		a.whenPressed(new NewLeftSideScale());
 

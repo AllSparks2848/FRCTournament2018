@@ -18,8 +18,9 @@ public class CenterRightAutonFast extends CommandGroup {
     public CenterRightAutonFast() {
     	addSequential(new ShiftHigh());
 		addParallel(new ClampIntakeClaw());
-        addSequential(new VelocityTurnToAngle(4, 10, 1));
-        addParallel(new WaitThenElevator(3));
-        addSequential(new VelocityDriveToDistance(15, 8.5));
+		
+        addSequential(new VelocityTurnToAngle(4, 25, 1));
+        addParallel(new WaitThenElevator(1));
+        addSequential(new VelocityDriveToDistance(15, 7.5));
     }
 }
