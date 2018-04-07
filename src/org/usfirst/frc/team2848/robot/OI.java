@@ -127,7 +127,7 @@ public class OI {
 //		x.whenPressed(new CenterLeftAutonFast());
 //		y.whenPressed(new CenterRightAutonFast());
 //		y.whenPressed(new CenterRightTwoCubeAuton());
-		y.whenPressed(new VelocityDriveToDistance(10, 9));
+		y.whenPressed(new VelocityDriveToDistance(12, 20));
 		b.whenPressed(new CenterLeftThreeCubeAutonULTRAFAST());
 		x.whenPressed(new VelocityTurnToAngle(8, 330, 1));
 //		a.whenPressed(new GoToHeight(800));
@@ -155,7 +155,7 @@ public class OI {
 		bb17.whileHeld(new Pivot());
 
 		// teleop new Button Boc
-		nbba1.whenPressed(new GoToHeight(2900)); // scale high 450
+		nbba1.whenPressed(new GoToHeight(2400)); // scale high 450
 		nbba2.whenPressed(new GoToHeight(2000)); // scale low 400
 		nbba3.whenPressed(new GoToHeight(1400)); // switch high 250
 		nbba4.whenPressed(new GoToHeight(800)); // switch low 150

@@ -61,7 +61,7 @@ public class Robot extends IterativeRobot {
 		Robot.drivetrain.leftEncoder.setReverseDirection(true);
 
 		Robot.drivetrain.leftEncoder.setDistancePerPulse(-0.0012); //0.00116
-		Robot.drivetrain.rightEncoder.setDistancePerPulse(0.001125); //.00115
+		Robot.drivetrain.rightEncoder.setDistancePerPulse(0.00117); //.00115
 
 		CameraServer.getInstance().startAutomaticCapture();
 

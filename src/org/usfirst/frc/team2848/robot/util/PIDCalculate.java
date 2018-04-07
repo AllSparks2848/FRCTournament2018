@@ -194,7 +194,7 @@ public class PIDCalculate extends Thread {
 		
 
 		if (this.type == 0) {
-			MiniPID speedDiffPID = new MiniPID(0.2, 0, 0);
+			MiniPID speedDiffPID = new MiniPID(0.2, 0.00001, 0);
 			double constantPower = this.velocityL * 0.063;
 			
 			if (constantPower < 0) {

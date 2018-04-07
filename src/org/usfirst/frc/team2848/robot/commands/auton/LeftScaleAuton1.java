@@ -23,22 +23,23 @@ public class LeftScaleAuton1 extends CommandGroup {
 		addSequential(new VelocityDriveToDistance(6.75, 27));
 		
 		//Turn and spit first cube
-		addParallel(new WaitThenElevator(0));
+		addParallel(new WaitThenElevatorSCALE(0));
 		addSequential(new VelocityTurnToAngle(4, 90, 1));
-		addSequential(new Wait(.2));
+		addSequential(new Wait(.4));
+		addSequential(new ExtakeFrontAuton());
 		addParallel(new DownToBottom());
 		
 		//Turn and get second cube
-		addSequential(new VelocityTurnToAngle(4, 150, 1));
-		addParallel(new IntakeCubeAuton(6));
-		addSequential(new VelocityDriveToDistance(6.75, 9));
-    	addSequential(new ExtakeFrontAuton());
-    	addSequential(new VelocityDriveToDistance(-6.75, 9));
+		addSequential(new VelocityTurnToAngle(4, 152, 1));
+		addParallel(new IntakeCubeAuton(4));
+		addSequential(new VelocityDriveToDistance(6.75, 11));
+    	addSequential(new VelocityDriveToDistance(-6.75, 10.5));
     	
     	//Turn and spit seconod cube
-    	addParallel(new WaitThenElevator(0));
-		addSequential(new VelocityTurnToAngle(4, 90, 1));
-		addSequential(new Wait(.2));
+    	addParallel(new WaitThenElevatorSCALE(0));
+		addSequential(new VelocityTurnToAngle(4, 100, 1));
+		addSequential(new Wait(.8));
+		addSequential(new ExtakeFrontAuton());
 		addParallel(new DownToBottom());
 		
     }

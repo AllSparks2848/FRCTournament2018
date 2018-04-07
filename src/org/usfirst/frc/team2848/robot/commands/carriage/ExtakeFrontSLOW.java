@@ -20,7 +20,7 @@ public class ExtakeFrontSLOW extends Command {
 
 	protected void execute() {
 		Robot.carriage.intakeClaw.set(DoubleSolenoid.Value.kForward);
-		Robot.carriage.intakeClawMotor.set(0.4);// outputs cube to robot's front
+		Robot.carriage.intakeClawMotor.set(-0.4);// outputs cube to robot's front
 		Robot.carriage.omniPlateMotor.set(.5);
 	}
 
