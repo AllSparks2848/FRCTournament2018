@@ -43,7 +43,7 @@ public class CenterRightThreeCubeAutonULTRAFAST extends CommandGroup {
 
 		addSequential(new VelocityDriveToDistance(-20, 2));
 
-		addSequential(new VelocityTurnToAngle(8, 12, 1));
+		addSequential(new VelocityTurnToAngle(8, 12, 1));	
 		addParallel(new WaitThenElevator(.2));
 		addSequential(new VelocityDriveToDistance(20, 3.5));
 

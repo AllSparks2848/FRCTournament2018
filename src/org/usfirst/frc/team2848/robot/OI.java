@@ -6,6 +6,7 @@ import org.usfirst.frc.team2848.robot.commands.auton.LeftScaleAuton1;
 import org.usfirst.frc.team2848.robot.commands.auton.LeftScaleRightSwitchAuton;
 import org.usfirst.frc.team2848.robot.commands.carriage.ClampIntakeClaw;
 import org.usfirst.frc.team2848.robot.commands.carriage.ExtakeFront;
+import org.usfirst.frc.team2848.robot.commands.carriage.ExtakeFrontSLOW;
 import org.usfirst.frc.team2848.robot.commands.carriage.ExtakeLeft;
 import org.usfirst.frc.team2848.robot.commands.carriage.ExtakeRight;
 import org.usfirst.frc.team2848.robot.commands.carriage.ReleaseIntakeClaw;
@@ -178,8 +179,8 @@ public class OI {
 		nbbb9.whenPressed(new ClampIntakeClaw());
 		nbbb10.whileHeld(new SecureCube());
 		nbbb11.whileHeld(new SpitOutFront());
-		nbbb12.whileHeld(new ExtakeLeft());
-		nbbb13.whileHeld(new ExtakeRight());
+		nbbb12.whileHeld(new ExtakeFrontSLOW());
+		nbbb13.whileHeld(new ExtakeFront());
 		nbbb14.whileHeld(new IntakeCube()); // ian changed from when pressed
 											// autonintake cube becuase no
 											// ultrasocin
