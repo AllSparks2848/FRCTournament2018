@@ -1,6 +1,6 @@
 package org.usfirst.frc.team2848.robot.commands.auton;
 
-import org.usfirst.frc.team2848.robot.commands.carriage.ClampIntakeClaw;
+import org.usfirst.frc.team2848.robot.commands.carriage.ClawDown;
 import org.usfirst.frc.team2848.robot.commands.carriage.ExtakeLeft;
 import org.usfirst.frc.team2848.robot.commands.drive.DriveToPoint;
 import org.usfirst.frc.team2848.robot.commands.drive.ShiftHigh;
@@ -21,7 +21,7 @@ public class NewLeftSideScale extends CommandGroup {
 
     public NewLeftSideScale() {
     	addSequential(new ShiftHigh());
-		addSequential(new ClampIntakeClaw());
+		addSequential(new ClawDown());
 		addSequential(new VelocityDriveToDistance(6, 28)); //23
 		addSequential(new VelocityTurnToAngle(4, 90, 1));
 //		addSequential(new VelocityDriveToDistance(6, 2));

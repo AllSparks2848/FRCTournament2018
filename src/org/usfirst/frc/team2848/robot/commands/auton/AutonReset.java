@@ -1,6 +1,6 @@
 package org.usfirst.frc.team2848.robot.commands.auton;
 
-import org.usfirst.frc.team2848.robot.commands.carriage.ReleaseIntakeClaw;
+import org.usfirst.frc.team2848.robot.commands.carriage.ClawUp;
 import org.usfirst.frc.team2848.robot.commands.elevator.DownToBottomAuton;
 import org.usfirst.frc.team2848.robot.commands.elevator.GoToHeightAuton;
 import org.usfirst.frc.team2848.robot.commands.intake.PivotIn;
@@ -23,6 +23,6 @@ public class AutonReset extends CommandGroup {
 		addSequential(new GoToHeightAuton(570));
 		addSequential(new Wait(1));
 		addSequential(new PivotIn());
-		addSequential(new ReleaseIntakeClaw());
+		addSequential(new ClawUp());
 	}
 }

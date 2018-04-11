@@ -19,6 +19,7 @@ public class PivotOut extends Command {
 	}
 
 	protected void execute() {
+		Robot.pivotIntake.intakePivot.set(DoubleSolenoid.Value.kForward);
 	}
 
 	protected boolean isFinished() {

@@ -1,6 +1,6 @@
 package org.usfirst.frc.team2848.robot.commands.auton;
 
-import org.usfirst.frc.team2848.robot.commands.carriage.ClampIntakeClaw;
+import org.usfirst.frc.team2848.robot.commands.carriage.ClawDown;
 import org.usfirst.frc.team2848.robot.commands.carriage.ExtakeLeft;
 import org.usfirst.frc.team2848.robot.commands.drive.ShiftHigh;
 import org.usfirst.frc.team2848.robot.commands.drive.VelocityDriveToDistance;
@@ -21,7 +21,7 @@ public class LeftScaleRightSwitchAuton extends CommandGroup {
 
 	public LeftScaleRightSwitchAuton() {
 		addSequential(new ShiftHigh());
-		addSequential(new ClampIntakeClaw());
+		addSequential(new ClawDown());
 		addSequential(new VelocityDriveToDistance(-6.75, -26.25));
 		addSequential(new GoToHeight(420));
 		addSequential(new Wait(.2));

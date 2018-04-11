@@ -13,6 +13,7 @@ import org.usfirst.frc.team2848.robot.subsystems.PivotIntake;
 import org.usfirst.frc.team2848.robot.util.PIDCalculate;
 //import org.usfirst.frc.team2848.robot.util.ControlLooper;
 import org.usfirst.frc.team2848.robot.util.PathPlanning;
+import org.usfirst.frc.team2848.robot.util.PointNav;
 
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -60,8 +61,8 @@ public class Robot extends IterativeRobot {
 		Robot.drivetrain.navX.reset();
 		Robot.drivetrain.leftEncoder.setReverseDirection(true);
 
-		Robot.drivetrain.leftEncoder.setDistancePerPulse(-0.0012); //0.00116
-		Robot.drivetrain.rightEncoder.setDistancePerPulse(0.00117); //.00115
+		Robot.drivetrain.leftEncoder.setDistancePerPulse(-0.0011146); //0.00116
+		Robot.drivetrain.rightEncoder.setDistancePerPulse(0.0011181); //.00115
 
 		CameraServer.getInstance().startAutomaticCapture();
 
@@ -147,10 +148,7 @@ public class Robot extends IterativeRobot {
 			autonomousCommand.cancel();
 
 		Robot.hanger.lockHangerDown();
-		
-//		Robot.drivetrain.arcPIDs = new PIDCalculate(0, 0, 0, 0);
-//		Robot.drivetrain.arcPIDs.setTargetXandY(-4, -4);
-		
+
 	}
 
 	/**
@@ -164,13 +162,16 @@ public class Robot extends IterativeRobot {
 		if (Math.abs(oi.getLeftJoystick()) > .05 || Math.abs(oi.getRightJoystick()) > .05)
 			drivetrain.arcadeDrive(oi.getLeftJoystick(), -oi.getRightJoystick());
 		
-//		Robot.drivetrain.arcPIDs.integratePosition();
+
+//		goToPoint.integratePosition();
+		
+//		System.out.println("Target: " + goToPoint.targetAngle + " Current: " + goToPoint.headingAngle);
+		
 //		System.out.println("lefty: " + Robot.drivetrain.arcPIDs.leftSpeed + " righty: " + Robot.drivetrain.arcPIDs.rightSpeed);
 		
 //		System.out.println("Beambreak: " + intake.haveCube.get());
 
-//		System.out.println("left encoder: " + Robot.drivetrain.leftEncoder.get() + " right encoder: "
-//				+ Robot.drivetrain.rightEncoder.get());
+//		System.out.println("left encoder: " + Robot.drivetrain.leftEncoder.get() + " right encoder: " + Robot.drivetrain.rightEncoder.get());
 //		System.out.println("gyro angle: " + Robot.drivetrain.navX.getYaw());
 //		// System.out.println("sonar: " + Robot.intake.sonar.getValue());
 //		System.out.println("Elev: " + Robot.elevator.elevatorEncoder.get() + " Bottom Lim: "

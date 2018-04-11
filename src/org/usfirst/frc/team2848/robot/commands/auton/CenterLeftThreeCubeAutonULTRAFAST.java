@@ -8,6 +8,7 @@ import org.usfirst.frc.team2848.robot.commands.elevator.GoToHeight;
 import org.usfirst.frc.team2848.robot.commands.intake.IntakeCubeAuton;
 import org.usfirst.frc.team2848.robot.commands.intake.PivotIn;
 
+import AutonCommandGroups.WaitThenElevator;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**

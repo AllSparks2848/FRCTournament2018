@@ -2,19 +2,21 @@ package org.usfirst.frc.team2848.robot;
 
 import org.usfirst.frc.team2848.robot.commands.auton.AutonReset;
 import org.usfirst.frc.team2848.robot.commands.auton.CenterLeftThreeCubeAutonULTRAFAST;
+import org.usfirst.frc.team2848.robot.commands.auton.CenterRightThreeCubeAutonULTRAFAST;
 import org.usfirst.frc.team2848.robot.commands.auton.LeftScaleAuton1;
 import org.usfirst.frc.team2848.robot.commands.auton.LeftScaleRightSwitchAuton;
-import org.usfirst.frc.team2848.robot.commands.carriage.ClampIntakeClaw;
+import org.usfirst.frc.team2848.robot.commands.auton.NewRightSideScale;
+import org.usfirst.frc.team2848.robot.commands.carriage.ClawDown;
+import org.usfirst.frc.team2848.robot.commands.carriage.ClawUp;
 import org.usfirst.frc.team2848.robot.commands.carriage.ExtakeFront;
 import org.usfirst.frc.team2848.robot.commands.carriage.ExtakeFrontSLOW;
 import org.usfirst.frc.team2848.robot.commands.carriage.ExtakeLeft;
 import org.usfirst.frc.team2848.robot.commands.carriage.ExtakeRight;
-import org.usfirst.frc.team2848.robot.commands.carriage.ReleaseIntakeClaw;
 import org.usfirst.frc.team2848.robot.commands.carriage.SecureCube;
+import org.usfirst.frc.team2848.robot.commands.drive.DriveToPoint;
 import org.usfirst.frc.team2848.robot.commands.drive.ShiftHigh;
 import org.usfirst.frc.team2848.robot.commands.drive.ShiftLow;
 import org.usfirst.frc.team2848.robot.commands.drive.VelocityDriveToDistance;
-import org.usfirst.frc.team2848.robot.commands.drive.VelocityTurnToAngle;
 import org.usfirst.frc.team2848.robot.commands.elevator.DownToBottom;
 import org.usfirst.frc.team2848.robot.commands.elevator.GoToHeight;
 import org.usfirst.frc.team2848.robot.commands.elevator.GoToHeightPortal;
@@ -23,7 +25,6 @@ import org.usfirst.frc.team2848.robot.commands.elevator.ManualUp;
 import org.usfirst.frc.team2848.robot.commands.hanger.DeployHanger;
 import org.usfirst.frc.team2848.robot.commands.hanger.PullUp;
 import org.usfirst.frc.team2848.robot.commands.intake.IntakeCube;
-import org.usfirst.frc.team2848.robot.commands.intake.IntakeWithStop;
 import org.usfirst.frc.team2848.robot.commands.intake.Pivot;
 import org.usfirst.frc.team2848.robot.commands.intake.PivotIn;
 import org.usfirst.frc.team2848.robot.commands.intake.RotateCube;
@@ -32,6 +33,8 @@ import org.usfirst.frc.team2848.robot.commands.intake.SpitOutFront;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -127,9 +130,9 @@ public class OI {
 //		x.whenPressed(new CenterLeftAutonFast());
 //		y.whenPressed(new CenterRightAutonFast());
 //		y.whenPressed(new CenterRightTwoCubeAuton());
-		y.whenPressed(new VelocityDriveToDistance(12, 20));
+		y.whenPressed(new NewRightSideScale());
 		b.whenPressed(new CenterLeftThreeCubeAutonULTRAFAST());
-		x.whenPressed(new VelocityTurnToAngle(8, 330, 1));
+		a.whenPressed(new CenterRightThreeCubeAutonULTRAFAST());
 //		a.whenPressed(new GoToHeight(800));
 //		b.whenPressed(new GoToHeight(1400));
 //		x.whileHeld(new GoToHeight(2000));
@@ -145,7 +148,7 @@ public class OI {
 		// bb14.whileHeld(new PullUp());
 		bb15.whileHeld(new DeployHanger());
 		// bb16.whenPressed(new DeployHanger());
-		bb16.whileHeld(new SpitOutFront());// pulse intake
+		bb16.whileHeld(new SpitOutFront());
 		bb18.whileHeld(new ManualUp());
 		bb19.whileHeld(new ManualDown());
 		bb110.whileHeld(new IntakeCube());
@@ -170,21 +173,18 @@ public class OI {
 
 		// nbbb1.whenPressed(new ); //warn
 		// nbbb2.whenPressed(new AutonReset()); //not wanted
-		nbbb3.whenPressed(new IntakeWithStop()); // not wanted
+		//nbbb3.whenPressed(new IntakeWithStop()); // not wanted
 		nbbb4.whileHeld(new RotateCube()); // rotate
-		nbbb5.whileHeld(new IntakeWithStop()); // SwitchSpitIntake
+		//nbbb5.whileHeld(new IntakeWithStop()); // SwitchSpitIntake
 		nbbb6.whenPressed(new Pivot()); // Pivot
 		nbbb7.whenPressed(new PivotIn()); // PivotIn
-		nbbb8.whenPressed(new ReleaseIntakeClaw());
-		nbbb9.whenPressed(new ClampIntakeClaw());
+		nbbb8.whenPressed(new ClawUp());
+		nbbb9.whenPressed(new ClawDown());
 		nbbb10.whileHeld(new SecureCube());
 		nbbb11.whileHeld(new SpitOutFront());
 		nbbb12.whileHeld(new ExtakeFrontSLOW());
 		nbbb13.whileHeld(new ExtakeFront());
-		nbbb14.whileHeld(new IntakeCube()); // ian changed from when pressed
-											// autonintake cube becuase no
-											// ultrasocin
-
+		nbbb14.whileHeld(new IntakeCube());
 	}
 
 	public double getLeftJoystick() {

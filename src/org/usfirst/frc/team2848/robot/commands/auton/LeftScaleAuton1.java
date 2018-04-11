@@ -1,6 +1,6 @@
 package org.usfirst.frc.team2848.robot.commands.auton;
 
-import org.usfirst.frc.team2848.robot.commands.carriage.ClampIntakeClaw;
+import org.usfirst.frc.team2848.robot.commands.carriage.ClawDown;
 import org.usfirst.frc.team2848.robot.commands.carriage.ExtakeFrontAuton;
 import org.usfirst.frc.team2848.robot.commands.drive.ShiftHigh;
 import org.usfirst.frc.team2848.robot.commands.drive.VelocityDriveToDistance;
@@ -10,6 +10,7 @@ import org.usfirst.frc.team2848.robot.commands.elevator.GoToHeight;
 import org.usfirst.frc.team2848.robot.commands.intake.IntakeCubeAuton;
 import org.usfirst.frc.team2848.robot.util.Wait;
 
+import AutonCommandGroups.WaitThenElevatorSCALE;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
@@ -19,7 +20,7 @@ public class LeftScaleAuton1 extends CommandGroup {
 
     public LeftScaleAuton1() {
     	addSequential(new ShiftHigh());
-		addSequential(new ClampIntakeClaw());
+		addSequential(new ClawDown());
 		addSequential(new VelocityDriveToDistance(6.75, 27));
 		
 		//Turn and spit first cube

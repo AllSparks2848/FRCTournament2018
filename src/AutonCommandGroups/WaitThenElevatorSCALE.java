@@ -1,4 +1,4 @@
-package org.usfirst.frc.team2848.robot.commands.auton;
+package AutonCommandGroups;
 
 import org.usfirst.frc.team2848.robot.commands.carriage.ExtakeFrontAuton;
 import org.usfirst.frc.team2848.robot.commands.elevator.GoToHeight;

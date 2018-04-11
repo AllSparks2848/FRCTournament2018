@@ -8,9 +8,9 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class ReleaseIntakeClaw extends Command {
+public class ClawUp extends Command {
 	boolean unclamped;
-    public ReleaseIntakeClaw() {
+    public ClawUp() {
     	requires(Robot.carriage);
     }
 

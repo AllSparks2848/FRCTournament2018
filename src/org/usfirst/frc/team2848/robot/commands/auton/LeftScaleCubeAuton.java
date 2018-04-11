@@ -1,6 +1,6 @@
 package org.usfirst.frc.team2848.robot.commands.auton;
 
-import org.usfirst.frc.team2848.robot.commands.carriage.ClampIntakeClaw;
+import org.usfirst.frc.team2848.robot.commands.carriage.ClawDown;
 import org.usfirst.frc.team2848.robot.commands.carriage.ExtakeLeft;
 import org.usfirst.frc.team2848.robot.commands.drive.DriveToPoint;
 import org.usfirst.frc.team2848.robot.commands.drive.ShiftHigh;
@@ -20,7 +20,7 @@ public class LeftScaleCubeAuton extends CommandGroup {
 
     public LeftScaleCubeAuton() {
     	addSequential(new ShiftHigh());
-		addSequential(new ClampIntakeClaw());
+		addSequential(new ClawDown());
 //		addSequential(new VelocityDriveToDistance(-6, -12.5));
 //		addSequential(new VelocityDriveToDistance(-7.5, -26.25)); //shop scale is 8 inches back (25.5)
 		addSequential(new VelocityDriveToDistance(-6.75, -26.25));

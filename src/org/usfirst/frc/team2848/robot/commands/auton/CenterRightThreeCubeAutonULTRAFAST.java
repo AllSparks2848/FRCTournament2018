@@ -8,6 +8,7 @@ import org.usfirst.frc.team2848.robot.commands.elevator.GoToHeight;
 import org.usfirst.frc.team2848.robot.commands.intake.IntakeCubeAuton;
 import org.usfirst.frc.team2848.robot.commands.intake.PivotIn;
 
+import AutonCommandGroups.WaitThenElevator;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
@@ -24,7 +25,7 @@ public class CenterRightThreeCubeAutonULTRAFAST extends CommandGroup {
 		addSequential(new VelocityTurnToAngle(8, 323, 1));
 
 		addParallel(new IntakeCubeAuton(2));
-		addSequential(new VelocityDriveToDistance(20, 2));
+		addSequential(new VelocityDriveToDistance(17, 2));
 
 		addSequential(new VelocityDriveToDistance(-20, 2.5));
 

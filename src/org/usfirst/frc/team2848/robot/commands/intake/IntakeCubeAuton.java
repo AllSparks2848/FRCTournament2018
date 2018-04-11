@@ -27,7 +27,7 @@ public class IntakeCubeAuton extends Command {
 			Robot.intake.leftIntake.set(0.8);
 			Robot.intake.rightIntake.set(-0.8);// intakes
 			Robot.carriage.intakeClawMotor.set(-0.8);
-			Robot.carriage.omniPlateMotor.set(-1.0);// output cube to robot's left
+			Robot.carriage.omniPlateMotor.set(1.0);// output cube to robot's left
 	}
 
 	protected boolean isFinished() {

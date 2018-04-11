@@ -1,6 +1,6 @@
 package org.usfirst.frc.team2848.robot.commands.auton;
 
-import org.usfirst.frc.team2848.robot.commands.carriage.ClampIntakeClaw;
+import org.usfirst.frc.team2848.robot.commands.carriage.ClawDown;
 import org.usfirst.frc.team2848.robot.commands.drive.ShiftHigh;
 import org.usfirst.frc.team2848.robot.commands.drive.VelocityDriveToDistance;
 import org.usfirst.frc.team2848.robot.commands.drive.VelocityTurnToAngle;
@@ -16,7 +16,7 @@ public class CenterLeftAuton extends CommandGroup {
 
     public CenterLeftAuton() {
     	addSequential(new ShiftHigh());
-		addSequential(new ClampIntakeClaw());
+		addSequential(new ClawDown());
         addSequential(new VelocityDriveToDistance(5, 3));
         addSequential(new VelocityTurnToAngle(2, 320, 2));
         addSequential(new VelocityDriveToDistance(5, 8));

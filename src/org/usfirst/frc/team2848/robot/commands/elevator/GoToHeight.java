@@ -2,7 +2,6 @@ package org.usfirst.frc.team2848.robot.commands.elevator;
 
 import org.usfirst.frc.team2848.robot.Robot;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -17,7 +16,6 @@ public class GoToHeight extends Command {
 	
 	public GoToHeight(double x) {// use target height as parameter
 		requires(Robot.elevator);
-		requires(Robot.pivotIntake);
 		
 		target = x;
 	}

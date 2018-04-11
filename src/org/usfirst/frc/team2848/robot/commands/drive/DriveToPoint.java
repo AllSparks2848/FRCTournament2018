@@ -2,6 +2,7 @@ package org.usfirst.frc.team2848.robot.commands.drive;
 
 import org.usfirst.frc.team2848.robot.Robot;
 import org.usfirst.frc.team2848.robot.util.PIDCalculate;
+import org.usfirst.frc.team2848.robot.util.PointNav;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
@@ -12,17 +13,15 @@ import edu.wpi.first.wpilibj.command.Command;
 public class DriveToPoint extends Command {
 	
 	double x, y;
+	
+	PointNav LoLa;
 
-    public DriveToPoint(double X, double Y) {
-    	this.x = X;
-    	this.y = Y;
+    public DriveToPoint(double[] X, double[] Y, double[] speeds, Command[] actions, int points) {
+    	LoLa = new PointNav(X, Y, speeds, points, actions, 100000);
     }
 
     protected void initialize() {
-    	Robot.drivetrain.arcPIDs = new PIDCalculate(4, 4, 0, 2);
-    	Robot.drivetrain.arcPIDs.setPriority(10);
-    	Robot.drivetrain.arcPIDs.setTargetXandY(0, 9);
-        Robot.drivetrain.arcPIDs.start();
+    	LoLa.start();
     } 
 
     protected void execute() {
@@ -30,13 +29,14 @@ public class DriveToPoint extends Command {
     }
 
     protected boolean isFinished() {
-        return Robot.drivetrain.arcPIDs.interrupt == 1;
+        return LoLa.interrupt == 1;
     }
 
     protected void end() {
-    	Robot.drivetrain.arcPIDs.interrupt();
+    	Robot.drivetrain.drivetrainSetPowerZero();
+    	LoLa.interrupt();
     	try {
-			Robot.drivetrain.arcPIDs.join();
+			LoLa.join();
 		} catch (InterruptedException e) { 
 			e.printStackTrace();
 		}
