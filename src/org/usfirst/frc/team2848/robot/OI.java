@@ -13,10 +13,8 @@ import org.usfirst.frc.team2848.robot.commands.carriage.ExtakeFrontSLOW;
 import org.usfirst.frc.team2848.robot.commands.carriage.ExtakeLeft;
 import org.usfirst.frc.team2848.robot.commands.carriage.ExtakeRight;
 import org.usfirst.frc.team2848.robot.commands.carriage.SecureCube;
-import org.usfirst.frc.team2848.robot.commands.drive.DriveToPoint;
 import org.usfirst.frc.team2848.robot.commands.drive.ShiftHigh;
 import org.usfirst.frc.team2848.robot.commands.drive.ShiftLow;
-import org.usfirst.frc.team2848.robot.commands.drive.VelocityDriveToDistance;
 import org.usfirst.frc.team2848.robot.commands.elevator.DownToBottom;
 import org.usfirst.frc.team2848.robot.commands.elevator.GoToHeight;
 import org.usfirst.frc.team2848.robot.commands.elevator.GoToHeightPortal;
@@ -33,8 +31,6 @@ import org.usfirst.frc.team2848.robot.commands.intake.SpitOutFront;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
  * This class is the glue that binds the controls on the physical operator

@@ -18,12 +18,12 @@ public class NewRightSideScale extends CommandGroup {
 
     public NewRightSideScale() {
     	
-    	double[] xp = {2, 3.5, 3.5, -0.5, 3};
-    	double[] yp = {4, 9.5, 2.5, 4, 3};
-    	double[] speeds = {0.65, 0.65, -0.65, 0.65, -0.65};
+    	double[] xp = {0, 5, 3.5, -0.5, 3};
+    	double[] yp = {25, 25, 2.5, 4, 3};
+    	double[] speeds = {0.6, 0, -0.65, 0.65, -0.65};
     	Command[] actions = {new PivotOut(), new GoToHeight(1000), new ExtakeAndDown(), new IntakeCubeAuton(3), new GoToHeight(1000)};
     	
-    	addSequential(new DriveToPoint(xp, yp, speeds, actions, 5));
+    	addSequential(new DriveToPoint(xp, yp, speeds, actions, 2));
 //    	
 //		addSequential(new ClawDown());
 //		addSequential(new VelocityDriveToDistance(6, 20));

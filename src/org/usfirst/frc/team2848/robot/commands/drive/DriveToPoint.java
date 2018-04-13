@@ -17,7 +17,7 @@ public class DriveToPoint extends Command {
 	PointNav LoLa;
 
     public DriveToPoint(double[] X, double[] Y, double[] speeds, Command[] actions, int points) {
-    	LoLa = new PointNav(X, Y, speeds, points, actions, 100000);
+    	LoLa = new PointNav(X, Y, speeds, points, actions, 50000);
     }
 
     protected void initialize() {
@@ -33,6 +33,9 @@ public class DriveToPoint extends Command {
     }
 
     protected void end() {
+    	
+    	System.out.println("Ending");
+    	
     	Robot.drivetrain.drivetrainSetPowerZero();
     	LoLa.interrupt();
     	try {

@@ -21,11 +21,11 @@ public class CenterLeftThreeCubeAutonULTRAFAST extends CommandGroup {
 		
 		// go to two
 		addParallel(new DownToBottom());
-		addSequential(new VelocityDriveToDistance(-20, 3.25));
-		addSequential(new VelocityTurnToAngle(8, 38, 1));
+		addSequential(new VelocityDriveToDistance(-20, 3.1));
+		addSequential(new VelocityTurnToAngle(8, 33, 1));
 
 		addParallel(new IntakeCubeAuton(2));
-		addSequential(new VelocityDriveToDistance(20, 2));
+		addSequential(new VelocityDriveToDistance(20, 1.9));
 
 		addSequential(new VelocityDriveToDistance(-20, 2.5));
 
@@ -36,8 +36,8 @@ public class CenterLeftThreeCubeAutonULTRAFAST extends CommandGroup {
 		addSequential(new ExtakeFrontAuton());
 // go to 3
 		addParallel(new DownToBottom());
-		addSequential(new VelocityDriveToDistance(-20, 2.75));
-		addSequential(new VelocityTurnToAngle(8, 36, 1));
+		addSequential(new VelocityDriveToDistance(-20, 2.5));
+		addSequential(new VelocityTurnToAngle(8, 33, 1));
 
 		addParallel(new IntakeCubeAuton(2.5));
 		addSequential(new VelocityDriveToDistance(20, 3.3));
