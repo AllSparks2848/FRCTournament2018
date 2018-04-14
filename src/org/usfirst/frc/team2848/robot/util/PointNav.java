@@ -165,7 +165,7 @@ public class PointNav extends Thread {
 
 		multiplierPID.reset();
 		multiplierPID.setOutputLimits(-1.0, 1.0);
-		multiplierPID.setP(0.05);
+		multiplierPID.setP(0.25);
 		multiplierPID.setI(0.0);
 		multiplierPID.setD(0.0);
 
@@ -248,19 +248,17 @@ public class PointNav extends Thread {
 
 					powerDiff = turnOffsetPID.getOutput(getDifferenceInAngleDegrees(this.targetAngle, this.headingAngle),0);
 
-					System.out.println("powerDiff: " + powerDiff);
-
 					Robot.drivetrain.left.set((constantPower + powerDiff) * multiplier);
 					Robot.drivetrain.right.set(-(constantPower - powerDiff) * multiplier);
 
 					if (this.currentIndex == this.pointNumber - 1 && 
-							(Math.abs(Math.cos(getDifferenceInAngleDegrees(this.targetAngle, this.headingAngle) / 180 * Math.PI) * Math.pow(Math.pow(this.deltaX, 2) + Math.pow(this.deltaY, 2), 0.5)) < 0.5) && 
+							(Math.abs(Math.cos(getDifferenceInAngleDegrees(this.targetAngle, this.headingAngle) / 180 * Math.PI) * Math.pow(Math.pow(this.deltaX, 2) + Math.pow(this.deltaY, 2), 0.5)) < 1.0) && 
 							(Math.abs(Math.sin(getDifferenceInAngleDegrees(this.targetAngle, this.headingAngle) / 180 * Math.PI) * Math.pow(Math.pow(this.deltaX, 2) + Math.pow(this.deltaY, 2), 0.5)) < 2)) {
 						this.interrupt = 1;
 						System.out.println("Interrupting");
 						this.interrupt();
 						return;
-					} else if ((Math.abs(Math.cos(getDifferenceInAngleDegrees(this.targetAngle, this.headingAngle) / 180 * Math.PI) * Math.pow(Math.pow(this.deltaX, 2) + Math.pow(this.deltaY, 2), 0.5)) < 0.5) && 
+					} else if ((Math.abs(Math.cos(getDifferenceInAngleDegrees(this.targetAngle, this.headingAngle) / 180 * Math.PI) * Math.pow(Math.pow(this.deltaX, 2) + Math.pow(this.deltaY, 2), 0.5)) < 1.0) && 
 							(Math.abs(Math.sin(getDifferenceInAngleDegrees(this.targetAngle, this.headingAngle) / 180 * Math.PI) * Math.pow(Math.pow(this.deltaX, 2) + Math.pow(this.deltaY, 2), 0.5)) < 2)) {
 						turnOffsetPID.reset();
 						multiplierPID.reset();

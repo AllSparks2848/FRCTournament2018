@@ -41,6 +41,7 @@ public class IntakeCubeAuton extends Command {
 		Robot.intake.leftIntake.set(0.0);
 		Robot.intake.rightIntake.set(0.0);// stops motors
 		Robot.carriage.intakeClaw.set(DoubleSolenoid.Value.kForward);
+		
 	}
 
 	protected void interrupted() {

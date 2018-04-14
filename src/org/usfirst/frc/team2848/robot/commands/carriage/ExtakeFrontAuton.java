@@ -27,7 +27,7 @@ public class ExtakeFrontAuton extends Command {
 	}
 
 	protected boolean isFinished() {
-		return timer.get() > 0.1;
+		return timer.get() > 0.5;
 	}
 
 	protected void end() {

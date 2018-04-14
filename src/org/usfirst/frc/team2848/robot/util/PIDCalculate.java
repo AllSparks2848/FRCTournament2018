@@ -210,7 +210,7 @@ public class PIDCalculate extends Thread {
 			multiplierPID.reset();
 			multiplierPID.setOutputLimits(-1.0, 1.0);
 			
-			multiplierPID.setP(0.25); // .4
+			multiplierPID.setP(0.3); // .4
 			multiplierPID.setI(0.0);
 			multiplierPID.setD(0.0); // .5
 			
@@ -293,7 +293,7 @@ public class PIDCalculate extends Thread {
 					if(t.get() > timerTarget){
 						displacement = getDifferenceInAngleDegrees(Robot.drivetrain.navX.getYaw(), this.target);
 						
-						if(Math.abs(displacement - previousDisplacement) < 0.7) {
+						if(Math.abs(displacement - previousDisplacement) < 0.2) {
 							 System.out.println("displacement: " + Math.abs(displacement - previousDisplacement));
 							 this.interrupt = 1;
 							 System.out.println("Interrupting");

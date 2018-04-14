@@ -29,26 +29,23 @@ public class CenterLeftThreeCubeAutonULTRAFAST extends CommandGroup {
 
 		addSequential(new VelocityDriveToDistance(-20, 2.5));
 
-		addSequential(new VelocityTurnToAngle(8, 350, 1));
+		addSequential(new VelocityTurnToAngle(8, 343, 1));
 		addParallel(new WaitThenElevator(.1));
 		addSequential(new VelocityDriveToDistance(20, 4.25));
-
-		addSequential(new ExtakeFrontAuton());
 // go to 3
 		addParallel(new DownToBottom());
 		addSequential(new VelocityDriveToDistance(-20, 2.5));
 		addSequential(new VelocityTurnToAngle(8, 33, 1));
 
 		addParallel(new IntakeCubeAuton(2.5));
-		addSequential(new VelocityDriveToDistance(20, 3.3));
+		addSequential(new VelocityDriveToDistance(20, 3.1));
 
 		addSequential(new VelocityDriveToDistance(-20, 2));
 
 		addSequential(new VelocityTurnToAngle(8, 348, 1));
 		addParallel(new WaitThenElevator(.05));
 		addSequential(new VelocityDriveToDistance(20, 3));
-
-		addSequential(new ExtakeFrontAuton());
+		
 		// addSequential(new VelocityDriveToDistance(-5, 6));
 		//
 		// addParallel(new ClampIntakeClaw());

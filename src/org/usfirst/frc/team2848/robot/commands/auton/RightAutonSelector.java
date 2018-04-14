@@ -35,13 +35,13 @@ public class RightAutonSelector extends Command {
 			runningAuton = new ForwardAuton();
 			break;
 		case "LRL":
-			runningAuton = new RightScaleAuton();
+			runningAuton = new RightScaleCross();
 			break;
 		case "RLR":
 			runningAuton = new ForwardAuton();
 			break;
 		case "RRR":
-			runningAuton = new RightScaleAuton();
+			runningAuton = new RightScaleCross();
 			break;
 		default:
 			runningAuton = new ForwardAuton();

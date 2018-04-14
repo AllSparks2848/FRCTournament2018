@@ -36,7 +36,7 @@ public class LeftAutonSelector extends Command {
 		case "LLL":
 //			runningAuton = new LeftScaleAuton();
 //			runningAuton = new LeftScaleAuton();
-			runningAuton = new NewLeftSideScale();
+			runningAuton = new LeftSidePointBased();
 			System.out.println("RUNNING LEFT SCALE AUTON");
 			break;
 		case "LRL":
@@ -49,7 +49,7 @@ public class LeftAutonSelector extends Command {
 		case "RLR":
 //			runningAuton = new LeftScaleAuton();
 //			runningAuton = new LeftScaleAuton();
-			runningAuton = new NewLeftSideScale();
+			runningAuton = new LeftSidePointBased();
 			System.out.println("RUNNING LEFT SCALE AUTON");
 			break;
 		case "RRR":

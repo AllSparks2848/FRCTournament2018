@@ -21,22 +21,21 @@ public class CenterRightThreeCubeAutonULTRAFAST extends CommandGroup {
 		
 		// go to two
 		addParallel(new DownToBottom());
-		addSequential(new VelocityDriveToDistance(-20, 3));
+		addSequential(new VelocityDriveToDistance(-20, 3.25));
 		addSequential(new VelocityTurnToAngle(8, 323, 1));
 
 		addParallel(new IntakeCubeAuton(2));
-		addSequential(new VelocityDriveToDistance(17, 2));
+		addSequential(new VelocityDriveToDistance(17, 2.5));
 
-		addSequential(new VelocityDriveToDistance(-20, 2.5));
+		addSequential(new VelocityDriveToDistance(-20, 2.75));
 
-		addSequential(new VelocityTurnToAngle(8, 10, 1));
-		addParallel(new WaitThenElevator(.5));
-		addSequential(new VelocityDriveToDistance(20, 5));
-
-		addSequential(new ExtakeFrontAuton());
+		addSequential(new VelocityTurnToAngle(8, 5, 1));
+		addParallel(new WaitThenElevator(.1));
+		addSequential(new VelocityDriveToDistance(20, 4.5));
+		
 // go to 3
 		addParallel(new DownToBottom());
-		addSequential(new VelocityDriveToDistance(-20, 3));
+		addSequential(new VelocityDriveToDistance(-20, 2.75));
 		addSequential(new VelocityTurnToAngle(8, 320, 1));
 
 		addParallel(new IntakeCubeAuton(2.5));
@@ -46,9 +45,8 @@ public class CenterRightThreeCubeAutonULTRAFAST extends CommandGroup {
 
 		addSequential(new VelocityTurnToAngle(8, 12, 1));	
 		addParallel(new WaitThenElevator(.2));
-		addSequential(new VelocityDriveToDistance(20, 3.5));
+		addSequential(new VelocityDriveToDistance(20, 2));
 
-		addSequential(new ExtakeFrontAuton());
 		// addSequential(new VelocityDriveToDistance(-5, 6));
 		//
 		// addParallel(new ClampIntakeClaw());
