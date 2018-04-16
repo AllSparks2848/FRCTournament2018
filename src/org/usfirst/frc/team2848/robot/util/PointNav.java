@@ -4,8 +4,6 @@ import java.util.ArrayList;
 
 import org.usfirst.frc.team2848.robot.Robot;
 
-import AutonCommandGroups.ExtakeAndDown;
-import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -69,7 +67,7 @@ public class PointNav extends Thread {
 		leftPos = Robot.drivetrain.leftEncoder.getDistance();
 		rightPos = Robot.drivetrain.rightEncoder.getDistance();
 
-		yaw = Robot.drivetrain.navX.getYaw();
+		yaw = Robot.drivetrain.navX.getFusedHeading();
 
 		yaw = 90 - yaw;
 		if (yaw < 0) {
@@ -119,6 +117,8 @@ public class PointNav extends Thread {
 
 		this.deltaX = this.target_x[currentIndex] - this.current_x;
 		this.deltaY = this.target_y[currentIndex] - this.current_y;
+		
+//		System.out.println("TargetX: " + this.target_x[currentIndex] + " TargetY: " + this.target_y[currentIndex]);
 
 		if (this.deltaY == 0) {
 			if (this.deltaX > 0) {
@@ -202,38 +202,43 @@ public class PointNav extends Thread {
 
 				if (constantPower == 0) {
 					
+					multiplierPID.setOutputLimits(-1.0, 1.0);
+					multiplierPID.setP(0.04);
+					multiplierPID.setI(0.0);
+					multiplierPID.setD(0.0);
+					
 					targetYawAngle = 90 - this.targetAngle;
 					if(targetYawAngle < 0) {
 						targetYawAngle += 360;
 					}
 
 					
-					multiplier = multiplierPID.getOutput(getDifferenceInAngleDegrees(Robot.drivetrain.navX.getYaw(), targetYawAngle), 0);
+					multiplier = multiplierPID.getOutput(getDifferenceInAngleDegrees(Robot.drivetrain.navX.getFusedHeading(), targetYawAngle), 0);
 
 					Robot.drivetrain.left.set(multiplier);
 					Robot.drivetrain.right.set(multiplier);
 
 					if (t.get() > timerTarget) {
 						
-						displacement = getDifferenceInAngleDegrees(Robot.drivetrain.navX.getYaw(), targetYawAngle);
+						displacement = getDifferenceInAngleDegrees(Robot.drivetrain.navX.getFusedHeading(), targetYawAngle);
 
-//						if (this.currentIndex == this.pointNumber - 1 && Math.abs(displacement - previousDisplacement) < 0.7) {
-//							this.interrupt = 1;
-//							System.out.println("Interrupting");
-//							this.interrupt();
-//							return;
-//						} else if(Math.abs(displacement - previousDisplacement) < 0.7) {
-//							multiplierPID.reset();
-//							turnOffsetPID.reset();
-//							this.currentIndex += 1;
-//							constantPower = this.constPowers[this.currentIndex];
-//							if(constantPower == 0) {
-//								this.t.reset();
-//								this.t.start();
-//							}
-//							this.actions[this.currentIndex].start();
-//							return;
-//						}
+						if (this.currentIndex == this.pointNumber - 1 && Math.abs(displacement - previousDisplacement) < 0.7) {
+							this.interrupt = 1;
+							System.out.println("Interrupting");
+							this.interrupt();
+							return;
+						} else if(Math.abs(displacement - previousDisplacement) < 0.7) {
+							multiplierPID.reset();
+							turnOffsetPID.reset();
+							this.currentIndex += 1;
+							constantPower = this.constPowers[this.currentIndex];
+							if(constantPower == 0) {
+								this.t.reset();
+								this.t.start();
+							}
+							this.actions[this.currentIndex].start();
+							return;
+						}
 
 						previousDisplacement = displacement;
 
@@ -242,11 +247,19 @@ public class PointNav extends Thread {
 
 
 				} else {
+					multiplierPID.setOutputLimits(-1.0, 1.0);
+					
+					multiplierPID.setP(0.3); // .4
+					multiplierPID.setI(0.0);
+					multiplierPID.setD(0.0); // .5
+					
 					if (this.currentIndex == this.pointNumber - 1) {
 						multiplier = multiplierPID.getOutput(-(Math.cos(getDifferenceInAngleDegrees(this.targetAngle, this.headingAngle) / 180 * Math.PI) * Math.pow(Math.pow(this.deltaX, 2) + Math.pow(this.deltaY, 2), 0.5)), 0);
 					}
 
 					powerDiff = turnOffsetPID.getOutput(getDifferenceInAngleDegrees(this.targetAngle, this.headingAngle),0);
+
+//					System.out.println("Targety: " + this.targetAngle);
 
 					Robot.drivetrain.left.set((constantPower + powerDiff) * multiplier);
 					Robot.drivetrain.right.set(-(constantPower - powerDiff) * multiplier);

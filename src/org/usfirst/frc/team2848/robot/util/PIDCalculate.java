@@ -84,7 +84,7 @@ public class PIDCalculate extends Thread {
 		leftSpeed = ((leftPos - lastLeftPos) / period) * 1000000000;
 		rightSpeed = ((rightPos - lastRightPos) / period) * 1000000000;
 
-		yaw = Robot.drivetrain.navX.getYaw();
+		yaw = Robot.drivetrain.navX.getFusedHeading();
 
 		yaw = 90 - yaw;
 		if (yaw < 0) {
@@ -277,7 +277,7 @@ public class PIDCalculate extends Thread {
 					integratePosition();
 
 					timestamp_ = System.nanoTime();
-					multiplier = multiplierPID.getOutput(getDifferenceInAngleDegrees(Robot.drivetrain.navX.getYaw(), this.target), 0);
+					multiplier = multiplierPID.getOutput(getDifferenceInAngleDegrees(Robot.drivetrain.navX.getFusedHeading(), this.target), 0);
 
 					// double leftPower =
 					// Robot.drivetrain.leftPIDDrive.getOutput(this.leftSpeed,
@@ -291,7 +291,7 @@ public class PIDCalculate extends Thread {
 					
 
 					if(t.get() > timerTarget){
-						displacement = getDifferenceInAngleDegrees(Robot.drivetrain.navX.getYaw(), this.target);
+						displacement = getDifferenceInAngleDegrees(Robot.drivetrain.navX.getFusedHeading(), this.target);
 						
 						if(Math.abs(displacement - previousDisplacement) < 0.2) {
 							 System.out.println("displacement: " + Math.abs(displacement - previousDisplacement));

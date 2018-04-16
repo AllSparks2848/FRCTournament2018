@@ -4,6 +4,7 @@ import org.usfirst.frc.team2848.robot.Robot;
 import org.usfirst.frc.team2848.robot.RobotMap;
 import org.usfirst.frc.team2848.robot.util.MiniPID;
 import org.usfirst.frc.team2848.robot.util.PIDCalculate;
+import org.usfirst.frc.team2848.robot.util.PointNav;
 
 import com.kauailabs.navx.frc.AHRS;
 
@@ -70,6 +71,10 @@ public class DriveTrain extends PIDSubsystem {
 	
 	public MiniPID leftPIDDrive = new MiniPID(kP, kI, kD);
 	public MiniPID rightPIDDrive = new MiniPID(kP, kI, kD);
+	
+	public PointNav LoLa;
+	public double X_Point;
+	public double Y_Point;
 
 	// DriveTrain and Gyro PIDControllers
 	public PIDController driveController = new PIDController(driveKp, driveKi, driveKd, leftEncoder, leftDrive1);

@@ -1,19 +1,20 @@
 package org.usfirst.frc.team2848.robot;
 
 import org.usfirst.frc.team2848.robot.commands.auton.AutonReset;
+import org.usfirst.frc.team2848.robot.commands.auton.CenterLeftThreeCubeAutonULTRAFAST;
 import org.usfirst.frc.team2848.robot.commands.auton.CenterRightThreeCubeAutonULTRAFAST;
-import org.usfirst.frc.team2848.robot.commands.auton.LeftScaleRightSwitchAuton;
-import org.usfirst.frc.team2848.robot.commands.auton.RightScaleCross;
 import org.usfirst.frc.team2848.robot.commands.auton.RightSidePointBased;
 import org.usfirst.frc.team2848.robot.commands.carriage.ClawDown;
 import org.usfirst.frc.team2848.robot.commands.carriage.ClawUp;
 import org.usfirst.frc.team2848.robot.commands.carriage.ExtakeFront;
+import org.usfirst.frc.team2848.robot.commands.carriage.ExtakeFrontAuton;
 import org.usfirst.frc.team2848.robot.commands.carriage.ExtakeFrontSLOW;
 import org.usfirst.frc.team2848.robot.commands.carriage.ExtakeLeft;
 import org.usfirst.frc.team2848.robot.commands.carriage.ExtakeRight;
 import org.usfirst.frc.team2848.robot.commands.carriage.SecureCube;
 import org.usfirst.frc.team2848.robot.commands.drive.ShiftHigh;
 import org.usfirst.frc.team2848.robot.commands.drive.ShiftLow;
+import org.usfirst.frc.team2848.robot.commands.drive.VelocityTurnToAngle;
 import org.usfirst.frc.team2848.robot.commands.elevator.DownToBottom;
 import org.usfirst.frc.team2848.robot.commands.elevator.GoToHeight;
 import org.usfirst.frc.team2848.robot.commands.elevator.GoToHeightPortal;
@@ -107,7 +108,7 @@ public class OI {
 //		 back.whenPressed(new LeftScaleSwitchAuton());
 //		 back.whenPressed(new ForwardAndCross());
 //		back.whenPressed(new LeftSwitchRightScaleAuton());
-		back.whenPressed(new LeftScaleRightSwitchAuton());
+//		back.whenPressed(new LeftScaleRightSwitchAuton());
 //		back.whenPressed(new RightScaleRightSwitchAuton());
 		// back.whenPressed(new GyroTurn(-60));
 		// back.whenPressed(new AutonSetup());
@@ -125,15 +126,15 @@ public class OI {
 //		x.whenPressed(new CenterLeftAutonFast());
 //		y.whenPressed(new CenterRightAutonFast());
 //		y.whenPressed(new CenterRightTwoCubeAuton());
-		y.whenPressed(new RightScaleCross());
-		b.whenPressed(new RightSidePointBased());
+		y.whenPressed(new RightSidePointBased());
+		b.whenPressed(new CenterLeftThreeCubeAutonULTRAFAST());
 		a.whenPressed(new CenterRightThreeCubeAutonULTRAFAST());
 //		a.whenPressed(new GoToHeight(800));
 //		b.whenPressed(new GoToHeight(1400));
-//		x.whenPressed(new VelocityTurnToAngle(4, 180, 1));
+		x.whenPressed(new VelocityTurnToAngle(4, 270, 1));
 //		y.whenPressed(new GoToHeight(2500));
 //		a.whenPressed(new LeftScaleAuton1());
-		back.whileHeld(new IntakeCube());
+		back.whenPressed(new ExtakeFrontAuton());
 //		a.whenPressed(new NewLeftSideScale());
 
 		// teleop button box commands

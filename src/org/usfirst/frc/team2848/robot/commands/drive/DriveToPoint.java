@@ -12,16 +12,23 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class DriveToPoint extends Command {
 	
-	double x, y;
-	
-	PointNav LoLa;
+	double[] X;
+	double[] Y;
+	double[] speeds;
+	Command[] actions;
+	int points;
 
     public DriveToPoint(double[] X, double[] Y, double[] speeds, Command[] actions, int points) {
-    	LoLa = new PointNav(X, Y, speeds, points, actions, 50000);
+    	this.X = X;
+    	this.Y = Y;
+    	this.speeds = speeds;
+    	this.actions = actions;
+    	this.points = points;
     }
 
     protected void initialize() {
-    	LoLa.start();
+    	Robot.drivetrain.LoLa = new PointNav(this.X, this.Y, this.speeds, this.points, this.actions, 50000);
+    	Robot.drivetrain.LoLa.start();
     } 
 
     protected void execute() {
@@ -29,20 +36,24 @@ public class DriveToPoint extends Command {
     }
 
     protected boolean isFinished() {
-        return LoLa.interrupt == 1;
+        return Robot.drivetrain.LoLa.interrupt == 1;
     }
 
     protected void end() {
     	
     	System.out.println("Ending");
+    	Robot.drivetrain.X_Point = Robot.drivetrain.LoLa.current_x;
+    	Robot.drivetrain.Y_Point = Robot.drivetrain.LoLa.current_y;
     	
     	Robot.drivetrain.drivetrainSetPowerZero();
-    	LoLa.interrupt();
+    	Robot.drivetrain.LoLa.interrupt();
     	try {
-			LoLa.join();
+			Robot.drivetrain.LoLa.join();
 		} catch (InterruptedException e) { 
 			e.printStackTrace();
 		}
+    	
+    	Robot.drivetrain.LoLa = null;
     }
 
     protected void interrupted() {
