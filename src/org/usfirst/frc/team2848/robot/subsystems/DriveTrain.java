@@ -73,8 +73,8 @@ public class DriveTrain extends PIDSubsystem {
 	public MiniPID rightPIDDrive = new MiniPID(kP, kI, kD);
 	
 	public PointNav LoLa;
-	public double X_Point;
-	public double Y_Point;
+	public double X_Point = 0;
+	public double Y_Point = 0;
 
 	// DriveTrain and Gyro PIDControllers
 	public PIDController driveController = new PIDController(driveKp, driveKi, driveKd, leftEncoder, leftDrive1);

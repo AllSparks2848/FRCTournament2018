@@ -28,6 +28,9 @@ public class DriveToPoint extends Command {
 
     protected void initialize() {
     	Robot.drivetrain.LoLa = new PointNav(this.X, this.Y, this.speeds, this.points, this.actions, 50000);
+    	Robot.drivetrain.LoLa.current_x = Robot.drivetrain.X_Point;
+    	Robot.drivetrain.LoLa.current_y = Robot.drivetrain.Y_Point;
+    	
     	Robot.drivetrain.LoLa.start();
     } 
 

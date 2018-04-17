@@ -15,15 +15,15 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class CenterRightAutonFast extends CommandGroup {
 
     public CenterRightAutonFast() {
-    	double[] xp = {0, 3};
-    	double[] yp = {1, 8.0};
-    	double[] speeds = {0.7, 0.75};
-    	Command[] actions = {new DoNothing(), new DoNothing()};
+    	double[] xp = {2.5};
+    	double[] yp = {8};
+    	double[] speeds = {0.7};
+    	Command[] actions = {new DoNothing()};
     	
     	
     	addSequential(new ShiftHigh());
 		addParallel(new ClawDown());
 		addParallel(new WaitThenElevator(1));
-		addSequential(new DriveToPoint(xp, yp, speeds, actions, 2));
+		addSequential(new DriveToPoint(xp, yp, speeds, actions, 1));
     }
 }

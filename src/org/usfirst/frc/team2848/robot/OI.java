@@ -2,7 +2,7 @@ package org.usfirst.frc.team2848.robot;
 
 import org.usfirst.frc.team2848.robot.commands.auton.AutonReset;
 import org.usfirst.frc.team2848.robot.commands.auton.CenterLeftThreeCubeAutonULTRAFAST;
-import org.usfirst.frc.team2848.robot.commands.auton.CenterRightThreeCubeAutonULTRAFAST;
+import org.usfirst.frc.team2848.robot.commands.auton.CenterRightAutonFast;
 import org.usfirst.frc.team2848.robot.commands.auton.RightSidePointBased;
 import org.usfirst.frc.team2848.robot.commands.carriage.ClawDown;
 import org.usfirst.frc.team2848.robot.commands.carriage.ClawUp;
@@ -128,7 +128,7 @@ public class OI {
 //		y.whenPressed(new CenterRightTwoCubeAuton());
 		y.whenPressed(new RightSidePointBased());
 		b.whenPressed(new CenterLeftThreeCubeAutonULTRAFAST());
-		a.whenPressed(new CenterRightThreeCubeAutonULTRAFAST());
+		a.whenPressed(new CenterRightAutonFast());
 //		a.whenPressed(new GoToHeight(800));
 //		b.whenPressed(new GoToHeight(1400));
 		x.whenPressed(new VelocityTurnToAngle(4, 270, 1));
