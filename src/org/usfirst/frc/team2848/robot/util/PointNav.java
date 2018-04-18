@@ -267,7 +267,7 @@ public class PointNav extends Thread {
 
 					powerDiff = turnOffsetPID.getOutput(getDifferenceInAngleDegrees(this.targetAngle, this.headingAngle), 0);
 					
-					System.out.println("Target: " + this.targetAngle + " Adj: " + Math.cos(getDifferenceInAngleDegrees(this.targetAngle, this.headingAngle) / 180 * Math.PI) * Math.abs(Math.pow(Math.pow(this.deltaX, 2) + Math.pow(this.deltaY, 2), 0.5)));
+//					System.out.println("Target: " + this.targetAngle + " Adj: " + Math.cos(getDifferenceInAngleDegrees(this.targetAngle, this.headingAngle) / 180 * Math.PI) * Math.abs(Math.pow(Math.pow(this.deltaX, 2) + Math.pow(this.deltaY, 2), 0.5)));
 					
 					if (Math.cos(getDifferenceInAngleDegrees(this.targetAngle, this.headingAngle) / 180 * Math.PI) * Math.abs(Math.pow(Math.pow(this.deltaX, 2) + Math.pow(this.deltaY, 2), 0.5)) < 0) {
 //						System.out.println("constPower: " + constantPower);
