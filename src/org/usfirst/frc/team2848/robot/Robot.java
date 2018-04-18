@@ -100,6 +100,8 @@ public class Robot extends IterativeRobot {
 			}
 		}
 		
+		drivetrain.X_Point = 0;
+		drivetrain.Y_Point = 0;
 		Robot.drivetrain.LoLa = null;
 		
 		Robot.hanger.lockHangerDown();

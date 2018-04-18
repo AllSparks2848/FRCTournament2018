@@ -15,10 +15,10 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-public class RightScaleCross extends CommandGroup {
+public class LeftScaleCross extends CommandGroup {
 	
-    public RightScaleCross() {
-    	double[] xp = {0, -4, -15.5, -20.5};
+    public LeftScaleCross() {
+    	double[] xp = {0, 4, 15.5, 20.5};
     	double[] yp = {14, 19, 19, 26.5};
     	double[] speeds = {0.7, 0.7, 0.7, 0.65};
     	Command[] actions = {new PivotOut(),  new DoNothing(),  new DoNothing(),  new DoNothing()};
@@ -26,7 +26,7 @@ public class RightScaleCross extends CommandGroup {
     	addSequential(new ShiftHigh());
 		addParallel(new ClawDown());
     	addSequential(new DriveToPoint(xp, yp, speeds, actions, 4));
-    	addSequential(new VelocityTurnToAngle(4, 90, 1));
+    	addSequential(new VelocityTurnToAngle(4, 270, 1));
     	addSequential(new GoToHeight(2400));
     	addSequential(new Wait(0.5));
 		addSequential(new ExtakeFront(0.5, 1.0));

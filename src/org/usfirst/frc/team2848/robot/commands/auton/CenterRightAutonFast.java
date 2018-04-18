@@ -16,14 +16,14 @@ public class CenterRightAutonFast extends CommandGroup {
 
     public CenterRightAutonFast() {
     	double[] xp = {2.5};
-    	double[] yp = {8};
+    	double[] yp = {8.5};
     	double[] speeds = {0.7};
     	Command[] actions = {new DoNothing()};
     	
     	
     	addSequential(new ShiftHigh());
 		addParallel(new ClawDown());
-		addParallel(new WaitThenElevator(1));
+		addParallel(new WaitThenElevator(1, 1000, 0.7));
 		addSequential(new DriveToPoint(xp, yp, speeds, actions, 1));
     }
 }

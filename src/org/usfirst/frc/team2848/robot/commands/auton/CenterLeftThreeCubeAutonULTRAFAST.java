@@ -1,13 +1,10 @@
 package org.usfirst.frc.team2848.robot.commands.auton;
 
-import org.usfirst.frc.team2848.robot.commands.carriage.ExtakeFrontAuton;
 import org.usfirst.frc.team2848.robot.commands.drive.VelocityDriveToDistance;
 import org.usfirst.frc.team2848.robot.commands.drive.VelocityTurnToAngle;
-import org.usfirst.frc.team2848.robot.commands.elevator.DownToBottom;
-import org.usfirst.frc.team2848.robot.commands.elevator.GoToHeight;
 import org.usfirst.frc.team2848.robot.commands.intake.IntakeCubeAuton;
-import org.usfirst.frc.team2848.robot.commands.intake.PivotIn;
 
+import AutonCommandGroups.WaitThenDown;
 import AutonCommandGroups.WaitThenElevator;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
@@ -20,7 +17,7 @@ public class CenterLeftThreeCubeAutonULTRAFAST extends CommandGroup {
 		addSequential(new CenterLeftAutonFast());
 		
 		// go to two
-		addParallel(new DownToBottom());
+		addParallel(new WaitThenDown(0));
 		addSequential(new VelocityDriveToDistance(-20, 3.1));
 		addSequential(new VelocityTurnToAngle(8, 33, 1));
 
@@ -30,10 +27,10 @@ public class CenterLeftThreeCubeAutonULTRAFAST extends CommandGroup {
 		addSequential(new VelocityDriveToDistance(-20, 2.5));
 
 		addSequential(new VelocityTurnToAngle(8, 343, 1));
-		addParallel(new WaitThenElevator(.1));
+		addParallel(new WaitThenElevator(.1, 1000, 0.7));
 		addSequential(new VelocityDriveToDistance(20, 4.25));
 // go to 3
-		addParallel(new DownToBottom());
+		addParallel(new WaitThenDown(0));
 		addSequential(new VelocityDriveToDistance(-20, 2.5));
 		addSequential(new VelocityTurnToAngle(8, 33, 1));
 
@@ -43,7 +40,7 @@ public class CenterLeftThreeCubeAutonULTRAFAST extends CommandGroup {
 		addSequential(new VelocityDriveToDistance(-20, 2));
 
 		addSequential(new VelocityTurnToAngle(8, 348, 1));
-		addParallel(new WaitThenElevator(.05));
+		addParallel(new WaitThenElevator(.05, 1000, 0.7));
 		addSequential(new VelocityDriveToDistance(20, 3));
 		
 		// addSequential(new VelocityDriveToDistance(-5, 6));

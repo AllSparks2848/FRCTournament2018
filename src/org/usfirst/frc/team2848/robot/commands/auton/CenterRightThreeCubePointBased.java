@@ -1,15 +1,8 @@
 package org.usfirst.frc.team2848.robot.commands.auton;
 
-import org.usfirst.frc.team2848.robot.commands.carriage.ExtakeFrontAuton;
 import org.usfirst.frc.team2848.robot.commands.drive.DriveToPoint;
-import org.usfirst.frc.team2848.robot.commands.drive.VelocityDriveToDistance;
-import org.usfirst.frc.team2848.robot.commands.drive.VelocityTurnToAngle;
 import org.usfirst.frc.team2848.robot.commands.elevator.DownToBottom;
-import org.usfirst.frc.team2848.robot.commands.elevator.GoToHeight;
-import org.usfirst.frc.team2848.robot.commands.intake.IntakeCubeAuton;
-import org.usfirst.frc.team2848.robot.commands.intake.PivotIn;
 
-import AutonCommandGroups.WaitThenElevator;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 

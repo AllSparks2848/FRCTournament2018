@@ -234,8 +234,8 @@ public class PIDCalculate extends Thread {
 					if(t.get() > timerTarget){
 						displacement = Math.abs(Robot.drivetrain.leftEncoder.getDistance() - this.target);
 						
-						if(Math.abs(displacement - previousDisplacement) < 0.05) {
-							 System.out.println("displacement: " + Math.abs(displacement - previousDisplacement));
+						if(Math.abs(displacement - previousDisplacement) < 0.03) {
+//							 System.out.println("displacement: " + Math.abs(displacement - previousDisplacement));
 							 this.interrupt = 1;
 							 System.out.println("Interrupting");
 							 this.interrupt();
@@ -294,7 +294,7 @@ public class PIDCalculate extends Thread {
 						displacement = getDifferenceInAngleDegrees(Robot.drivetrain.navX.getFusedHeading(), this.target);
 						
 						if(Math.abs(displacement - previousDisplacement) < 0.2) {
-							 System.out.println("displacement: " + Math.abs(displacement - previousDisplacement));
+//							 System.out.println("displacement: " + Math.abs(displacement - previousDisplacement));
 							 this.interrupt = 1;
 							 System.out.println("Interrupting");
 							 this.interrupt();

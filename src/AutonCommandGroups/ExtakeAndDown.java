@@ -1,8 +1,7 @@
 package AutonCommandGroups;
 
-import org.usfirst.frc.team2848.robot.commands.carriage.ExtakeFrontAuton;
+import org.usfirst.frc.team2848.robot.commands.carriage.ExtakeFront;
 import org.usfirst.frc.team2848.robot.commands.elevator.DownToBottom;
-import org.usfirst.frc.team2848.robot.commands.intake.PivotIn;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
@@ -11,8 +10,8 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  */
 public class ExtakeAndDown extends CommandGroup {
 
-    public ExtakeAndDown() {
-    	addParallel(new ExtakeFrontAuton());
+    public ExtakeAndDown(double speed) {
+    	addParallel(new ExtakeFront(0.3, 0.5));
     	addSequential(new DownToBottom());
     	
         // Add Commands here:

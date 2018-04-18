@@ -1,20 +1,18 @@
 package org.usfirst.frc.team2848.robot;
 
 import org.usfirst.frc.team2848.robot.commands.auton.AutonReset;
-import org.usfirst.frc.team2848.robot.commands.auton.CenterLeftThreeCubeAutonULTRAFAST;
-import org.usfirst.frc.team2848.robot.commands.auton.CenterRightAutonFast;
+import org.usfirst.frc.team2848.robot.commands.auton.LeftScaleCross;
+import org.usfirst.frc.team2848.robot.commands.auton.LeftSidePointBased;
+import org.usfirst.frc.team2848.robot.commands.auton.RightScaleCross;
 import org.usfirst.frc.team2848.robot.commands.auton.RightSidePointBased;
 import org.usfirst.frc.team2848.robot.commands.carriage.ClawDown;
 import org.usfirst.frc.team2848.robot.commands.carriage.ClawUp;
 import org.usfirst.frc.team2848.robot.commands.carriage.ExtakeFront;
-import org.usfirst.frc.team2848.robot.commands.carriage.ExtakeFrontAuton;
-import org.usfirst.frc.team2848.robot.commands.carriage.ExtakeFrontSLOW;
 import org.usfirst.frc.team2848.robot.commands.carriage.ExtakeLeft;
 import org.usfirst.frc.team2848.robot.commands.carriage.ExtakeRight;
 import org.usfirst.frc.team2848.robot.commands.carriage.SecureCube;
 import org.usfirst.frc.team2848.robot.commands.drive.ShiftHigh;
 import org.usfirst.frc.team2848.robot.commands.drive.ShiftLow;
-import org.usfirst.frc.team2848.robot.commands.drive.VelocityTurnToAngle;
 import org.usfirst.frc.team2848.robot.commands.elevator.DownToBottom;
 import org.usfirst.frc.team2848.robot.commands.elevator.GoToHeight;
 import org.usfirst.frc.team2848.robot.commands.elevator.GoToHeightPortal;
@@ -127,14 +125,14 @@ public class OI {
 //		y.whenPressed(new CenterRightAutonFast());
 //		y.whenPressed(new CenterRightTwoCubeAuton());
 		y.whenPressed(new RightSidePointBased());
-		b.whenPressed(new CenterLeftThreeCubeAutonULTRAFAST());
-		a.whenPressed(new CenterRightAutonFast());
+		b.whenPressed(new LeftSidePointBased());
+		a.whenPressed(new LeftScaleCross());
 //		a.whenPressed(new GoToHeight(800));
 //		b.whenPressed(new GoToHeight(1400));
-		x.whenPressed(new VelocityTurnToAngle(4, 270, 1));
+		x.whenPressed(new RightScaleCross());
 //		y.whenPressed(new GoToHeight(2500));
 //		a.whenPressed(new LeftScaleAuton1());
-		back.whenPressed(new ExtakeFrontAuton());
+		back.whenPressed(new ExtakeFront(0.5, 1.0));
 //		a.whenPressed(new NewLeftSideScale());
 
 		// teleop button box commands
@@ -150,7 +148,7 @@ public class OI {
 		bb110.whileHeld(new IntakeCube());
 		bb111.whileHeld(new ExtakeLeft()); // left
 		bb112.whileHeld(new ExtakeRight()); // right
-		bb113.whileHeld(new ExtakeFront());
+		bb113.whileHeld(new ExtakeFront(10, 1.0));
 		bb17.whileHeld(new Pivot());
 
 		// teleop new Button Boc
@@ -178,8 +176,8 @@ public class OI {
 		nbbb9.whenPressed(new ClawDown());
 		nbbb10.whileHeld(new SecureCube());
 		nbbb11.whileHeld(new SpitOutFront());
-		nbbb12.whileHeld(new ExtakeFrontSLOW());
-		nbbb13.whileHeld(new ExtakeFront());
+		nbbb12.whileHeld(new ExtakeFront(10, 0.4));
+		nbbb13.whileHeld(new ExtakeFront(10, 1.0));
 		nbbb14.whileHeld(new IntakeCube());
 	}
 

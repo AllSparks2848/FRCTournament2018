@@ -1,6 +1,5 @@
 package AutonCommandGroups;
 
-import org.usfirst.frc.team2848.robot.commands.carriage.ExtakeFrontAuton;
 import org.usfirst.frc.team2848.robot.commands.elevator.GoToHeight;
 import org.usfirst.frc.team2848.robot.commands.intake.PivotIn;
 import org.usfirst.frc.team2848.robot.util.Wait;
@@ -16,7 +15,6 @@ public class WaitThenElevatorSCALE extends CommandGroup {
     	addSequential(new Wait(seconds));
     	addSequential(new GoToHeight(2300));
     	addSequential(new PivotIn());
-//    	addSequential(new ExtakeFrontAuton());
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
